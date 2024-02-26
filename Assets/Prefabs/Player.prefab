@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6931185971115855338}
   - component: {fileID: 301876681653556976}
   - component: {fileID: 4426857697000941460}
+  - component: {fileID: 4627755680071924025}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -85,7 +86,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 3
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -157,6 +158,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ca7c76ac-02c0-4489-aada-e03bf4780c69
     m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 301876681653556976}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnClimbing
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dcc9a61d-8af5-4f1b-ae82-f19c10ad2cda
+    m_ActionName: Player/Climbing[/Keyboard/w,/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -177,9 +194,13 @@ MonoBehaviour:
   playerAnimation: {fileID: 1365103534890963654}
   playerStats: {fileID: 0}
   playerSpeed: 5
-  playerJumpPower: 2
+  playerClimbingSpeed: 3
+  playerJumpPower: 5
   onMove: 0
   onJump: 0
+  isClimbing: 0
+  dir: {x: 0, y: 0}
+  climbingDir: {x: 0, y: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -197,13 +218,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dfad6b945296ca4fb6a2e44486febad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  health: 100
   curHealth: 0
   isDead: 0
-  lifeCount: 0
+  lifeCount: 5
   bombAmount: 0
-  invincibilityRate: 0
+  invincibilityRate: 2
   onInvincibility: 0
+--- !u!114 &4627755680071924025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4674462189064075841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d14404de174149448567a28edfae84a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5886556157043182164
 GameObject:
   m_ObjectHideFlags: 0

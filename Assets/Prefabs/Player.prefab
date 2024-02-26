@@ -163,7 +163,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 3
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -223,8 +223,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 301876681653556976}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnJump
-        m_Mode: 1
+        m_MethodName: OnJumpGauge
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -288,7 +288,6 @@ MonoBehaviour:
   playerStats: {fileID: 0}
   playerSpeed: 5
   playerClimbingSpeed: 3
-  playerJumpPower: 5
   onMove: 0
   onJump: 0
   isClimbing: 1
@@ -296,6 +295,8 @@ MonoBehaviour:
   climbingDir: {x: 0, y: 0}
   platformObject: {fileID: 0}
   _playerOnPlatform: 0
+  maxJumpPower: 6
+  minJumpPower: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 384

@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviour
     //TEST
     public Image testGauge;
     bool onJumpGauge;
-    public event Action OnTestUi;
 
 
     //TEST
@@ -136,17 +135,7 @@ public class PlayerController : MonoBehaviour
             playerAnimation.animator.SetBool("OnJump", false);
             onJump = false;
         }
-    }
-    public void OnJump()
-    {
-        if (!onJump)
-        {
-            //_rigidbody.AddForce(Vector2.up*playerJumpPower, ForceMode2D.Impulse);
-        }
-    }
-
-
-    
+    }    
 
     public void OnJumpGauge(InputAction.CallbackContext context)
     {

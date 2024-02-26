@@ -55,8 +55,6 @@ public class PlayerController : MonoBehaviour
     //TEST
     public Image testGauge;
     bool onJumpGauge;
-
-
     //TEST
 
 
@@ -154,20 +152,18 @@ public class PlayerController : MonoBehaviour
        
     }
 
-
     IEnumerator OnJumpGaugeCo()
     {
         onJumpGauge = true;
         while (onJumpGauge)
         {         
-            curGatherJumpGauge += Time.deltaTime;
-            curGatherJumpGauge %= 1;
+            curGatherJumpGauge += Time.deltaTime*5;
             //float percent = curGatherJumpGauge / maxJumpPower;
             testGauge.fillAmount = curGatherJumpGauge;
             yield return null;
         }
         Debug.Log(curGatherJumpGauge);
-        float curJumpPower =  Mathf.Clamp(maxJumpPower* curGatherJumpGauge,3,8);
+        float curJumpPower =  Mathf.Clamp(maxJumpPower* curGatherJumpGauge,minJumpPower,maxJumpPower);
         Debug.Log(curJumpPower);
 
         _rigidbody.AddForce(Vector2.up * curJumpPower, ForceMode2D.Impulse);

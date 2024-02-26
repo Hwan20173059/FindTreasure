@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1319589037323213460}
   - component: {fileID: 6931185971115855338}
   - component: {fileID: 301876681653556976}
+  - component: {fileID: 4426857697000941460}
+  - component: {fileID: 4627755680071924025}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -33,6 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 214340244630965257}
+  - {fileID: 2252242290026208061}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -68,8 +71,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.44176346}
-  m_Size: {x: 0.5, y: 1.083527}
+  m_Offset: {x: 0, y: 0.45954067}
+  m_Size: {x: 0.5, y: 1.0479726}
   m_Direction: 0
 --- !u!50 &1319589037323213460
 Rigidbody2D:
@@ -83,7 +86,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 3
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -159,7 +162,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 301876681653556976}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnDown
+        m_MethodName: OnClimbing
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -169,8 +172,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 1f428037-23a6-4e4d-8213-83414f84cfa0
-    m_ActionName: Player/Down[/Keyboard/s]
+    m_ActionId: dcc9a61d-8af5-4f1b-ae82-f19c10ad2cda
+    m_ActionName: Player/Climbing[/Keyboard/w,/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -189,15 +192,82 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimation: {fileID: 1365103534890963654}
+  playerStats: {fileID: 0}
   playerSpeed: 5
+  playerClimbingSpeed: 3
   playerJumpPower: 5
   onMove: 0
-  ground:
+  onJump: 0
+  isClimbing: 0
+  dir: {x: 0, y: 0}
+  climbingDir: {x: 0, y: 0}
+  groundLayer:
     serializedVersion: 2
-    m_Bits: 128
-  passthrough:
-    serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 64
+  raycastDistance: 0.1
+  hitPoint: {fileID: 2252242290026208061}
+--- !u!114 &4426857697000941460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4674462189064075841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dfad6b945296ca4fb6a2e44486febad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  curHealth: 0
+  isDead: 0
+  lifeCount: 5
+  bombAmount: 0
+  invincibilityRate: 2
+  onInvincibility: 0
+--- !u!114 &4627755680071924025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4674462189064075841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d14404de174149448567a28edfae84a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5886556157043182164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2252242290026208061}
+  m_Layer: 0
+  m_Name: HitPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2252242290026208061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5886556157043182164}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.107, y: 0.511, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 881488532122723687}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8985709169405521167
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +295,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8985709169405521167}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.08, z: 0}
+  m_LocalPosition: {x: 0, y: -0.047, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
-public class TileControl : MonoBehaviour
+public class Passthrough : MonoBehaviour
 {
     private PlatformEffector2D platformObject;
     private bool _playerOnPlatform;
@@ -13,7 +15,6 @@ public class TileControl : MonoBehaviour
 
     public void OnDown(InputAction.CallbackContext context)
     {
-        //Debug.Log(context);
         if (context.phase == InputActionPhase.Performed)
         {
             platformObject.rotationalOffset = 180f;
@@ -39,5 +40,4 @@ public class TileControl : MonoBehaviour
     {
         SetPlayerOnPlatform(collision, false);
     }
-
 }

@@ -155,6 +155,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ca7c76ac-02c0-4489-aada-e03bf4780c69
     m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 301876681653556976}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1f428037-23a6-4e4d-8213-83414f84cfa0
+    m_ActionName: Player/Down[/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -174,11 +190,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnimation: {fileID: 1365103534890963654}
   playerSpeed: 5
-  playerJumpPower: 10
+  playerJumpPower: 5
   onMove: 0
   ground:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
+  passthrough:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &8985709169405521167
 GameObject:
   m_ObjectHideFlags: 0

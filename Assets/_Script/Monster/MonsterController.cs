@@ -6,9 +6,9 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
 
-public class MonsterController : BaseController
+public class MonsterController : MonsterBaseController
 {
-    // Stat _stat;
+    MonsterStat _stat;
 
     [SerializeField]
     float _scanRange = 10;
@@ -19,11 +19,12 @@ public class MonsterController : BaseController
 
     public override void Init()
     {
-        //_state = gameObject.GetComponent<Stat>();
+        _stat = gameObject.GetComponent<MonsterStat>();
 
+        // 몬스터 체력바 표시
         //if (gameObject.GetComponentInChildren<UI_HPBar>() == null)
         //    Managers.UI.MakeWorldSpaceUI<UI_HPBar>(transform);
-        
+
     }
 
     protected override void UpdateIdle()
@@ -65,14 +66,12 @@ public class MonsterController : BaseController
         {
             // dir.x 가 음인지, 양인지 확인하여 이동하기.
             float _moveDir = dir.x > 0 ? 1f : -1f;
-            // 스프라이트도 뒤집기
-            // min_X, max_X 값으로부터 이동 범위 한정
+            transform.GetComponent<SpriteRenderer>().flipX = dir.x > 0 ? false : true;
+            // 추후, 스테이지 모양에 따라 min_X, max_X 값으로부터 이동 범위 한정
 
             transform.position += Vector3.right * _speed * Time.deltaTime;
         }
 
-
-        
     }
     protected override void UpdateSkill()
     {
@@ -83,12 +82,19 @@ public class MonsterController : BaseController
         Debug.Log("Monster OnHitEvent");
         if(_lockTarget != null)
         {
-            // Stat 플레이어의 스탯과, 몬스터의 스탯으로부터 데미지 계산 및 플레이어에게 데미지 주기
-            // 현재 게임에서는 Defense 미구현, damage 계산 구문 삭제 해도 됨.
-            // Stat targetStat = _lockTarget.GetComponent<Stat>();
-            // Stat myStat = gameObject.GetComponent<Stat>();
-            // int damage = Mathf.Max(0, myStat.Attack - targetStat.Defense);
-            // TargetStat.Hp -= damage;
+            // Stat 플레이어의 스탯과, 몬스터의 스탯으로부터 데미지 계산 및 플레이어에게 데미지 주기.
+            MonsterStat myStat = gameObject.GetComponent<MonsterStat>();
+            // targetStat.Hp -= Mathf.Max(0, myStat.Attack);
+
+            // target(플레이어)의 HP가 0 이상 남은 경우
+            if (true) // targetStat.Hp > 0
+            {
+                float distance = (_lockTarget.transform.position - transform.position).magnitude;
+                if (distance <= _attackRange)
+                    State = MonsterState.Skill;
+                else
+                    State = MonsterState.Moving;
+            }
         }
         else
         {

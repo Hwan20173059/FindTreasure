@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class BaseController : MonoBehaviour
+public abstract class MonsterBaseController : MonoBehaviour
 {
     public enum MonsterState
     {
@@ -48,7 +48,6 @@ public abstract class BaseController : MonoBehaviour
 
     private void Start()
     {
-        //State = MonsterState.Skill; // 테스트용
         Init();
     }
 

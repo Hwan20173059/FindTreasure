@@ -1,8 +1,11 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 //이동
 //데미지
@@ -11,6 +14,7 @@ using UnityEngine.InputSystem;
 
 
 [RequireComponent(typeof(PlayerStats))]
+[RequireComponent(typeof(PlayerAttack))]
 public class PlayerController : MonoBehaviour
 { 
     [Header("Componets")]
@@ -21,7 +25,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player State")]
     [SerializeField] float playerSpeed;
     [SerializeField] float playerClimbingSpeed;
-    [SerializeField] float playerJumpPower;
+    //[SerializeField] float playerJumpPower;
     public bool onMove;
     [SerializeField] bool onJump;
     [SerializeField] bool isClimbing;
@@ -30,6 +34,15 @@ public class PlayerController : MonoBehaviour
     HashSet<GameObject> ladders = new HashSet<GameObject>();
     [SerializeField] Vector2 dir;
     [SerializeField] Vector2 climbingDir;
+    [SerializeField] private PlatformEffector2D platformObject;
+    [SerializeField] private bool _playerOnPlatform; // 얕은 플랫폼 위에 있는지
+
+
+    [Header("Jump")]
+    [SerializeField] float maxJumpPower;
+    [SerializeField] float minJumpPower;
+    float curGatherJumpGauge;
+    
 
     [Header("Layer")]
     public LayerMask groundLayer;
@@ -39,10 +52,14 @@ public class PlayerController : MonoBehaviour
     [Header("Effect")]
     public Transform hitPoint;
 
+    //TEST
+    public Image testGauge;
+    bool onJumpGauge;
+    public event Action OnTestUi;
 
 
-    [SerializeField] private PlatformEffector2D platformObject;
-    [SerializeField] private bool _playerOnPlatform; // 얕은 플랫폼 위에 있는지
+    //TEST
+
 
 
     private void Awake()
@@ -88,6 +105,20 @@ public class PlayerController : MonoBehaviour
             playerAnimation.animator.SetBool("IsRun", false);
         }
     }
+
+    public void OnDown(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            if (_playerOnPlatform)
+            {
+                Debug.Log("platformObject");
+                platformObject.rotationalOffset = 180f;
+            }
+        }
+    }
+
+
     #endregion
 
     #region Jump
@@ -110,9 +141,52 @@ public class PlayerController : MonoBehaviour
     {
         if (!onJump)
         {
-            _rigidbody.AddForce(Vector2.up*playerJumpPower, ForceMode2D.Impulse);
+            //_rigidbody.AddForce(Vector2.up*playerJumpPower, ForceMode2D.Impulse);
         }
     }
+
+
+    
+
+    public void OnJumpGauge(InputAction.CallbackContext context)
+    {
+        if(!onJump)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                StartCoroutine(OnJumpGaugeCo());
+            }
+
+            if (context.phase == InputActionPhase.Canceled)
+            {
+                onJumpGauge = false;
+            }
+        }
+       
+    }
+
+
+    IEnumerator OnJumpGaugeCo()
+    {
+        onJumpGauge = true;
+        while (onJumpGauge)
+        {         
+            curGatherJumpGauge += Time.deltaTime;
+            curGatherJumpGauge %= 1;
+            //float percent = curGatherJumpGauge / maxJumpPower;
+            testGauge.fillAmount = curGatherJumpGauge;
+            yield return null;
+        }
+        Debug.Log(curGatherJumpGauge);
+        float curJumpPower =  Mathf.Clamp(maxJumpPower* curGatherJumpGauge,3,8);
+        Debug.Log(curJumpPower);
+
+        _rigidbody.AddForce(Vector2.up * curJumpPower, ForceMode2D.Impulse);
+        testGauge.fillAmount = 0;
+        curGatherJumpGauge = 0;
+    }
+
+
     #endregion
 
     #region Ladder
@@ -176,18 +250,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// S 키를 누르면 얕은 플랫폼에서 내려온다
     /// </summary>
-    public void OnDown(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed)
-        {
-            if (_playerOnPlatform)
-            {
-                Debug.Log("platformObject");
-                platformObject.rotationalOffset = 180f;
-            }
-        }
-    }
-
+  
     private void SetPlayerOnPlatform(Collision2D other, bool value)
     {
         platformObject = other.gameObject.GetComponent<PlatformEffector2D>();

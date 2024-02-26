@@ -34,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 214340244630965257}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &2322976979939388394
 CapsuleCollider2D:
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnimation: {fileID: 1365103534890963654}
   playerSpeed: 5
-  playerJumpPower: 5
+  playerJumpPower: 10
   onMove: 0
   ground:
     serializedVersion: 2

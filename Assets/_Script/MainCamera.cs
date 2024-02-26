@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class MainCamera : MonoBehaviour
@@ -7,7 +8,9 @@ public class MainCamera : MonoBehaviour
     public Transform target;
     public float speed;
 
-    public Vector2 center;
+    public int currentStage = 0;
+    public Vector2[] Stage;
+
     public Vector2 size;
 
     float height;
@@ -22,7 +25,9 @@ public class MainCamera : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(center, size);
+
+        for(int i = 0; i < Stage.Length; i++)
+            Gizmos.DrawWireCube(Stage[i], size);
     }
 
     private void LateUpdate()
@@ -30,10 +35,10 @@ public class MainCamera : MonoBehaviour
         transform.position = Vector2.Lerp(transform.position, target.position, Time.deltaTime * speed);
 
         float lx = size.x * 0.5f - width;
-        float clampX = Mathf.Clamp(transform.position.x, -lx + center.x, lx + center.x);
+        float clampX = Mathf.Clamp(transform.position.x, -lx + Stage[currentStage].x, lx + Stage[currentStage].x);
 
         float ly = size.y * 0.5f - height;
-        float clampY = Mathf.Clamp(transform.position.y, -ly + center.y, ly + center.y);
+        float clampY = Mathf.Clamp(transform.position.y, -ly + Stage[currentStage].y, ly + Stage[currentStage].y);
 
         transform.position = new Vector3(clampX, clampY, -10f);
     }

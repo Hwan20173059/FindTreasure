@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 //이동
 //데미지
@@ -25,7 +26,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player State")]
     [SerializeField] float playerSpeed;
     [SerializeField] float playerClimbingSpeed;
-    //[SerializeField] float playerJumpPower;
+    [SerializeField] float playerJumpPower;
     public bool onMove;
     [SerializeField] bool onJump;
     [SerializeField] bool isClimbing;
@@ -40,8 +41,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] float maxJumpPower;
-    [SerializeField] float minJumpPower;
-    float curGatherJumpGauge;
+    [SerializeField] float jumpTime= 0f;
+    float maxJumpTime = .5f;
+    bool onGround;
     
 
     [Header("Layer")]
@@ -51,12 +53,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Effect")]
     public Transform hitPoint;
-
-    //TEST
-    public Image testGauge;
-    bool onJumpGauge;
-    //TEST
-
 
 
     private void Awake()
@@ -68,6 +64,16 @@ public class PlayerController : MonoBehaviour
     {
         CheckFloor();
         CheckClimbing();
+
+
+        if (onJump)
+        {        
+            jumpTime += Time.deltaTime;
+            if (jumpTime >= maxJumpTime)
+            {
+                onJump = false;
+            }
+        }
     }
 
 
@@ -84,6 +90,12 @@ public class PlayerController : MonoBehaviour
         {
             _rigidbody.gravityScale = 1f;
         }
+
+        if (onJump)
+        {
+            _rigidbody.AddForce(Vector2.up*5,ForceMode2D.Force);
+        }
+
     }
 
     #region Move
@@ -126,50 +138,34 @@ public class PlayerController : MonoBehaviour
         if (hit.collider == null)
         {
             playerAnimation.animator.SetBool("OnJump", true);
-            onJump = true;
+            onGround = false;
+            jumpTime = 0f;
         }
         else
         {
             playerAnimation.animator.SetBool("OnJump", false);
-            onJump = false;
+            onGround = true;
+            
         }
     }    
 
-    public void OnJumpGauge(InputAction.CallbackContext context)
+    public void Jump(InputAction.CallbackContext context)
     {
-        if(!onJump)
+        if (onGround)
         {
             if (context.phase == InputActionPhase.Performed)
             {
-                StartCoroutine(OnJumpGaugeCo());
-            }
-
-            if (context.phase == InputActionPhase.Canceled)
-            {
-                onJumpGauge = false;
-            }
+                onJump = true;
+                _rigidbody.AddForce(Vector2.up * playerJumpPower, ForceMode2D.Impulse);
+            } 
         }
-       
+
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            onJump = false;
+        }
     }
 
-    IEnumerator OnJumpGaugeCo()
-    {
-        onJumpGauge = true;
-        while (onJumpGauge)
-        {         
-            curGatherJumpGauge += Time.deltaTime*5;
-            //float percent = curGatherJumpGauge / maxJumpPower;
-            testGauge.fillAmount = curGatherJumpGauge;
-            yield return null;
-        }
-        Debug.Log(curGatherJumpGauge);
-        float curJumpPower =  Mathf.Clamp(maxJumpPower* curGatherJumpGauge,minJumpPower,maxJumpPower);
-        Debug.Log(curJumpPower);
-
-        _rigidbody.AddForce(Vector2.up * curJumpPower, ForceMode2D.Impulse);
-        testGauge.fillAmount = 0;
-        curGatherJumpGauge = 0;
-    }
 
 
     #endregion

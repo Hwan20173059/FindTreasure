@@ -15,11 +15,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float playerSpeed;
     [SerializeField] float playerJumpPower;
     public bool onMove;
-    bool onJump;
+    [SerializeField] bool onJump;
 
     [Header("Layer")]
     public LayerMask ground;
-    float raycastDistance = 0.1f;
+    [SerializeField] float raycastDistance;
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -27,19 +27,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position,Vector2.down,raycastDistance);
-
-        if(hit.collider == null)
-        {
-            onJump = true;
-        }
-        else
-        {
-            onJump = false;
-        }
-
-       
-       
+        CheckFloor();
     }
 
 
@@ -66,7 +54,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void CheckFloor()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, ground);
 
+        if (hit.collider == null)
+        {
+            playerAnimation.animator.SetBool("OnJump", true);
+            onJump = true;
+        }
+        else
+        {
+            playerAnimation.animator.SetBool("OnJump", false);
+            onJump = false;
+        }
+    }
     public void OnJump()
     {
         if (!onJump)

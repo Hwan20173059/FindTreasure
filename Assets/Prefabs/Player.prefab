@@ -68,8 +68,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.44176346}
-  m_Size: {x: 0.5, y: 1.083527}
+  m_Offset: {x: 0, y: 0.45954067}
+  m_Size: {x: 0.5, y: 1.0479726}
   m_Direction: 0
 --- !u!50 &1319589037323213460
 Rigidbody2D:
@@ -174,11 +174,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnimation: {fileID: 1365103534890963654}
   playerSpeed: 5
-  playerJumpPower: 10
+  playerJumpPower: 2
   onMove: 0
+  onJump: 0
   ground:
     serializedVersion: 2
     m_Bits: 64
+  raycastDistance: 0.1
 --- !u!1 &8985709169405521167
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +208,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8985709169405521167}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.08, z: 0}
+  m_LocalPosition: {x: 0, y: -0.047, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -9,7 +9,7 @@ public class PlayerAnimation : MonoBehaviour
     public Animator animator;
 
     public event Action<float> OnMoveEvent;
-
+    public event Action OnDeathEvent;
 
     private void Awake()
     {
@@ -19,6 +19,10 @@ public class PlayerAnimation : MonoBehaviour
     public void CallOnMoveEvent(float dirX)
     {
         OnMoveEvent?.Invoke(dirX);
+    }
+    public void CallOnDeathEvent()
+    {
+        OnDeathEvent?.Invoke();
     }
 
     void Set_MoveAnimationParameter(float dirX)

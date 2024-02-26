@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     float raycastDistance = 0.1f;
 
     private PlatformEffector2D platformObject;
-    private bool _playerOnPlatform;
+    private bool _playerOnPlatform; // 얕은 플랫폼 위에 있는지
 
     private void Awake()
     {
@@ -83,7 +83,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnDown(InputAction.CallbackContext context)
     {
-        Debug.Log(_playerOnPlatform);
         if (context.phase == InputActionPhase.Performed)
         {
             if (_playerOnPlatform)
@@ -91,16 +90,11 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("platformObject");
                 platformObject.rotationalOffset = 180f;
             }
-            else
-            {
-                Debug.Log("platformObject is null");
-            }
         }
     }
 
     private void SetPlayerOnPlatform(Collision2D other, bool value)
     {
-
         platformObject = other.gameObject.GetComponent<PlatformEffector2D>();
         if (platformObject != null)
         {
@@ -111,7 +105,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("OnCollisionEnter2D");
+        //Debug.Log("OnCollisionEnter2D");
         if (passthrough.value == (passthrough.value | (1 << collision.gameObject.layer)))
         {
             SetPlayerOnPlatform(collision, true);
@@ -120,7 +114,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log("OnCollisionExit2D");
+        //Debug.Log("OnCollisionExit2D");
         if (passthrough.value == (passthrough.value | (1 << collision.gameObject.layer)))
         {
             SetPlayerOnPlatform(collision, false);

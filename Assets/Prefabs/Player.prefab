@@ -190,11 +190,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnimation: {fileID: 1365103534890963654}
   playerSpeed: 5
-  playerJumpPower: 10
+  playerJumpPower: 5
   onMove: 0
   ground:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
+  passthrough:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &8985709169405521167
 GameObject:
   m_ObjectHideFlags: 0

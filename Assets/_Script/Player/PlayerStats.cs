@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+//CurHealth
+//LifeCount
+//bombAmount
+
 public class PlayerStats : LifeEntity
 {
     PlayerAnimation playerAnimation;
@@ -15,8 +21,10 @@ public class PlayerStats : LifeEntity
     {
         OnDeathEvent += Death;
     }
-    private void Start()
+
+    protected override void Start()
     {
+        base.Start();
         playerAnimation = GetComponent<PlayerAnimation>();
     }
 
@@ -74,9 +82,7 @@ public class PlayerStats : LifeEntity
             bombAmount--;
             return true;
         }
-
         return false;
-
     }
 
 

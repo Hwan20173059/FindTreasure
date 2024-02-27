@@ -3,10 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-//이동
-//데미지
-//점프
-//
 
 
 [RequireComponent(typeof(PlayerStats))]
@@ -16,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [Header("Componets")]
     public PlayerAnimation playerAnimation;
     public PlayerStats playerStats;
-    Rigidbody2D _rigidbody;
+    public Rigidbody2D _rigidbody;
     Pooling pooling;
 
     [Header("Player State")]
@@ -24,8 +20,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float playerClimbingSpeed;
     [SerializeField] float playerJumpPower;
     public bool onMove;
-    [SerializeField] bool onJump;
-    [SerializeField] bool isClimbing;
+    bool onJump;
+    bool isClimbing;
     public Transform poolItemPos;
     public Transform dropItemPos;
 
@@ -39,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] float addJumbPower;
-    [SerializeField] float jumpTime = 0f;
+    float jumpTime = 0f;
     float maxJumpTime = .5f;
     bool onGround;
 
@@ -277,6 +273,9 @@ public class PlayerController : MonoBehaviour
             SetPlayerOnPlatform(collision, false);
         }
     }
+
+
+
 
     #endregion
 

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7676212833019239835}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -237,6 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnimation: {fileID: 1365103534890963654}
   playerStats: {fileID: 4426857697000941460}
+  _rigidbody: {fileID: 0}
   playerSpeed: 5
   playerClimbingSpeed: 3
   playerJumpPower: 70

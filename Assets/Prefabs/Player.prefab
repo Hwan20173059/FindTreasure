@@ -91,9 +91,9 @@ GameObject:
   - component: {fileID: 301876681653556976}
   - component: {fileID: 4426857697000941460}
   - component: {fileID: 4627755680071924025}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ Transform:
   - {fileID: 2252242290026208061}
   - {fileID: 5302533429190209300}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6721873082806423224
 BoxCollider2D:

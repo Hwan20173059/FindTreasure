@@ -40,9 +40,9 @@ public class BombController : MonoBehaviour
         explosionEffect.Play();
         debris.Play();
         explosionCollider.enabled = true;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
         explosionCollider.enabled = false;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.3f);
         gameObject.SetActive(false);
 
     }

@@ -1,12 +1,7 @@
-using System.Collections;
-using System;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 //이동
 //데미지
@@ -41,10 +36,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] float maxJumpPower;
-    [SerializeField] float jumpTime= 0f;
+    [SerializeField] float jumpTime = 0f;
     float maxJumpTime = .5f;
     bool onGround;
-    
+
 
     [Header("Layer")]
     public LayerMask groundLayer;
@@ -54,9 +49,6 @@ public class PlayerController : MonoBehaviour
     [Header("Effect")]
     public Transform hitPoint;
 
-    //TEST
-    public Image testGauge;
-    bool onJumpGauge;
 
     private void Awake()
     {
@@ -70,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
 
         if (onJump)
-        {        
+        {
             jumpTime += Time.deltaTime;
             if (jumpTime >= maxJumpTime)
             {
@@ -94,7 +86,7 @@ public class PlayerController : MonoBehaviour
 
         if (onJump)
         {
-            _rigidbody.AddForce(Vector2.up * 5,ForceMode2D.Force);
+            _rigidbody.AddForce(Vector2.up * 5, ForceMode2D.Force);
         }
 
     }
@@ -147,7 +139,6 @@ public class PlayerController : MonoBehaviour
         {
             if (_playerOnPlatform)
             {
-                //Debug.Log("platformObject");
                 platformObject.rotationalOffset = 180f;
                 _playerOnPlatform = false;
             }
@@ -172,18 +163,17 @@ public class PlayerController : MonoBehaviour
             onGround = false;
             jumpTime = 0f;
         }
-    }  
+    }
 
     public void Jump(InputAction.CallbackContext context)
     {
         if (onGround)
         {
-
             if (context.phase == InputActionPhase.Performed)
             {
                 onJump = true;
                 _rigidbody.AddForce(Vector2.up * playerJumpPower, ForceMode2D.Impulse);
-            } 
+            }
         }
 
         if (context.phase == InputActionPhase.Canceled)
@@ -262,7 +252,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Debug.Log("OnCollisionEnter2D");
         if (passthrough.value == (passthrough.value | (1 << collision.gameObject.layer)))
         {
             SetPlayerOnPlatform(collision, true);
@@ -271,7 +260,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        //Debug.Log("OnCollisionExit2D");
         if (passthrough.value == (passthrough.value | (1 << collision.gameObject.layer)))
         {
             SetPlayerOnPlatform(collision, false);

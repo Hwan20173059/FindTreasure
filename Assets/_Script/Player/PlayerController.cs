@@ -102,11 +102,6 @@ public class PlayerController : MonoBehaviour
         //Debug.Log((transform.position.y - hit.point.y));
         if ((hitL.collider != null && (transform.position.y - hitL.point.y) > 0f) || (hitR.collider != null && (transform.position.y - hitR.point.y) > 0f))
         {
-            if (platformObject != null)
-            {
-                // 점프가 플랫폼 높이에 딱맞는 경우 collisionExit가 안일어나는경우 발생. 이를 위한 보정
-                platformObject.rotationalOffset = 0f;
-            }
             return true;
         }
         return false;

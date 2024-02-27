@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
     [Header("Effect")]
     public Transform hitPoint;
 
+    [Header("Camera")]
+    public PlayerCamera playercamera;
 
     private void Awake()
     {
@@ -93,15 +95,15 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
+        RaycastHit2D hitL = Physics2D.Raycast(transform.position + new Vector3(-0.5f,0), Vector2.down, raycastDistance, groundLayer);
+        RaycastHit2D hitR = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0), Vector2.down, raycastDistance, groundLayer);
+
+        Debug.DrawRay(transform.position + new Vector3(-0.3f, 0), Vector2.down, Color.red);
+        Debug.DrawRay(transform.position + new Vector3(0.3f, 0), Vector2.down, Color.red);
+
         //Debug.Log((transform.position.y - hit.point.y));
-        if (hit.collider != null && (transform.position.y - hit.point.y) > 0f)
+        if ((hitL.collider != null && (transform.position.y - hitL.point.y) > 0f) || (hitR.collider != null && (transform.position.y - hitR.point.y) > 0f))
         {
-            if (platformObject != null)
-            {
-                // 점프가 플랫폼 높이에 딱맞는 경우 collisionExit가 안일어나는경우 발생. 이를 위한 보정
-                platformObject.rotationalOffset = 0f;
-            }
             return true;
         }
         return false;
@@ -109,11 +111,11 @@ public class PlayerController : MonoBehaviour
         //return Physics2D.OverlapCircle(transform.position, groundCheckRadius, groundLayer);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, Vector3.down);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawRay(transform.position, Vector3.down);
+    //}
 
 
     #region Move
@@ -215,6 +217,11 @@ public class PlayerController : MonoBehaviour
         {
             _rigidbody.velocity = Vector2.zero;
             ladders.Add(collision.gameObject);
+        }
+
+        if (collision.CompareTag("Stage"))
+        {
+            playercamera.currentStage = collision.gameObject.GetComponent<StageManager>().stage;
         }
     }
 

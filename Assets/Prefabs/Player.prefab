@@ -114,7 +114,7 @@ Transform:
   - {fileID: 2252242290026208061}
   - {fileID: 5302533429190209300}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6721873082806423224
 BoxCollider2D:
@@ -159,7 +159,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1}
+  m_Size: {x: 0.3, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &1319589037323213460
 Rigidbody2D:
@@ -298,7 +298,7 @@ MonoBehaviour:
   playerStats: {fileID: 0}
   playerSpeed: 5
   playerClimbingSpeed: 3
-  playerJumpPower: 8
+  playerJumpPower: 3
   onMove: 0
   onJump: 0
   isClimbing: 1
@@ -316,7 +316,6 @@ MonoBehaviour:
     m_Bits: 256
   raycastDistance: 0.1
   hitPoint: {fileID: 2252242290026208061}
-  testGauge: {fileID: 1067908600846402894}
 --- !u!114 &4426857697000941460
 MonoBehaviour:
   m_ObjectHideFlags: 0

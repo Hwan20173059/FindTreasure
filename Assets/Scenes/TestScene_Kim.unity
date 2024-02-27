@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 301876681653556976, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
+      propertyPath: playercamera
+      value: 
+      objectReference: {fileID: 519420033}
     - target: {fileID: 881488532122723687, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -295,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 109999806}
-  cameraSpeed: 10
+  cameraSpeed: 20
   currentStage: 0
   center:
   - {x: 4, y: 2}
@@ -11790,9 +11794,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1828535369}
   - component: {fileID: 1828535370}
+  - component: {fileID: 1828535371}
   m_Layer: 0
-  m_Name: Stage2
-  m_TagString: Untagged
+  m_Name: Stage1
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11857,6 +11862,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 40, y: 21}
   m_EdgeRadius: 0
+--- !u!114 &1828535371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828535368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4946639163b1634409b3be7123291775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stage: 1
 --- !u!1 &1864238654
 GameObject:
   m_ObjectHideFlags: 0
@@ -12616,9 +12634,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1945604122}
   - component: {fileID: 1945604123}
+  - component: {fileID: 1945604124}
   m_Layer: 0
-  m_Name: Stage1
-  m_TagString: Untagged
+  m_Name: Stage0
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12683,6 +12702,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 32, y: 16}
   m_EdgeRadius: 0
+--- !u!114 &1945604124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945604121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4946639163b1634409b3be7123291775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stage: 0
 --- !u!1 &2125634897
 GameObject:
   m_ObjectHideFlags: 0

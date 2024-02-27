@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
     [Header("Effect")]
     public Transform hitPoint;
 
+    [Header("Camera")]
+    public PlayerCamera playercamera;
 
     private void Awake()
     {
@@ -215,6 +217,11 @@ public class PlayerController : MonoBehaviour
         {
             _rigidbody.velocity = Vector2.zero;
             ladders.Add(collision.gameObject);
+        }
+
+        if (collision.CompareTag("Stage"))
+        {
+            playercamera.currentStage = collision.gameObject.GetComponent<StageManager>().stage;
         }
     }
 

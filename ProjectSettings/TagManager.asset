@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Stage
+  - Monster
   layers:
   - Default
   - TransparentFX
@@ -16,12 +17,12 @@ TagManager:
   - Ground
   - Passthrough
   - Decoration
+  - Breakable
   - 
   - 
   - 
   - 
-  - 
-  - 
+  - Player
   - 
   - 
   - 

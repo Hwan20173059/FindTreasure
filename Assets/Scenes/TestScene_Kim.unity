@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 109999806}
-  cameraSpeed: 5
+  cameraSpeed: 10
   currentStage: 0
   center:
   - {x: 4, y: 2}

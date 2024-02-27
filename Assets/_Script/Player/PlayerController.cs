@@ -165,28 +165,20 @@ public class PlayerController : MonoBehaviour
     #region Jump
     void CheckFloor()
     {
+        // RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
+        // if (hit.collider == null)
         if (IsGrounded())
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
-
-        if (hit.collider == null)
+        {
+            playerAnimation.animator.SetBool("OnJump", false);
+            onGround = true;
+        }
+        else
         {
             playerAnimation.animator.SetBool("OnJump", true);
             onGround = false;
             jumpTime = 0f;
         }
-        else
-        {
-            playerAnimation.animator.SetBool("OnJump", false);
-            onGround = true;
-            
-        }
-        else
-        {
-            playerAnimation.animator.SetBool("OnJump", true);
-            onJump = true;
-        }
-
-    }    
+    }  
 
     public void Jump(InputAction.CallbackContext context)
     {
@@ -205,9 +197,6 @@ public class PlayerController : MonoBehaviour
             onJump = false;
         }
     }
-
-
-
     #endregion
 
     #region Ladder

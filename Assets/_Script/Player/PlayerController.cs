@@ -12,7 +12,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerStats))]
 public class PlayerController : MonoBehaviour
-{ 
+{
     [Header("Componets")]
     public PlayerAnimation playerAnimation;
     public PlayerStats playerStats;
@@ -40,7 +40,9 @@ public class PlayerController : MonoBehaviour
     public Transform hitPoint;
 
 
-
+    [Header("LayerChecker")]
+    //[SerializeField] private Transform groundCheck;
+    //[SerializeField] private float groundCheckRadius = 0.05f;
     [SerializeField] private PlatformEffector2D platformObject;
     [SerializeField] private bool _playerOnPlatform; // 얕은 플랫폼 위에 있는지
 
@@ -61,7 +63,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (onMove) { _rigidbody.position += dir * playerSpeed * Time.deltaTime; }
-        if (isClimbing) 
+        if (isClimbing)
         {
             _rigidbody.gravityScale = 0f;
             _rigidbody.position += climbingDir * playerClimbingSpeed * Time.deltaTime;
@@ -72,10 +74,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private bool IsGrounded()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
+        //Debug.Log((transform.position.y - hit.point.y));
+        if (hit.collider != null && (transform.position.y - hit.point.y) > 0f)
+        {
+            if (platformObject != null)
+            {
+                // 점프가 플랫폼 높이에 딱맞는 경우 collisionExit가 안일어나는경우 발생. 이를 위한 보정
+                platformObject.rotationalOffset = 0f;
+            }
+            return true;
+        }
+        return false;
+
+        //return Physics2D.OverlapCircle(transform.position, groundCheckRadius, groundLayer);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, Vector3.down);
+    }
+
+
     #region Move
     public void OnMove(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Performed)
         {
             dir = context.ReadValue<Vector2>();
             playerAnimation.CallOnMoveEvent(dir.x);
@@ -93,24 +120,23 @@ public class PlayerController : MonoBehaviour
     #region Jump
     void CheckFloor()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
-
-        if (hit.collider == null)
-        {
-            playerAnimation.animator.SetBool("OnJump", true);
-            onJump = true;
-        }
-        else
+        if (IsGrounded())
         {
             playerAnimation.animator.SetBool("OnJump", false);
             onJump = false;
         }
+        else
+        {
+            playerAnimation.animator.SetBool("OnJump", true);
+            onJump = true;
+        }
     }
+
     public void OnJump()
     {
         if (!onJump)
         {
-            _rigidbody.AddForce(Vector2.up*playerJumpPower, ForceMode2D.Impulse);
+            _rigidbody.AddForce(Vector2.up * playerJumpPower, ForceMode2D.Impulse);
         }
     }
     #endregion
@@ -123,7 +149,7 @@ public class PlayerController : MonoBehaviour
         {
             climbingDir = context.ReadValue<Vector2>();
         }
-        if(context.phase == InputActionPhase.Canceled)
+        if (context.phase == InputActionPhase.Canceled)
         {
             climbingDir = Vector2.zero;
         }
@@ -131,11 +157,11 @@ public class PlayerController : MonoBehaviour
 
     void CheckClimbing()
     {
-        if (ladders.Count >0 && Mathf.Abs(climbingDir.y) > 0f)
+        if (ladders.Count > 0 && Mathf.Abs(climbingDir.y) > 0f)
         {
             isClimbing = true;
         }
-        else if(ladders.Count <= 0 )
+        else if (ladders.Count <= 0)
         {
             isClimbing = false;
         }
@@ -182,8 +208,9 @@ public class PlayerController : MonoBehaviour
         {
             if (_playerOnPlatform)
             {
-                Debug.Log("platformObject");
+                //Debug.Log("platformObject");
                 platformObject.rotationalOffset = 180f;
+                _playerOnPlatform = false;
             }
         }
     }

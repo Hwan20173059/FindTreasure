@@ -71,7 +71,7 @@ public class MonsterSpawnData : MonoBehaviour
                     {
                         monsterType = "MonsterA",
                         isBoss = false,
-                        spawnPosition = new Vector2(-1, 1),
+                        spawnPosition = new Vector2(1, -1),
                     },
                     // 다른 몬스터 정보 추가
                 }

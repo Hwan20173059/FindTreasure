@@ -28,7 +28,7 @@ public abstract class MonsterBaseController : MonoBehaviour
         set
         {
             _state = value;
-            Animator anim = GetComponent<Animator>();
+            Animator anim = transform.Find("Sprite").GetComponent<Animator>();
             switch (_state)
             {
                 case MonsterState.Die:

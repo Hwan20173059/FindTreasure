@@ -3,17 +3,36 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+// 몬스터 스폰과 관리, 상태관리
 public class MonstersManager : MonoBehaviour
 {
-    // 몬스터 스폰과 관리, 상태관리
-
-    // 1. 스테이지 번호를 매개변수로 받아, MonsterSpawnData에 저장된 정보대로 몬스터를 소환하는 메서드
+    // 역할1. 스테이지 번호를 매개변수로 받아, MonsterSpawnData에 저장된 정보대로 몬스터를 소환하는 메서드
     // string monsterType에 적힌 문자열은, 프리팹의 이름과 같다.
+    // 역할2. ...
+
+    // 싱글톤(외부 스크립트에서 접근 용이)
+    public static MonstersManager Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject); // 중복 인스턴스가 생성되면 파괴
+        }
+
+        // 초기화
+        transform.GetComponent<MonsterSpawnData>().init();
+    }
+
 
     private void Start()
     {
         transform.GetComponent<MonsterSpawnData>().init();
         SpawnMonsters("stage1-1");
+        SpawnMonsters("stage1-2");
     }
 
     // 스테이지 이름 또는 번호로부터 몬스터의 스폰 위치 정보를 받아온다.
@@ -43,17 +62,36 @@ public class MonstersManager : MonoBehaviour
     {
         foreach (var spawnInfo in spawnData)
         {
-            // 프리팹 로드 경로 설정
             string prefabPath = $"Prefabs/Monsters/{spawnInfo.monsterType}";
-            // 프리팹 로드
             GameObject monsterPrefab = Resources.Load<GameObject>(prefabPath);
             if (monsterPrefab != null)
             {
-                // 몬스터 인스턴스 생성 및 스폰 위치 설정
-                GameObject monterObj = Instantiate(monsterPrefab, spawnInfo.spawnPosition, Quaternion.identity);
+                GameObject monsterObj = Instantiate(monsterPrefab, spawnInfo.spawnPosition, Quaternion.identity);
 
-                // Todo. 스폰된 위치 바로 아래의 콜라이더 좌우 확인하고, 이동가능 거리 설정
+                // "Ground"와 "Passthrough" 레이어에만 있는 물체를 감지하기 위한 LayerMask 생성
+                int layerMask = LayerMask.GetMask("Ground", "Passthrough");
 
+                // 광선 쏘기
+                RaycastHit2D hit = Physics2D.Raycast(spawnInfo.spawnPosition, Vector2.down, 10f, layerMask);
+                if (hit.collider != null)
+                {
+                    // 하단 콜라이더의 경계를 기반으로 MinX와 MaxX 계산
+                    BoxCollider2D monsterCollider = monsterObj.GetComponent<BoxCollider2D>();
+                    float colliderHalfWidth = monsterCollider != null ? monsterCollider.size.x * monsterObj.transform.localScale.x / 2f : 0;
+                    float minX = hit.collider.bounds.min.x + colliderHalfWidth;
+                    float maxX = hit.collider.bounds.max.x - colliderHalfWidth;
+
+                    float genY = hit.collider.bounds.max.y;
+                    monsterObj.transform.position = new Vector3(monsterObj.transform.position.x, genY, monsterObj.transform.position.z);
+
+                    // MonsterStat 컴포넌트 찾기 및 MinX, MaxX 설정
+                    MonsterStat monsterStat = monsterObj.GetComponent<MonsterStat>();
+                    if (monsterStat != null)
+                    {
+                        monsterStat.MinX = minX;
+                        monsterStat.MaxX = maxX;
+                    }
+                }
             }
             else
             {

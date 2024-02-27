@@ -35,7 +35,8 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("Jump")]
-    [SerializeField] float maxJumpPower;
+    //[SerializeField] float maxJumpPower;
+    [SerializeField] float addJumbPower;
     [SerializeField] float jumpTime = 0f;
     float maxJumpTime = .5f;
     bool onGround;
@@ -83,12 +84,12 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            _rigidbody.gravityScale = 1f;
+            _rigidbody.gravityScale = 2f;
         }
 
         if (onJump)
         {
-            _rigidbody.AddForce(Vector2.up * 5, ForceMode2D.Force);
+            _rigidbody.AddForce(Vector2.up * addJumbPower, ForceMode2D.Force);
         }
 
     }

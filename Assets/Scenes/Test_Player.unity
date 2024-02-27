@@ -1529,8 +1529,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  offset: {x: 0, y: 0, z: -10}
   cameraSpeed: 1
+  currentStage: 0
+  center: []
+  size: []
 --- !u!1 &634053487
 GameObject:
   m_ObjectHideFlags: 0

@@ -173,10 +173,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -298,7 +298,7 @@ MonoBehaviour:
   playerStats: {fileID: 0}
   playerSpeed: 5
   playerClimbingSpeed: 3
-  playerJumpPower: 3
+  playerJumpPower: 50
   onMove: 0
   onJump: 0
   isClimbing: 1
@@ -306,7 +306,7 @@ MonoBehaviour:
   climbingDir: {x: 0, y: 0}
   platformObject: {fileID: 0}
   _playerOnPlatform: 0
-  maxJumpPower: 6
+  addJumbPower: 0
   jumpTime: 0
   groundLayer:
     serializedVersion: 2
@@ -316,6 +316,7 @@ MonoBehaviour:
     m_Bits: 256
   raycastDistance: 0.1
   hitPoint: {fileID: 2252242290026208061}
+  playercamera: {fileID: 0}
 --- !u!114 &4426857697000941460
 MonoBehaviour:
   m_ObjectHideFlags: 0

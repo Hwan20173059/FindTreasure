@@ -44,9 +44,10 @@ public class BorderInteract : MonoBehaviour
     private void Awake()
     {
         textDic.Add(0, "fewsfes545464\n054054\n054054\n김이박최\n054 054\n나중에 텍스트 데이터 따로 빼서\n아이디만 넣어놓고 호출되도록 변경\n0\n450\n4");
+        textDic.Add(1, "S키를 눌러 아래로 점프합니다.");
 
         mainSprite.sprite = Resources.Load<Sprite>($"Texture/Border/{color}/{borderType}");
-        textMeshProUGUI.text = textDic[0];
+        textMeshProUGUI.text = textDic[textId];
         textCanvas.gameObject.SetActive(false);
     }
 

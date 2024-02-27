@@ -3,10 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-//이동
-//데미지
-//점프
-//
 
 
 [RequireComponent(typeof(PlayerStats))]
@@ -16,28 +12,30 @@ public class PlayerController : MonoBehaviour
     [Header("Componets")]
     public PlayerAnimation playerAnimation;
     public PlayerStats playerStats;
-    Rigidbody2D _rigidbody;
+    public Rigidbody2D _rigidbody;
+    Pooling pooling;
 
     [Header("Player State")]
     [SerializeField] float playerSpeed;
     [SerializeField] float playerClimbingSpeed;
     [SerializeField] float playerJumpPower;
     public bool onMove;
-    [SerializeField] bool onJump;
-    [SerializeField] bool isClimbing;
+    bool onJump;
+    bool isClimbing;
+    public Transform poolItemPos;
+    public Transform dropItemPos;
 
     [Header("Player Move")]
     HashSet<GameObject> ladders = new HashSet<GameObject>();
-    [SerializeField] Vector2 dir;
-    [SerializeField] Vector2 climbingDir;
+    Vector2 dir;
+    Vector2 climbingDir;
     [SerializeField] private PlatformEffector2D platformObject;
     [SerializeField] private bool _playerOnPlatform; // 얕은 플랫폼 위에 있는지
 
 
     [Header("Jump")]
-    //[SerializeField] float maxJumpPower;
     [SerializeField] float addJumbPower;
-    [SerializeField] float jumpTime = 0f;
+    float jumpTime = 0f;
     float maxJumpTime = .5f;
     bool onGround;
 
@@ -56,6 +54,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        pooling = GetComponent<Pooling>();
+        pooling.CreatePool(poolItemPos);
     }
 
     private void Update()
@@ -212,27 +212,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Ladder"))
-        {
-            _rigidbody.velocity = Vector2.zero;
-            ladders.Add(collision.gameObject);
-        }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Ladder"))
+    //    {
+    //        _rigidbody.velocity = Vector2.zero;
+    //        ladders.Add(collision.gameObject);
+    //    }
 
-        if (collision.CompareTag("Stage"))
-        {
-            playercamera.currentStage = collision.gameObject.GetComponent<StageManager>().stage;
-        }
-    }
+    //    if (collision.CompareTag("Stage"))
+    //    {
+    //        playercamera.currentStage = collision.gameObject.GetComponent<StageManager>().stage;
+    //    }
+    //}
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Ladder"))
-        {
-            ladders.Remove(collision.gameObject);
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Ladder"))
+    //    {
+    //        ladders.Remove(collision.gameObject);
+    //    }
+    //}
 
     #endregion
 
@@ -274,5 +274,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+
+
     #endregion
+
+    #region Bomb
+    public void UseBomb(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+        {
+            if (playerStats.UseBomb())
+            {
+                pooling.GetPoolItem("Bomb", dropItemPos);
+
+            }
+        }
+       
+    }
+
+
+
+    #endregion
+
 }

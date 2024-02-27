@@ -10,7 +10,7 @@ public class LifeEntity : MonoBehaviour,IDamageable
     public bool isDead;
     public event Action OnDeathEvent;
 
-    private void Start()
+    protected virtual void Start()
     {
         curHealth = health;
     }

@@ -1,12 +1,7 @@
-using System.Collections;
-using System;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 //이동
 //데미지
@@ -17,7 +12,7 @@ using static UnityEditor.Timeline.TimelinePlaybackControls;
 [RequireComponent(typeof(PlayerStats))]
 [RequireComponent(typeof(PlayerAttack))]
 public class PlayerController : MonoBehaviour
-{ 
+{
     [Header("Componets")]
     public PlayerAnimation playerAnimation;
     public PlayerStats playerStats;
@@ -41,10 +36,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] float maxJumpPower;
-    [SerializeField] float jumpTime= 0f;
+    [SerializeField] float jumpTime = 0f;
     float maxJumpTime = .5f;
     bool onGround;
-    
+
 
     [Header("Layer")]
     public LayerMask groundLayer;
@@ -67,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
 
         if (onJump)
-        {        
+        {
             jumpTime += Time.deltaTime;
             if (jumpTime >= maxJumpTime)
             {
@@ -76,12 +71,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-
     private void FixedUpdate()
     {
         if (onMove) { _rigidbody.position += dir * playerSpeed * Time.deltaTime; }
-        if (isClimbing) 
+        if (isClimbing)
         {
             _rigidbody.gravityScale = 0f;
             _rigidbody.position += climbingDir * playerClimbingSpeed * Time.deltaTime;
@@ -93,15 +86,40 @@ public class PlayerController : MonoBehaviour
 
         if (onJump)
         {
-            _rigidbody.AddForce(Vector2.up * 5,ForceMode2D.Force);
+            _rigidbody.AddForce(Vector2.up * 5, ForceMode2D.Force);
         }
 
     }
 
+    private bool IsGrounded()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
+        //Debug.Log((transform.position.y - hit.point.y));
+        if (hit.collider != null && (transform.position.y - hit.point.y) > 0f)
+        {
+            if (platformObject != null)
+            {
+                // 점프가 플랫폼 높이에 딱맞는 경우 collisionExit가 안일어나는경우 발생. 이를 위한 보정
+                platformObject.rotationalOffset = 0f;
+            }
+            return true;
+        }
+        return false;
+
+        //return Physics2D.OverlapCircle(transform.position, groundCheckRadius, groundLayer);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, Vector3.down);
+    }
+
+
     #region Move
     public void OnMove(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Performed)
         {
             dir = context.ReadValue<Vector2>();
             playerAnimation.CallOnMoveEvent(dir.x);
@@ -121,33 +139,31 @@ public class PlayerController : MonoBehaviour
         {
             if (_playerOnPlatform)
             {
-                Debug.Log("platformObject");
                 platformObject.rotationalOffset = 180f;
+                _playerOnPlatform = false;
             }
         }
     }
-
-
     #endregion
+
 
     #region Jump
     void CheckFloor()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
-
-        if (hit.collider == null)
+        // RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
+        // if (hit.collider == null)
+        if (IsGrounded())
+        {
+            playerAnimation.animator.SetBool("OnJump", false);
+            onGround = true;
+        }
+        else
         {
             playerAnimation.animator.SetBool("OnJump", true);
             onGround = false;
             jumpTime = 0f;
         }
-        else
-        {
-            playerAnimation.animator.SetBool("OnJump", false);
-            onGround = true;
-            
-        }
-    }    
+    }
 
     public void Jump(InputAction.CallbackContext context)
     {
@@ -157,7 +173,7 @@ public class PlayerController : MonoBehaviour
             {
                 onJump = true;
                 _rigidbody.AddForce(Vector2.up * playerJumpPower, ForceMode2D.Impulse);
-            } 
+            }
         }
 
         if (context.phase == InputActionPhase.Canceled)
@@ -165,9 +181,6 @@ public class PlayerController : MonoBehaviour
             onJump = false;
         }
     }
-
-
-
     #endregion
 
     #region Ladder
@@ -178,7 +191,7 @@ public class PlayerController : MonoBehaviour
         {
             climbingDir = context.ReadValue<Vector2>();
         }
-        if(context.phase == InputActionPhase.Canceled)
+        if (context.phase == InputActionPhase.Canceled)
         {
             climbingDir = Vector2.zero;
         }
@@ -186,11 +199,11 @@ public class PlayerController : MonoBehaviour
 
     void CheckClimbing()
     {
-        if (ladders.Count >0 && Mathf.Abs(climbingDir.y) > 0f)
+        if (ladders.Count > 0 && Mathf.Abs(climbingDir.y) > 0f)
         {
             isClimbing = true;
         }
-        else if(ladders.Count <= 0 )
+        else if (ladders.Count <= 0)
         {
             isClimbing = false;
         }
@@ -223,15 +236,10 @@ public class PlayerController : MonoBehaviour
     //        Vector2 dir = (collision.gameObject.transform.position-transform.position).normalized;
     //        playerStats.TakeHit(1, hitPoint, dir);
     //        _rigidbody.AddForce(dir, ForceMode2D.Impulse);
-
-
     //    }
     //}
 
-    /// <summary>
-    /// S 키를 누르면 얕은 플랫폼에서 내려온다
-    /// </summary>
-  
+
     private void SetPlayerOnPlatform(Collision2D other, bool value)
     {
         platformObject = other.gameObject.GetComponent<PlatformEffector2D>();
@@ -244,7 +252,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Debug.Log("OnCollisionEnter2D");
         if (passthrough.value == (passthrough.value | (1 << collision.gameObject.layer)))
         {
             SetPlayerOnPlatform(collision, true);
@@ -253,7 +260,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        //Debug.Log("OnCollisionExit2D");
         if (passthrough.value == (passthrough.value | (1 << collision.gameObject.layer)))
         {
             SetPlayerOnPlatform(collision, false);

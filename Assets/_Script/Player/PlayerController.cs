@@ -58,13 +58,6 @@ public class PlayerController : MonoBehaviour
     public Image testGauge;
     bool onJumpGauge;
 
-    [Header("LayerChecker")]
-    //[SerializeField] private Transform groundCheck;
-    //[SerializeField] private float groundCheckRadius = 0.05f;
-    [SerializeField] private PlatformEffector2D platformObject;
-    [SerializeField] private bool _playerOnPlatform; // 얕은 플랫폼 위에 있는지
-
-
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -154,8 +147,9 @@ public class PlayerController : MonoBehaviour
         {
             if (_playerOnPlatform)
             {
-                Debug.Log("platformObject");
+                //Debug.Log("platformObject");
                 platformObject.rotationalOffset = 180f;
+                _playerOnPlatform = false;
             }
         }
     }
@@ -255,22 +249,6 @@ public class PlayerController : MonoBehaviour
     //    }
     //}
 
-
-    /// <summary>
-    /// S 키를 누르면 얕은 플랫폼에서 내려온다
-    /// </summary>
-    public void OnDown(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed)
-        {
-            if (_playerOnPlatform)
-            {
-                //Debug.Log("platformObject");
-                platformObject.rotationalOffset = 180f;
-                _playerOnPlatform = false;
-            }
-        }
-    }
 
     private void SetPlayerOnPlatform(Collision2D other, bool value)
     {

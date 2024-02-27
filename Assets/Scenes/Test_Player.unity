@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 35028970}
   - component: {fileID: 35028972}
   - component: {fileID: 35028971}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: "wwww\u3148 (1)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 35782772}
   - component: {fileID: 35782774}
   - component: {fileID: 35782773}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: "wwww\u3148 (5)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 147895129}
   - component: {fileID: 147895131}
   - component: {fileID: 147895130}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: 9-Sliced (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 169783779}
   - component: {fileID: 169783781}
   - component: {fileID: 169783780}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: 9-Sliced (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -643,17 +643,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &169909340 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 301876681653556976, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
-  m_PrefabInstance: {fileID: 1659753261}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5f1af2c0b0379409a4f5d68adf0b39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &262726909
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +654,7 @@ GameObject:
   - component: {fileID: 262726910}
   - component: {fileID: 262726912}
   - component: {fileID: 262726911}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: "wwww\u3148 (3)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -795,7 +784,7 @@ GameObject:
   - component: {fileID: 274494854}
   - component: {fileID: 274494856}
   - component: {fileID: 274494855}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: "wwww\u3148 (4)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -925,7 +914,7 @@ GameObject:
   - component: {fileID: 460135450}
   - component: {fileID: 460135452}
   - component: {fileID: 460135451}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: "wwww\u3148 (6)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1055,7 +1044,7 @@ GameObject:
   - component: {fileID: 480786799}
   - component: {fileID: 480786801}
   - component: {fileID: 480786800}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: "wwww\u3148"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1185,7 +1174,7 @@ GameObject:
   - component: {fileID: 496717478}
   - component: {fileID: 496717480}
   - component: {fileID: 496717479}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: 9-Sliced (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1315,7 +1304,7 @@ GameObject:
   - component: {fileID: 502235595}
   - component: {fileID: 502235597}
   - component: {fileID: 502235596}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: 9-Sliced (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1534,7 +1523,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 623873611}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 427b76e483fbe574fac53da8a1f5f368, type: 3}
   m_Name: 
@@ -1542,6 +1531,74 @@ MonoBehaviour:
   player: {fileID: 0}
   offset: {x: 0, y: 0, z: -10}
   cameraSpeed: 1
+--- !u!1 &634053487
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 634053490}
+  - component: {fileID: 634053489}
+  - component: {fileID: 634053488}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &634053488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634053487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &634053489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634053487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &634053490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634053487}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &680384672
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,7 +1610,7 @@ GameObject:
   - component: {fileID: 680384673}
   - component: {fileID: 680384675}
   - component: {fileID: 680384674}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: "wwww\u3148 (2)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1683,7 +1740,7 @@ GameObject:
   - component: {fileID: 1071065701}
   - component: {fileID: 1071065703}
   - component: {fileID: 1071065702}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: "wwww\u3148 (8)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1813,7 +1870,7 @@ GameObject:
   - component: {fileID: 1211851455}
   - component: {fileID: 1211851457}
   - component: {fileID: 1211851456}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: 9-Sliced (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1941,7 +1998,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1312998733}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1992,7 +2049,7 @@ GameObject:
   - component: {fileID: 1449890428}
   - component: {fileID: 1449890430}
   - component: {fileID: 1449890429}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: "wwww\u3148 (7)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2122,7 +2179,7 @@ GameObject:
   - component: {fileID: 1520869955}
   - component: {fileID: 1520869957}
   - component: {fileID: 1520869956}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: 9-Sliced (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2297,46 +2354,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6931185971115855338, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6931185971115855338, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_ActionId
-      value: 65ad0820-eb35-44df-8805-f9f2e45eea34
-      objectReference: {fileID: 0}
-    - target: {fileID: 6931185971115855338, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_ActionName
-      value: Player/Down[/Keyboard/s]
-      objectReference: {fileID: 0}
-    - target: {fileID: 6931185971115855338, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6931185971115855338, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6931185971115855338, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 169909340}
-    - target: {fileID: 6931185971115855338, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6931185971115855338, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnDown
-      objectReference: {fileID: 0}
-    - target: {fileID: 6931185971115855338, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6931185971115855338, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2353,7 +2370,7 @@ GameObject:
   - component: {fileID: 1663184941}
   - component: {fileID: 1663184943}
   - component: {fileID: 1663184942}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: 9-Sliced (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2483,7 +2500,7 @@ GameObject:
   - component: {fileID: 1673923257}
   - component: {fileID: 1673923259}
   - component: {fileID: 1673923258}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: 9-Sliced
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2613,7 +2630,7 @@ GameObject:
   - component: {fileID: 2113472117}
   - component: {fileID: 2113472119}
   - component: {fileID: 2113472118}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: 9-Sliced (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

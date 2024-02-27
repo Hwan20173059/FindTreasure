@@ -271,13 +271,13 @@ MonoBehaviour:
   _rigidbody: {fileID: 0}
   playerSpeed: 5
   playerClimbingSpeed: 3
-  playerJumpPower: 80
+  playerJumpPower: 3
   onMove: 0
   poolItemPos: {fileID: 3918672614577551483}
   dropItemPos: {fileID: 8330693447573470754}
   platformObject: {fileID: 0}
   _playerOnPlatform: 0
-  addJumbPower: 100
+  addJumbPower: 60
   groundLayer:
     serializedVersion: 2
     m_Bits: 384

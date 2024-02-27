@@ -30,7 +30,7 @@ public class MonsterStat : MonoBehaviour
     public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
     public float ScanRange { get { return _scanRange; } set { _scanRange = value; } }
 
-    // 스폰 및 이동 관련
+    // 이동 관련
     [SerializeField]
     float _minX;
     [SerializeField]
@@ -38,5 +38,7 @@ public class MonsterStat : MonoBehaviour
 
     public float MinX { get { return _minX; } set { _minX = value; } }
     public float MaxX { get { return _maxX; } set { _maxX = value; } }
+
+
 
 }

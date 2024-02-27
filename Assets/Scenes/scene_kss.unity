@@ -772,7 +772,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
+  m_SurfaceArc: 75
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
@@ -950,7 +950,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1018227530
+--- !u!1001 &1265974760
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -964,11 +964,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 881488532122723687, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 881488532122723687, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 881488532122723687, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
       propertyPath: m_LocalPosition.z

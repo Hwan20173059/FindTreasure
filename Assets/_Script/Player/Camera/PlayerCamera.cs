@@ -10,8 +10,7 @@ public class PlayerCamera : MonoBehaviour
 
     public int currentStage;
 
-    public Vector2[] center;
-    public Vector2[] size;
+    public GameObject[] stage;
 
     float width;
     float height;
@@ -26,11 +25,11 @@ public class PlayerCamera : MonoBehaviour
     {
         transform.position = Vector3.Lerp(transform.position, player.position, Time.deltaTime);
 
-        float lx = size[currentStage].x * 0.5f - width;
-        float clampX = Mathf.Clamp(transform.position.x, -lx + center[currentStage].x, lx + center[currentStage].x);
+        float lx = stage[currentStage].GetComponent<BoxCollider2D>().size.x * 0.5f - width;
+        float clampX = Mathf.Clamp(transform.position.x, -lx + stage[currentStage].GetComponent<Transform>().position.x, lx + stage[currentStage].GetComponent<Transform>().position.x);
 
-        float ly = size[currentStage].y * 0.5f - height;
-        float clampY = Mathf.Clamp(transform.position.y, -ly + center[currentStage].y, ly + center[currentStage].y);
+        float ly = stage[currentStage].GetComponent<BoxCollider2D>().size.y * 0.5f - height;
+        float clampY = Mathf.Clamp(transform.position.y, -ly + stage[currentStage].GetComponent<Transform>().position.y, ly + stage[currentStage].GetComponent<Transform>().position.y);
 
         transform.position = new Vector3(clampX, clampY, -10);
     }

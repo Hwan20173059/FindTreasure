@@ -9,8 +9,9 @@ public class MainCamera : MonoBehaviour
     public float speed;
 
     public int currentStage = 0;
-    public Vector2[] stageCenter;
-    public Vector2[] stageSize;
+    public Vector2[] Stage;
+
+    public Vector2 size;
 
     float height;
     float width;
@@ -25,19 +26,19 @@ public class MainCamera : MonoBehaviour
     {
         Gizmos.color = Color.red;
 
-        for(int i = 0; i < stageCenter.Length; i++)
-            Gizmos.DrawWireCube(stageCenter[i], stageSize[i]);
+        for(int i = 0; i < Stage.Length; i++)
+            Gizmos.DrawWireCube(Stage[i], size);
     }
 
     private void LateUpdate()
     {
         transform.position = Vector2.Lerp(transform.position, target.position, Time.deltaTime * speed);
 
-        float lx = stageSize[currentStage].x * 0.5f - width;
-        float clampX = Mathf.Clamp(transform.position.x, -lx + stageCenter[currentStage].x, lx + stageCenter[currentStage].x);
+        float lx = size.x * 0.5f - width;
+        float clampX = Mathf.Clamp(transform.position.x, -lx + Stage[currentStage].x, lx + Stage[currentStage].x);
 
-        float ly = stageSize[currentStage].y * 0.5f - height;
-        float clampY = Mathf.Clamp(transform.position.y, -ly + stageCenter[currentStage].y, ly + stageCenter[currentStage].y);
+        float ly = size.y * 0.5f - height;
+        float clampY = Mathf.Clamp(transform.position.y, -ly + Stage[currentStage].y, ly + Stage[currentStage].y);
 
         transform.position = new Vector3(clampX, clampY, -10f);
     }

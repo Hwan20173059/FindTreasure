@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
         if (onJump)
         {
-            _rigidbody.AddForce(Vector2.up*5,ForceMode2D.Force);
+            _rigidbody.AddForce(Vector2.up * 5,ForceMode2D.Force);
         }
 
     }

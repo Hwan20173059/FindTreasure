@@ -41,6 +41,7 @@ public class MonsterController : MonsterBaseController
     //        return;
     //    }
     //}
+
     protected override void UpdateIdle()
     {
         Debug.Log("Monster UpdateIdle");
@@ -112,29 +113,64 @@ public class MonsterController : MonsterBaseController
     {
         Debug.Log("Monster UpdateSkill");
     }
-    void OnHitEvent()
-    {
-        Debug.Log("Monster OnHitEvent");
-        if(_lockTarget != null)
-        {
-            // Stat 플레이어의 스탯과, 몬스터의 스탯으로부터 데미지 계산 및 플레이어에게 데미지 주기.
-            MonsterStat myStat = gameObject.GetComponent<MonsterStat>();
-            // targetStat.Hp -= Mathf.Max(0, myStat.Attack);
+    //void OnHitEvent() // OnTriggerEnter2D에서 대신 처리. Todo: State 관련한 처리 등 가져가기
+    //{
+    //    Debug.Log("Monster OnHitEvent");
+    //    if(_lockTarget != null)
+    //    {
+    //        // Stat 플레이어의 스탯과, 몬스터의 스탯으로부터 데미지 계산 및 플레이어에게 데미지 주기.
+    //        MonsterStat myStat = gameObject.GetComponent<MonsterStat>();
+    //        // targetStat.Hp -= Mathf.Max(0, myStat.Attack);
 
-            // target(플레이어)의 HP가 0 이상 남은 경우
-            if (true) // targetStat.Hp > 0
+    //        // target(플레이어)의 HP가 0 이상 남은 경우
+    //        if (true) // targetStat.Hp > 0
+    //        {
+    //            float distance = (_lockTarget.transform.position - transform.position).magnitude;
+    //            if (distance <= _stat.AttackRange)
+    //                State = MonsterState.Skill;
+    //            else
+    //                State = MonsterState.Moving;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        State = MonsterState.Idle;
+    //    }
+    //}
+
+    // 몬스터가 플레이어에 부딪혔을 경우, 플레이어에게 데미지
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            // 부딪친 Player 오브젝트의 PlayerController 에서 데미지 주는 메서드 사용
+            PlayerStats _ps = collision.gameObject.GetComponent<PlayerStats>();
+            if (_ps != null)
             {
-                float distance = (_lockTarget.transform.position - transform.position).magnitude;
-                if (distance <= _stat.AttackRange)
-                    State = MonsterState.Skill;
-                else
-                    State = MonsterState.Moving;
+                Transform hitPoint = transform;
+                Vector2 hitDirection = (collision.transform.position - this.transform.position).normalized;
+                _ps.TakeHit(_stat.Attack, hitPoint, hitDirection); // + 히트포인트, 히트방향
             }
         }
-        else
-        {
-            State = MonsterState.Idle;
-        }
     }
+
+
+    // 데미지 받기
+    public void TakeHit(float damage, Transform hitPoint, Vector2 hitDir)
+    {
+        TakeDamage(damage);
+    }
+    private void TakeDamage(float damage)
+    {
+        _stat.Hp -= (int)damage;
+        if (_stat.Hp <= 0)
+            Die();
+    }
+    private void Die()
+    {
+
+    }
+
+
 
 }

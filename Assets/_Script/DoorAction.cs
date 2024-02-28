@@ -13,10 +13,12 @@ public enum DoorState
 public class DoorAction : MonoBehaviour
 {
     private DoorState state;
+    [SerializeField] private GameObject objectMask;
 
     private void Awake()
     {
         state = DoorState.Close;
+        objectMask.SetActive(false);
     }
 
     public void SetChestState(DoorState _state)
@@ -24,6 +26,7 @@ public class DoorAction : MonoBehaviour
         if (DoorState.Open == _state)
         {
             state = _state;
+            objectMask.SetActive(true);
             StartCoroutine(MoveDoorUp());
         }
     }

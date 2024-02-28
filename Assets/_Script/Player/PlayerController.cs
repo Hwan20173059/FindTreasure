@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -82,12 +83,12 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        
+
     }
 
     private void FixedUpdate()
     {
-        if(!playerStats.isDead)
+        if (!playerStats.isDead)
         {
             if (onMove) { _rigidbody.position += dir * playerSpeed * Time.deltaTime; }
             if (isClimbing)
@@ -105,7 +106,7 @@ public class PlayerController : MonoBehaviour
                 _rigidbody.AddForce(Vector2.up * addJumbPower, ForceMode2D.Force);
             }
         }
-     
+
     }
 
     private bool IsGrounded()
@@ -247,7 +248,8 @@ public class PlayerController : MonoBehaviour
 
         if (collision.CompareTag("GoldenKey"))
         {
-            // TODO : 키 획득 어떤식으로 할지
+            collision.GetComponentInParent<ChestInteract>().SetChestState(ChestState.Empty);
+            playerStats.GetGoldenKey();
         }
     }
 
@@ -267,7 +269,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        Debug.Log("E");
         if (context.phase == InputActionPhase.Performed)
         {
             // 주변 콜라이더 집합
@@ -331,7 +332,7 @@ public class PlayerController : MonoBehaviour
     #region Bomb
     public void UseBomb(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Performed)
         {
             if (playerStats.UseBomb())
             {
@@ -339,7 +340,7 @@ public class PlayerController : MonoBehaviour
 
             }
         }
-       
+
     }
 
 

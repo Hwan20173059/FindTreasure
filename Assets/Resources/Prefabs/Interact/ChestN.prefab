@@ -232,7 +232,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 32768
   rewardsObject: {fileID: 495621595294582366}
-  anim: {fileID: 7150881710212493796}
+  chestAnim: {fileID: 7150881710212493796}
+  keyAnim: {fileID: 6657829582508972127}
 --- !u!1 &2659009648769737945
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,8 +31,8 @@ MonoBehaviour:
       tempMaxX: 2
   - stageName: Stage5
     spawnInfos:
-    - monsterType: MonsterA
-      isStopOnIdle: 0
+    - monsterType: MonsterB
+      isStopOnIdle: 1
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 93, y: 24.1}
@@ -45,13 +45,13 @@ MonoBehaviour:
       spawnPosition: {x: 82, y: 24.1}
       tempMinX: 0
       tempMaxX: 0
-    - monsterType: MonsterA
+    - monsterType: MonsterB
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 71, y: 24.1}
-      tempMinX: 0
-      tempMaxX: 0
+      tempMinX: 1
+      tempMaxX: 2
     - monsterType: MonsterA
       isStopOnIdle: 0
       isStopOnTrack: 0

@@ -9,7 +9,7 @@ public class CAnimationHandler : MonoBehaviour
     #region Members
     private Animator m_Animator;
     [SerializeField]
-    private MonsterMelee m_MonsterController;
+    private MonsterBaseController m_MonsterController;
 
     #endregion Members
 
@@ -18,7 +18,7 @@ public class CAnimationHandler : MonoBehaviour
     void Awake()
     {
         m_Animator = GetComponent<Animator>();
-        m_MonsterController = GetComponentInParent<MonsterMelee>();
+        m_MonsterController = GetComponentInParent<MonsterBaseController>();
     }
 
     //public void EnterNextScene()
@@ -27,16 +27,22 @@ public class CAnimationHandler : MonoBehaviour
     //    m_Animator.Play("Animation_Name");
     //}
 
-    public void AtAttack()
+    public void AtAttackMelee()
     {
         Debug.Log("범위 내 플레이어에 데미지");
-        m_MonsterController.DamageToPlayer(haveRange:true);
+        m_MonsterController.DamageToPlayer(haveRange: true);
 
     }
-    public void AtEndAnimation()
+    public void AtAttackRange()
+    {
+        Debug.Log("플레이어에 투사체 발사");
+        m_MonsterController.ShotProjectile();
+
+    }
+    public void AtEndAttack()
     {
         //Debug.Log("공격 애니메이션 종료");
-        m_MonsterController.AtEndAnimation();
+        m_MonsterController.EndAttackAnimation();
     }
     public void AtEndDie()
     {

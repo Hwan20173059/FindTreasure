@@ -15,9 +15,7 @@ public class MonsterStat : MonoBehaviour
     [SerializeField]
     float _attackRange;
     [SerializeField]
-    float _attackSpeed;
-    [SerializeField]
-    float _attackObjInitDelay;
+    float _attackDelay;
     [SerializeField]
     int _defense;
     [SerializeField]
@@ -30,8 +28,7 @@ public class MonsterStat : MonoBehaviour
     public int MaxHp { get { return _maxHp; } set { _maxHp = value; } }
     public int AttackDamage { get { return _attackDamage; } set { _attackDamage = value; } }
     public float AttackRange { get { return _attackRange; } set { _attackRange = value; } }
-    public float AttackSpeed { get { return _attackSpeed; } set { _attackSpeed = value; } }
-    public float AttackObjInitDelay { get { return _attackObjInitDelay; } set { _attackObjInitDelay = value; } }
+    public float AttackDelay { get { return _attackDelay; } set { _attackDelay = value; } }
     public int Defense { get { return _defense; } set { _defense = value; } }
     public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
     public float ScanRange { get { return _scanRange; } set { _scanRange = value; } }

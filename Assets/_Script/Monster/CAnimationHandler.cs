@@ -29,6 +29,8 @@ public class CAnimationHandler : MonoBehaviour
     public void AtAttack()
     {
         Debug.Log("범위 내 플레이어에 데미지");
+        m_MonsterController.DamageToPlayer();
+
     }
     public void AtEndAnimation()
     {

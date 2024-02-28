@@ -9,6 +9,8 @@ TagManager:
   - Bomb
   - Chest
   - GoldenKey
+  - Monster
+  - Thorns
   layers:
   - Default
   - TransparentFX

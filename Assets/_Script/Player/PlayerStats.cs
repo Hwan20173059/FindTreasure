@@ -15,6 +15,8 @@ public class PlayerStats : LifeEntity
     [Header("Player State")]
     public int lifeCount;
     public int bombAmount;
+    public int goldenKeyAmount;
+
     [SerializeField] float invincibilityRate;
     [SerializeField] bool onInvincibility;
     private void Awake()
@@ -31,7 +33,7 @@ public class PlayerStats : LifeEntity
     public override void TakeHit(float damage, Vector2 hitDir)
     {
         if (!onInvincibility)
-        {  
+        {
             base.TakeHit(damage, hitDir);
         }
     }
@@ -46,7 +48,7 @@ public class PlayerStats : LifeEntity
     {
         base.Die();
         lifeCount--;
-        if(lifeCount < 0)
+        if (lifeCount < 0)
         {
             Debug.Log("Game Over");
         }
@@ -64,7 +66,7 @@ public class PlayerStats : LifeEntity
         float duration = invincibilityRate;
         onInvincibility = true;
         // Invincibillity effect,
-        while(duration <= 0)
+        while (duration <= 0)
         {
             duration -= Time.deltaTime;
 
@@ -77,7 +79,7 @@ public class PlayerStats : LifeEntity
 
     public bool UseBomb() // Add Ui delegate
     {
-        if(bombAmount > 0)
+        if (bombAmount > 0)
         {
             bombAmount--;
             return true;
@@ -85,5 +87,9 @@ public class PlayerStats : LifeEntity
         return false;
     }
 
+    public void GetGoldenKey()
+    {
+        goldenKeyAmount++;
+    }
 
 }

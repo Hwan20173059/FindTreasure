@@ -103,7 +103,7 @@ Transform:
   - {fileID: 2252242290026208061}
   - {fileID: 3918672614577551483}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6721873082806423224
 BoxCollider2D:
@@ -331,7 +331,7 @@ MonoBehaviour:
   interactDistance: 0.5
   groundLayer:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 1408
   passthrough:
     serializedVersion: 2
     m_Bits: 256
@@ -355,6 +355,7 @@ MonoBehaviour:
   isDead: 0
   lifeCount: 5
   bombAmount: 10
+  goldenKeyAmount: 0
   invincibilityRate: 2
   onInvincibility: 0
 --- !u!114 &4627755680071924025

@@ -54,6 +54,9 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+
+        Init();
+
         _rigidbody = GetComponent<Rigidbody2D>();
         pooling = GetComponent<Pooling>();
         pooling.CreatePool(poolItemPos);
@@ -61,38 +64,45 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        CheckFloor();
-        CheckClimbing();
-
-
-        if (onJump)
+        if (!playerStats.isDead)
         {
-            jumpTime += Time.deltaTime;
-            if (jumpTime >= maxJumpTime)
+            CheckFloor();
+            CheckClimbing();
+
+
+            if (onJump)
             {
-                onJump = false;
+                jumpTime += Time.deltaTime;
+                if (jumpTime >= maxJumpTime)
+                {
+                    onJump = false;
+                }
             }
         }
+        
     }
 
     private void FixedUpdate()
     {
-        if (onMove) { _rigidbody.position += dir * playerSpeed * Time.deltaTime; }
-        if (isClimbing)
+        if(!playerStats.isDead)
         {
-            _rigidbody.gravityScale = 0f;
-            _rigidbody.position += climbingDir * playerClimbingSpeed * Time.deltaTime;
-        }
-        else
-        {
-            _rigidbody.gravityScale = gravityScale;
-        }
+            if (onMove) { _rigidbody.position += dir * playerSpeed * Time.deltaTime; }
+            if (isClimbing)
+            {
+                _rigidbody.gravityScale = 0f;
+                _rigidbody.position += climbingDir * playerClimbingSpeed * Time.deltaTime;
+            }
+            else
+            {
+                _rigidbody.gravityScale = gravityScale;
+            }
 
-        if (onJump)
-        {
-            _rigidbody.AddForce(Vector2.up * addJumbPower, ForceMode2D.Force);
+            if (onJump)
+            {
+                _rigidbody.AddForce(Vector2.up * addJumbPower, ForceMode2D.Force);
+            }
         }
-
+     
     }
 
     private bool IsGrounded()
@@ -118,6 +128,13 @@ public class PlayerController : MonoBehaviour
     //    Gizmos.color = Color.red;
     //    Gizmos.DrawRay(transform.position, Vector3.down);
     //}
+
+    void Init()
+    {
+        playerJumpPower = 100;
+        addJumbPower = 200;
+        gravityScale = 4;
+    }
 
 
     #region Move

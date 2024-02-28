@@ -812,6 +812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ead913109e694841b99614cd0be76c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectMask: {fileID: 9166602136000132058}
 --- !u!19719996 &6284181363747835986
 TilemapCollider2D:
   m_ObjectHideFlags: 0

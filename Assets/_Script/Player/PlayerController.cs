@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     bool isClimbing;
     public Transform poolItemPos;
     public Transform dropItemPos;
+    bool isDamage = false;
 
     [Header("Player Move")]
     HashSet<GameObject> ladders = new HashSet<GameObject>();
@@ -257,12 +258,26 @@ public class PlayerController : MonoBehaviour
             collision.GetComponentInParent<ChestInteract>().SetChestState(ChestState.Empty);
             playerStats.GetGoldenKey();
         }
+    }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
         if (collision.CompareTag("Thorns"))
         {
-            Debug.Log("가시 데미지 처리");
+            if (isDamage == false)
+            {
+                playerStats.TakeDamage(10);
+                isDamage = true;
+                Invoke("isDamaged", 1);
+            }
         }
     }
+
+    public void isDamaged()
+    {
+        isDamage = false;
+    }
+
 
     //private void OnTriggerExit2D(Collider2D collision)
     //{

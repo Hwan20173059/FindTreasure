@@ -27,11 +27,31 @@ public class MonstersManager : MonoBehaviour
 
     public MonsterSpawnData monsterSpawnData;
 
+    public PlayerCamera PlayerCamera;
+    public int currentStage;
+    public GameObject[] stage;
 
     private void Start()
     {
-        SpawnMonsters("stage_a"); // 스테이지 관리 스테이지에서 이와 같이 스폰하면 될 듯
-        //SpawnMonsters("stage1-2");
+        currentStage = -1;
+        //SpawnMonsters("stage_a"); // 스테이지 관리 스크립트에서 이와 같이 스폰하면 될 듯 -> 스테이지 관리 스크립트... 그런 건 없었다.
+        ////SpawnMonsters("stage1-2");
+    }
+
+    private void LateUpdate()
+    {
+        if(PlayerCamera.currentStage !=  currentStage)
+        {
+            currentStage = PlayerCamera.currentStage;
+            try
+            {
+                SpawnMonsters($"Stage{currentStage}");
+            }
+            catch
+            {
+                Debug.Log($"Stage{currentStage}에 대한 스폰에 실패했습니다.");
+            }
+        }
     }
 
     // 스테이지 이름을 받아 해당 스테이지에 몬스터를 스폰

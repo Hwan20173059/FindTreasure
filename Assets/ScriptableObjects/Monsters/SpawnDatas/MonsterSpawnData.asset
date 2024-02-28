@@ -40,3 +40,10 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -1, y: -1}
+  - stageName: stage_a
+    spawnInfos:
+    - monsterType: MonsterA
+      isStopOnIdle: 0
+      isStopOnTrack: 0
+      isBoss: 0
+      spawnPosition: {x: 38.6, y: 6.6}

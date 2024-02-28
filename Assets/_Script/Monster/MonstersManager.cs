@@ -28,8 +28,8 @@ public class MonstersManager : MonoBehaviour
 
     private void Start()
     {
-        SpawnMonsters("stage1-1"); // 스테이지 관리 스테이지에서 이와 같이 스폰하면 될 듯
-        SpawnMonsters("stage1-2");
+        SpawnMonsters("stage_a"); // 스테이지 관리 스테이지에서 이와 같이 스폰하면 될 듯
+        //SpawnMonsters("stage1-2");
     }
 
     // 스테이지 이름을 받아 해당 스테이지에 몬스터를 스폰

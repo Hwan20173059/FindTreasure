@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "987ac56e-6b1b-4910-bb83-1f4b35f42080",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Bomb",
                     "type": "Button",
                     "id": "9f4bb109-22af-434e-bd91-3a8b5008bcb6",
@@ -137,6 +146,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6cc96e22-363a-4335-a0ec-1c671d9058bc",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

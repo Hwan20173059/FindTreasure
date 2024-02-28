@@ -103,8 +103,7 @@ Transform:
   - {fileID: 2252242290026208061}
   - {fileID: 3918672614577551483}
   m_Father: {fileID: 0}
-
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6721873082806423224
 BoxCollider2D:
@@ -483,19 +482,21 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.0768255, y: 0.12089476}
-      - {x: 0.15499198, y: 0.089556605}
-      - {x: 0.475335, y: 0.18732882}
+    - - {x: -0.110382676, y: 0.020222932}
+      - {x: 0.16170347, y: 0.009019136}
+      - {x: 0.40362632, y: 0.05133689}
+      - {x: 0.5357381, y: 0.14034864}
       - {x: 0.632738, y: 0.35720277}
       - {x: 0.6340513, y: 0.5864909}
       - {x: 0.63489056, y: 0.71558034}
       - {x: 0.46928072, y: 0.88222414}
+      - {x: 0.36832738, y: 0.95427716}
       - {x: 0.14890552, y: 0.9787276}
       - {x: 0.4549929, y: 0.7547396}
       - {x: 0.43163806, y: 0.48983088}
       - {x: 0.22159076, y: 0.19384767}
-      - {x: 0.007761717, y: 0.15751731}
-      - {x: -0.2793377, y: 0.23332205}
+      - {x: 0.007761717, y: 0.15080583}
+      - {x: -0.2323578, y: 0.21318772}
   m_UseDelaunayMesh: 0
 --- !u!114 &8786327750165693327
 MonoBehaviour:
@@ -509,6 +510,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c0a5f2f04f3a4645b04c2e90e6f5130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterMask:
+    serializedVersion: 2
+    m_Bits: 131072
 --- !u!1 &5832270536707314081
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,8 +590,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.32834315, y: 0.12223931}
-      - {x: 0.58176005, y: 0.23584525}
+    - - {x: 0.34176612, y: 0.014856055}
+      - {x: 0.6354517, y: 0.16873069}
       - {x: 0.6780362, y: 0.45783263}
       - {x: 0.6566137, y: 0.7076674}
       - {x: 0.5169996, y: 0.89294827}
@@ -597,7 +601,7 @@ PolygonCollider2D:
       - {x: 0.44205725, y: 0.69061065}
       - {x: 0.50869983, y: 0.5213452}
       - {x: 0.45744073, y: 0.31990415}
-      - {x: 0.084587276, y: 0.066836834}
+      - {x: -0.05635315, y: 0.0064337626}
   m_UseDelaunayMesh: 0
 --- !u!114 &6986285843088936306
 MonoBehaviour:
@@ -611,6 +615,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c0a5f2f04f3a4645b04c2e90e6f5130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterMask:
+    serializedVersion: 2
+    m_Bits: 131072
 --- !u!1 &5879789954399606451
 GameObject:
   m_ObjectHideFlags: 0

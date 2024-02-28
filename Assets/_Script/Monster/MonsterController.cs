@@ -26,7 +26,8 @@ public class MonsterController : MonsterBaseController
     }
     protected override void UpdateIdle()
     {
-        Debug.Log("Monster UpdateIdle");
+        //Debug.Log("Monster UpdateIdle");
+        //TakeHit(1, new Vector2(0, 0)); // DIE 테스트용 데미지 주기
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player == null) return;
 
@@ -65,7 +66,7 @@ public class MonsterController : MonsterBaseController
         {
             _destPos = _lockTarget.transform.position;
             float distance = (_destPos - transform.position).magnitude;
-            if (distance <= _stat.AttackRange)
+            if (distance <= _stat.AttackActionRange)
             {
                 State = MonsterState.Skill;
                 return;
@@ -96,40 +97,16 @@ public class MonsterController : MonsterBaseController
     }
     protected override void UpdateSkill()
     {
-        //Debug.Log("Monster UpdateSkill");
+        // Debug.Log("Monster UpdateSkill");
+        // Animation쪽 이벤트에서 처리
 
-        OnHitEvent();
-    }
-    void OnHitEvent() // Animation 중 Damage수치를 가진 오브젝트를 만드는 것으로 수정
-    {
-        //Debug.Log("Monster OnHitEvent");
-        if (_lockTarget != null)
-        {
-            // Stat 플레이어의 스탯과, 몬스터의 스탯으로부터 데미지 계산 및 플레이어에게 데미지 주기.
-            MonsterStat myStat = gameObject.GetComponent<MonsterStat>();
-            // targetStat.Hp -= Mathf.Max(0, myStat.AttackDamage);
-
-            // target(플레이어)의 HP가 0 이상 남은 경우
-            if (true) // targetStat.Hp > 0
-            {
-                float distance = (_lockTarget.transform.position - transform.position).magnitude;
-                //if (distance <= _stat.AttackRange)
-                //    State = MonsterState.Skill;
-                //else
-                //    State = MonsterState.Moving;
-            }
-        }
-        else
-        {
-            State = MonsterState.Idle;
-        }
     }
     public void AtEndAnimation()
     {
         if (_lockTarget != null)
         {
             float distance = (_lockTarget.transform.position - transform.position).magnitude;
-            if (distance <= _stat.AttackRange)
+            if (distance <= _stat.AttackActionRange)
                 State = MonsterState.Skill;
             else
                 State = MonsterState.Moving;
@@ -148,8 +125,8 @@ public class MonsterController : MonsterBaseController
             DamageToPlayer(collision.gameObject);
         }
     }
-    // 범용, 플레이어에게 데미지
-    public void DamageToPlayer(GameObject player = null, GameObject monster = null)
+    // 범용?, 플레이어에게 데미지
+    public void DamageToPlayer(GameObject player = null, GameObject monster = null, bool haveRange = false)
     {
         PlayerStats _ps;
         GameObject _player;
@@ -171,14 +148,13 @@ public class MonsterController : MonsterBaseController
 
         if (_ps != null)
         {
-            //Debug.Log(_player);
-            //Debug.Log(_monster);
-            Vector2 hitDirection = (_player.transform.position - _monster.transform.position).normalized;
-            _ps.TakeHit(_stat.AttackDamage, hitDirection); // 데미지, 히트방향
+            if (!haveRange || ((_player.transform.position - _monster.transform.position).magnitude < _stat.RealAttackRange))
+            {
+                Vector2 hitDirection = (_player.transform.position - _monster.transform.position).normalized;
+                _ps.TakeHit(_stat.AttackDamage, hitDirection); // 데미지, 히트방향
+            }
         }
     }
-
-
     // 데미지 받기
     public void TakeHit(float damage, Vector2 hitDir)
     {
@@ -195,14 +171,9 @@ public class MonsterController : MonsterBaseController
     protected override void UpdateDie()
     {
         Debug.Log("Monster Dead");
-        
-        Invoke("DestroyInvoke", 2f); // 임시
     }
-    private void DestroyInvoke()
+    public void DestroyObject()
     {
         Destroy(gameObject);
     }
-
-
-
 }

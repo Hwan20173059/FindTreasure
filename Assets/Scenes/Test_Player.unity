@@ -1531,8 +1531,7 @@ MonoBehaviour:
   player: {fileID: 0}
   cameraSpeed: 1
   currentStage: 0
-  center: []
-  size: []
+  stage: []
 --- !u!1 &634053487
 GameObject:
   m_ObjectHideFlags: 0
@@ -2314,7 +2313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 881488532122723687, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.49
       objectReference: {fileID: 0}
     - target: {fileID: 881488532122723687, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
       propertyPath: m_LocalPosition.y

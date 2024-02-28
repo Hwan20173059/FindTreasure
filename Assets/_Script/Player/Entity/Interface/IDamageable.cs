@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    void TakeHit(float damage, Transform hitPoint, Vector2 hitDir);
+    void TakeHit(float damage, Vector2 hitDir);
     void TakeDamage(float damage);
 }

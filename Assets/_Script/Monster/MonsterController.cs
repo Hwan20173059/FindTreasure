@@ -15,7 +15,6 @@ public class MonsterController : MonsterBaseController
 
     public float CurrentMoveDirection { get { return _currentMoveDirection; } set { _currentMoveDirection = value; } }
 
-
     public override void Init()
     {
         _stat = gameObject.GetComponent<MonsterStat>();
@@ -25,22 +24,6 @@ public class MonsterController : MonsterBaseController
         //    Managers.UI.MakeWorldSpaceUI<UI_HPBar>(transform);
 
     }
-
-    //protected override void UpdateIdle()
-    //{
-    //    Debug.Log("Monster UpdateIdle");
-    //    GameObject player = GameObject.FindGameObjectWithTag("Player");
-    //    if (player == null)
-    //        return;
-
-    //    float distance = (player.transform.position - transform.position).magnitude;
-    //    if(distance <= _stat.ScanRange)
-    //    {
-    //        _lockTarget = player;
-    //        State = MonsterState.Moving;
-    //        return;
-    //    }
-    //}
     protected override void UpdateIdle()
     {
         Debug.Log("Monster UpdateIdle");
@@ -58,14 +41,16 @@ public class MonsterController : MonsterBaseController
         // 현재 위치가 MinX보다 작거나 MaxX보다 클 경우 방향 전환
         if (transform.position.x <= _stat.MinX || transform.position.x >= _stat.MaxX)
         {
-            _currentMoveDirection *= -1; // 방향 전환
+            if(!_stat.IsStopOnIdle)
+                _currentMoveDirection *= -1;
         }
 
         // 스프라이트의 방향 설정
         transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX = _currentMoveDirection < 0;
 
         // 몬스터 이동
-        transform.position += Vector3.right * _currentMoveDirection * _stat.MoveSpeed * Time.deltaTime;
+        if(!_stat.IsStopOnIdle)
+            transform.position += Vector3.right * _currentMoveDirection * _stat.MoveSpeed * Time.deltaTime;
 
         // 몬스터가 범위를 벗어나지 않도록 조정
         float clampedX = Mathf.Clamp(transform.position.x, _stat.MinX, _stat.MaxX);
@@ -105,30 +90,33 @@ public class MonsterController : MonsterBaseController
             Vector3 nextPosition = transform.position + Vector3.right * _stat.MoveSpeed * CurrentMoveDirection * Time.deltaTime;
             nextPosition.x = Mathf.Clamp(nextPosition.x, _stat.MinX, _stat.MaxX);
 
-            transform.position = nextPosition;
+            if(!_stat.IsStopOnTrack)
+                transform.position = nextPosition;
         }
     }
     protected override void UpdateSkill()
     {
         Debug.Log("Monster UpdateSkill");
+
+        OnHitEvent();
     }
-    void OnHitEvent()
+    void OnHitEvent() // Animation 중 Damage수치를 가진 오브젝트를 만드는 것으로 수정
     {
         Debug.Log("Monster OnHitEvent");
-        if(_lockTarget != null)
+        if (_lockTarget != null)
         {
             // Stat 플레이어의 스탯과, 몬스터의 스탯으로부터 데미지 계산 및 플레이어에게 데미지 주기.
             MonsterStat myStat = gameObject.GetComponent<MonsterStat>();
-            // targetStat.Hp -= Mathf.Max(0, myStat.Attack);
+            // targetStat.Hp -= Mathf.Max(0, myStat.AttackDamage);
 
             // target(플레이어)의 HP가 0 이상 남은 경우
             if (true) // targetStat.Hp > 0
             {
                 float distance = (_lockTarget.transform.position - transform.position).magnitude;
-                if (distance <= _stat.AttackRange)
-                    State = MonsterState.Skill;
-                else
-                    State = MonsterState.Moving;
+                //if (distance <= _stat.AttackRange)
+                //    State = MonsterState.Skill;
+                //else
+                //    State = MonsterState.Moving;
             }
         }
         else
@@ -136,5 +124,68 @@ public class MonsterController : MonsterBaseController
             State = MonsterState.Idle;
         }
     }
+    public void AtEndAnimation()
+    {
+        if (_lockTarget != null)
+        {
+            float distance = (_lockTarget.transform.position - transform.position).magnitude;
+            if (distance <= _stat.AttackRange)
+                State = MonsterState.Skill;
+            else
+                State = MonsterState.Moving;
+        }
+        else
+        {
+            State = MonsterState.Idle;
+        }
+    }
+
+    // 몬스터가 플레이어에 부딪혔을 경우, 플레이어에게 데미지
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            // 부딪친 Player 오브젝트의 PlayerController 에서 데미지 주는 메서드 사용
+            PlayerStats _ps = collision.gameObject.GetComponent<PlayerStats>();
+            if (_ps != null)
+            {
+                Transform hitPoint = transform;
+                Vector2 hitDirection = (collision.transform.position - this.transform.position).normalized;
+                _ps.TakeHit(_stat.AttackDamage, hitDirection); // + 히트포인트, 히트방향
+            }
+        }
+    }
+
+    public void DamagePlayer()
+    {
+
+    }
+
+
+    // 데미지 받기
+    public void TakeHit(float damage, Vector2 hitDir)
+    {
+        TakeDamage(damage);
+    }
+    private void TakeDamage(float damage)
+    {
+        _stat.Hp -= (int)damage;
+        if (_stat.Hp <= 0)
+            State = MonsterState.Die;
+    }
+
+    // 체력이 0이 되어 죽음
+    protected override void UpdateDie()
+    {
+        Debug.Log("Monster Dead");
+        
+        Invoke("DestroyInvoke", 2f); // 임시
+    }
+    private void DestroyInvoke()
+    {
+        Destroy(gameObject);
+    }
+
+
 
 }

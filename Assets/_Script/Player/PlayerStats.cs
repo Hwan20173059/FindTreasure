@@ -2,29 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+//CurHealth
+//LifeCount
+//bombAmount
+
 public class PlayerStats : LifeEntity
 {
     PlayerAnimation playerAnimation;
 
     [Header("Player State")]
-    [SerializeField] int lifeCount;
-    [SerializeField] int bombAmount;
+    public int lifeCount;
+    public int bombAmount;
     [SerializeField] float invincibilityRate;
     [SerializeField] bool onInvincibility;
     private void Awake()
     {
         OnDeathEvent += Death;
     }
-    private void Start()
+
+    protected override void Start()
     {
+        base.Start();
         playerAnimation = GetComponent<PlayerAnimation>();
     }
 
-    public override void TakeHit(float damage, Transform hitPoint, Vector2 hitDir)
+    public override void TakeHit(float damage, Vector2 hitDir)
     {
         if (!onInvincibility)
         {  
-            base.TakeHit(damage, hitPoint, hitDir);
+            base.TakeHit(damage, hitDir);
         }
     }
 
@@ -64,4 +72,18 @@ public class PlayerStats : LifeEntity
         }
         onInvincibility = false;
     }
+
+
+
+    public bool UseBomb() // Add Ui delegate
+    {
+        if(bombAmount > 0)
+        {
+            bombAmount--;
+            return true;
+        }
+        return false;
+    }
+
+
 }

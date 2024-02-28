@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1733078212864327724}
   - component: {fileID: 271951894929672939}
   - component: {fileID: 4334616238253277708}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: MonsterA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,13 +66,17 @@ MonoBehaviour:
   _level: 1
   _hp: 5
   _maxHp: 5
-  _attack: 2
+  _attackDamage: 0
   _attackRange: 0.7
+  _attackSpeed: 0
+  _attackObjInitDelay: 0
   _defense: 0
   _moveSpeed: 2
   _scanRange: 2
   _minX: 0
   _maxX: 0
+  _isStopOnIdle: 0
+  _isStopOnTrack: 0
 --- !u!61 &4334616238253277708
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -129,7 +133,8 @@ GameObject:
   - component: {fileID: 126168909299537309}
   - component: {fileID: 4704413776419666570}
   - component: {fileID: 5202026962322598967}
-  m_Layer: 0
+  - component: {fileID: 7368081075164424794}
+  m_Layer: 17
   m_Name: Sprite
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -224,3 +229,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7368081075164424794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628963940907940943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e9f561c38152a84ba8d142ad5aed7b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

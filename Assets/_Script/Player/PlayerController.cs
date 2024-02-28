@@ -3,10 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-//이동
-//데미지
-//점프
-//
 
 
 [RequireComponent(typeof(PlayerStats))]
@@ -16,28 +12,31 @@ public class PlayerController : MonoBehaviour
     [Header("Componets")]
     public PlayerAnimation playerAnimation;
     public PlayerStats playerStats;
-    Rigidbody2D _rigidbody;
+    public Rigidbody2D _rigidbody;
+    Pooling pooling;
 
     [Header("Player State")]
     [SerializeField] float playerSpeed;
     [SerializeField] float playerClimbingSpeed;
     [SerializeField] float playerJumpPower;
+    [SerializeField] float gravityScale;
     public bool onMove;
-    [SerializeField] bool onJump;
-    [SerializeField] bool isClimbing;
+    bool onJump;
+    bool isClimbing;
+    public Transform poolItemPos;
+    public Transform dropItemPos;
 
     [Header("Player Move")]
     HashSet<GameObject> ladders = new HashSet<GameObject>();
-    [SerializeField] Vector2 dir;
-    [SerializeField] Vector2 climbingDir;
+    Vector2 dir;
+    Vector2 climbingDir;
     [SerializeField] private PlatformEffector2D platformObject;
     [SerializeField] private bool _playerOnPlatform; // 얕은 플랫폼 위에 있는지
 
 
     [Header("Jump")]
-    //[SerializeField] float maxJumpPower;
     [SerializeField] float addJumbPower;
-    [SerializeField] float jumpTime = 0f;
+    float jumpTime = 0f;
     float maxJumpTime = .5f;
     bool onGround;
 
@@ -58,43 +57,55 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+
+        Init();
+
         _rigidbody = GetComponent<Rigidbody2D>();
+        pooling = GetComponent<Pooling>();
+        pooling.CreatePool(poolItemPos);
     }
 
     private void Update()
     {
-        CheckFloor();
-        CheckClimbing();
-
-
-        if (onJump)
+        if (!playerStats.isDead)
         {
-            jumpTime += Time.deltaTime;
-            if (jumpTime >= maxJumpTime)
+            CheckFloor();
+            CheckClimbing();
+
+
+            if (onJump)
             {
-                onJump = false;
+                jumpTime += Time.deltaTime;
+                if (jumpTime >= maxJumpTime)
+                {
+                    onJump = false;
+                }
             }
         }
+        
     }
 
     private void FixedUpdate()
     {
-        if (onMove) { _rigidbody.position += dir * playerSpeed * Time.deltaTime; }
-        if (isClimbing)
+        if(!playerStats.isDead)
         {
-            _rigidbody.gravityScale = 0f;
-            _rigidbody.position += climbingDir * playerClimbingSpeed * Time.deltaTime;
-        }
-        else
-        {
-            _rigidbody.gravityScale = 2f;
-        }
+            if (onMove) { _rigidbody.position += dir * playerSpeed * Time.deltaTime; }
+            if (isClimbing)
+            {
+                _rigidbody.gravityScale = 0f;
+                _rigidbody.position += climbingDir * playerClimbingSpeed * Time.deltaTime;
+            }
+            else
+            {
+                _rigidbody.gravityScale = gravityScale;
+            }
 
-        if (onJump)
-        {
-            _rigidbody.AddForce(Vector2.up * addJumbPower, ForceMode2D.Force);
+            if (onJump)
+            {
+                _rigidbody.AddForce(Vector2.up * addJumbPower, ForceMode2D.Force);
+            }
         }
-
+     
     }
 
     private bool IsGrounded()
@@ -119,6 +130,13 @@ public class PlayerController : MonoBehaviour
     //    Gizmos.color = Color.red;
     //    Gizmos.DrawRay(transform.position, Vector3.down);
     //}
+
+    void Init()
+    {
+        playerJumpPower = 100;
+        addJumbPower = 200;
+        gravityScale = 4;
+    }
 
 
     #region Move
@@ -216,11 +234,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ladder"))
-        {
-            _rigidbody.velocity = Vector2.zero;
-            ladders.Add(collision.gameObject);
-        }
+        //if (collision.CompareTag("Ladder"))
+        //{
+        //    _rigidbody.velocity = Vector2.zero;
+        //    ladders.Add(collision.gameObject);
+        //}
 
         if (collision.CompareTag("Stage"))
         {
@@ -233,13 +251,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Ladder"))
-        {
-            ladders.Remove(collision.gameObject);
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Ladder"))
+    //    {
+    //        ladders.Remove(collision.gameObject);
+    //    }
+    //}
 
     #endregion
 
@@ -305,5 +323,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+
+
     #endregion
+
+    #region Bomb
+    public void UseBomb(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+        {
+            if (playerStats.UseBomb())
+            {
+                pooling.GetPoolItem("Bomb", dropItemPos);
+
+            }
+        }
+       
+    }
+
+
+
+    #endregion
+
 }

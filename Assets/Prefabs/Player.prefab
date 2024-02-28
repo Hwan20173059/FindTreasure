@@ -103,7 +103,7 @@ Transform:
   - {fileID: 2252242290026208061}
   - {fileID: 3918672614577551483}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6721873082806423224
 BoxCollider2D:
@@ -298,6 +298,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 987ac56e-6b1b-4910-bb83-1f4b35f42080
     m_ActionName: Player/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4627755680071924025}
+        m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
+        m_MethodName: OnAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 81632540-e9f7-4518-9395-6a302945ae1b
+    m_ActionName: Player/Attack[/Keyboard/z]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -323,6 +339,7 @@ MonoBehaviour:
   playerJumpPower: 120
   gravityScale: 0
   onMove: 0
+  onAttack: 0
   poolItemPos: {fileID: 3918672614577551483}
   dropItemPos: {fileID: 8330693447573470754}
   platformObject: {fileID: 0}
@@ -353,6 +370,7 @@ MonoBehaviour:
   health: 100
   curHealth: 0
   isDead: 0
+  attackDamage: 0
   lifeCount: 5
   bombAmount: 10
   invincibilityRate: 2
@@ -369,6 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d14404de174149448567a28edfae84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStats: {fileID: 0}
 --- !u!114 &3922153423090296803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,6 +414,7 @@ GameObject:
   m_Component:
   - component: {fileID: 366178340356668649}
   - component: {fileID: 6014687219757854681}
+  - component: {fileID: 8786327750165693327}
   m_Layer: 15
   m_Name: Attack_1
   m_TagString: Untagged
@@ -446,7 +466,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -475,6 +495,18 @@ PolygonCollider2D:
       - {x: 0.007761717, y: 0.15751731}
       - {x: -0.2793377, y: 0.23332205}
   m_UseDelaunayMesh: 0
+--- !u!114 &8786327750165693327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5811255141837919404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0a5f2f04f3a4645b04c2e90e6f5130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5832270536707314081
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,13 +517,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2609293734712402760}
   - component: {fileID: 2306433113829165120}
+  - component: {fileID: 6986285843088936306}
   m_Layer: 15
   m_Name: Attack_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2609293734712402760
 Transform:
   m_ObjectHideFlags: 0
@@ -514,7 +547,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5832270536707314081}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -536,7 +569,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -551,12 +584,31 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -0.95105654, y: 0.30901697}
-      - {x: -0.5877852, y: -0.80901706}
-      - {x: 0.58778536, y: -0.80901694}
-      - {x: 0.9510565, y: 0.30901712}
+    - - {x: 0.32834315, y: 0.12223931}
+      - {x: 0.58176005, y: 0.23584525}
+      - {x: 0.6780362, y: 0.45783263}
+      - {x: 0.6566137, y: 0.7076674}
+      - {x: 0.5169996, y: 0.89294827}
+      - {x: 0.3433987, y: 0.9704349}
+      - {x: -0.05308199, y: 0.991153}
+      - {x: 0.29862106, y: 0.8548281}
+      - {x: 0.44205725, y: 0.69061065}
+      - {x: 0.50869983, y: 0.5213452}
+      - {x: 0.45744073, y: 0.31990415}
+      - {x: 0.084587276, y: 0.066836834}
   m_UseDelaunayMesh: 0
+--- !u!114 &6986285843088936306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5832270536707314081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0a5f2f04f3a4645b04c2e90e6f5130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5879789954399606451
 GameObject:
   m_ObjectHideFlags: 0

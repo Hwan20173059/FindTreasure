@@ -10,11 +10,13 @@ public class PlayerAnimation : MonoBehaviour
 
     public event Action<float> OnMoveEvent;
     public event Action OnDeathEvent;
+    public event Action OnHit;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         OnMoveEvent += Set_MoveAnimationParameter;
+        OnDeathEvent += Death;
     }
     public void CallOnMoveEvent(float dirX)
     {
@@ -24,11 +26,21 @@ public class PlayerAnimation : MonoBehaviour
     {
         OnDeathEvent?.Invoke();
     }
+    public void CallOnHit()
+    {
+        OnHit?.Invoke();
+    }
 
     void Set_MoveAnimationParameter(float dirX)
     {
         animator.SetFloat("PotX", dirX);
     }
+
+    void Death()
+    {
+        animator.SetBool("OnDeath", true);
+    }
+
 
 
 

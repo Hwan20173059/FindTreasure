@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float playerJumpPower;
     [SerializeField] float gravityScale;
     public bool onMove;
+    public bool onAttack;
     bool onJump;
     bool isClimbing;
     public Transform poolItemPos;
@@ -90,21 +91,25 @@ public class PlayerController : MonoBehaviour
     {
         if (!playerStats.isDead)
         {
-            if (onMove) { _rigidbody.position += dir * playerSpeed * Time.deltaTime; }
-            if (isClimbing)
+            if (!onAttack)
             {
-                _rigidbody.gravityScale = 0f;
-                _rigidbody.position += climbingDir * playerClimbingSpeed * Time.deltaTime;
-            }
-            else
-            {
-                _rigidbody.gravityScale = gravityScale;
+                if (onMove) { _rigidbody.position += dir * playerSpeed * Time.deltaTime; }
+                if (isClimbing)
+                {
+                    _rigidbody.gravityScale = 0f;
+                    _rigidbody.position += climbingDir * playerClimbingSpeed * Time.deltaTime;
+                }
+                else
+                {
+                    _rigidbody.gravityScale = gravityScale;
+                }
+
+                if (onJump)
+                {
+                    _rigidbody.AddForce(Vector2.up * addJumbPower, ForceMode2D.Force);
+                }
             }
 
-            if (onJump)
-            {
-                _rigidbody.AddForce(Vector2.up * addJumbPower, ForceMode2D.Force);
-            }
         }
 
     }
@@ -142,19 +147,20 @@ public class PlayerController : MonoBehaviour
 
     #region Move
     public void OnMove(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed)
-        {
-            dir = context.ReadValue<Vector2>();
-            playerAnimation.CallOnMoveEvent(dir.x);
-            playerAnimation.animator.SetBool("IsRun", true);
-            onMove = true;
-        }
-        else
-        {
-            onMove = false;
-            playerAnimation.animator.SetBool("IsRun", false);
-        }
+    {  
+            if (context.phase == InputActionPhase.Performed)
+            {
+                dir = context.ReadValue<Vector2>();
+                playerAnimation.CallOnMoveEvent(dir.x);
+                playerAnimation.animator.SetBool("IsRun", true);
+                onMove = true;
+            }
+            else
+            {
+                onMove = false;
+                playerAnimation.animator.SetBool("IsRun", false);
+            }
+      
     }
 
     public void OnDown(InputAction.CallbackContext context)

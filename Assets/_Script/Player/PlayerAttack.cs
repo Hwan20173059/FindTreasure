@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 
 //폭탄
 //근거리
@@ -12,6 +12,38 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    //[Header("Player State")]
+    PlayerController playerController;
+    PlayerAnimation playerAnimation;
+    public PlayerStats playerStats;
+    float time;
+
+
+    private void Awake()
+    {
+        playerController = GetComponent<PlayerController>();
+        playerAnimation = playerController.playerAnimation;
+        playerStats = playerController.playerStats;
+    }
+
+    private void Update()
+    {
+        if(Time.time >= time)
+        {
+            playerController.onAttack = false;
+        }
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+        {
+            playerController.onAttack = true;
+            time = Time.time + 0.4f;
+
+            playerAnimation.animator.SetTrigger("Attack");
+        }
+    
+    }
+
 
 }

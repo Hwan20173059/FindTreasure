@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public PlayerStats playerStats;
-    
+
+    public Text lifeCount;
     public Text bombCount;
     public Text keyCount;
 
@@ -14,6 +15,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        lifeCount.text = "x " + playerStats.lifeCount.ToString();
         bombCount.text = "X " + playerStats.bombAmount.ToString();
         keyCount.text = playerStats.goldenKeyAmount.ToString() + " / 3";
 

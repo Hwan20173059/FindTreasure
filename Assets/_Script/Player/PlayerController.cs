@@ -249,6 +249,11 @@ public class PlayerController : MonoBehaviour
         {
             // TODO : 키 획득 어떤식으로 할지
         }
+
+        if (collision.CompareTag("Thorns"))
+        {
+            Debug.Log("가시 데미지 처리");
+        }
     }
 
     //private void OnTriggerExit2D(Collider2D collision)

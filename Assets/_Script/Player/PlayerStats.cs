@@ -11,8 +11,12 @@ using UnityEngine;
 public class PlayerStats : LifeEntity
 {
     PlayerAnimation playerAnimation;
+    PlayerController playerController;
 
     [Header("Player State")]
+    public float attackDamage;
+
+
     public int lifeCount;
     public int bombAmount;
     public int goldenKeyAmount;
@@ -27,33 +31,49 @@ public class PlayerStats : LifeEntity
     protected override void Start()
     {
         base.Start();
-        playerAnimation = GetComponent<PlayerAnimation>();
+        playerController = GetComponent<PlayerController>();
+        playerAnimation = playerController.playerAnimation;
+        
     }
 
     public override void TakeHit(float damage, Vector2 hitDir)
     {
         if (!onInvincibility)
         {
+
+            //test
+            playerController._rigidbody.AddForce(hitDir*50f, ForceMode2D.Impulse);
+            //test
+
             base.TakeHit(damage, hitDir);
         }
     }
 
+    public override void TakeDamage(float damage)
+    {
+        playerAnimation.animator.SetTrigger("OnHit");
+        base.TakeDamage(damage);
+    }
+
     void Death()
     {
-        playerAnimation.animator.SetBool("OnDeath", true);
+        playerAnimation.CallOnDeathEvent();
     }
 
 
     public override void Die()
     {
         base.Die();
-        lifeCount--;
-        if (lifeCount < 0)
+
+        lifeCount--;   
+        if(lifeCount < 0)
+
         {
             Debug.Log("Game Over");
         }
         else
         {
+            //CO 1s
             //Resurrection Animation,
             isDead = false;
             StartCoroutine(InvincibilityCo());

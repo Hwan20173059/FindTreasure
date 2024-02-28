@@ -2,31 +2,31 @@
   "kokr": [
     {
       "id": 0,
-      "textKR": "텍스트 메세지입니다.\nID는 0번 입니다."
+      "textKR": "\n<color=#FF0000>방향키</color>로 움직일 수 있습니다."
     },
     {
-      "id":1,
-      "textKR": "메세지 1번 입니다.\n\n<b>굵은글씨</b>"
+      "id": 1,
+      "textKR": "\n<color=#FF0000>C키</color>로 점프할 수 있습니다."
     },
     {
-      "id":2,
-      "textKR": "메세지 2번 입니다.\n\n<color=#FF0000>빨간글씨</color>"
+      "id": 2,
+      "textKR": "\n얇은 플랫폼은 <color=#FF0000>아래 방향키</color>로 통과할 수 있습니다."
     },
     {
-      "id":3,
-      "textKR": "메세지 3번 입니다.\n123qwe가나다"
+      "id": 3,
+      "textKR": "\n<color=#FF0000>X키</color>로 폭탄을 설치해 블록을 파괴할 수 있습니다."
     },
     {
-      "id":4,
-      "textKR": "메세지 4번 입니다.\n123qwe가나다"
+      "id": 4,
+      "textKR": "\n가시에 찔리면 피해를 받습니다."
     },
     {
-      "id":5,
-      "textKR": "메세지 5번 입니다.\n123qwe가나다"
+      "id": 5,
+      "textKR": "\n<color=#FF0000>Z키</color>로 공격을 할 수 있습니다."
     },
     {
-      "id":6,
-      "textKR": "메세지 6번 입니다.\n123qwe가나다"
+      "id": 6,
+      "textKR": "\n열쇠를 모아 스테이지를 진행해보세요."
     }
   ]
 }

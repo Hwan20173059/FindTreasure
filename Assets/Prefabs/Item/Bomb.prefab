@@ -37,7 +37,7 @@ Transform:
   - {fileID: 8978767450629861476}
   - {fileID: 2020369077727210762}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1805073199464406783
 SpriteRenderer:
@@ -189,6 +189,7 @@ MonoBehaviour:
   explosionCollider: {fileID: 627089580744544329}
   explosionEffect: {fileID: 6023745124291124447}
   debris: {fileID: 1653820034958547171}
+  clip: {fileID: 8300000, guid: a9168e308e36d454ab89ca1b6e0e2666, type: 3}
 --- !u!1 &3585090335371246107
 GameObject:
   m_ObjectHideFlags: 0

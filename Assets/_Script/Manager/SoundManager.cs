@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -12,6 +13,9 @@ public class SoundManager : MonoBehaviour
     Pooling objectPool;
     AudioSource musicAudioSource;
     public AudioClip clip;
+
+
+    [SerializeField] GameObject curObj;
 
     private void Awake()
     {
@@ -47,17 +51,27 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayClip(AudioClip clip, float volume)
     {
-        GameObject obj = objectPool.GetPoolItem("SoundSource");
-        obj.SetActive(true);
-        SoundSource soundSource = obj.GetComponent<SoundSource>();
+        curObj = objectPool.GetPoolItem("SoundSource");
+        curObj.SetActive(true);
+        SoundSource soundSource = curObj.GetComponent<SoundSource>();
         soundSource.Play(clip, volume);
     }
     public void PlayClip(AudioClip clip)
     {
-        GameObject obj = objectPool.GetPoolItem("SoundSource");
-        obj.SetActive(true);
-        SoundSource soundSource = obj.GetComponent<SoundSource>();
+        curObj = objectPool.GetPoolItem("SoundSource");
+        curObj.SetActive(true);
+        SoundSource soundSource = curObj.GetComponent<SoundSource>();
         soundSource.Play(clip, soundEffectVolume);
+    }
+
+    public GameObject CurSoundSource()
+    {
+        return curObj;
+    }
+
+    public void StopClip()
+    {
+        curObj.GetComponent<SoundSource>().Disable();
     }
 
 }

@@ -356,6 +356,8 @@ MonoBehaviour:
   raycastDistance: 0.1
   hitPoint: {fileID: 2252242290026208061}
   playercamera: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: e940674772644c945b4fe58f17b6a802, type: 3}
+  runSound: {fileID: 8300000, guid: 93f2fbbb5de36e34998afe7cdf77b94d, type: 3}
 --- !u!114 &4426857697000941460
 MonoBehaviour:
   m_ObjectHideFlags: 0

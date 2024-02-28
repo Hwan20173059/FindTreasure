@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MonsterBaseController : MonoBehaviour
 {
+    public GameObject ProjectilePrefab; // 에디터에서 설정
+
     public enum MonsterState
     {
         Die,
@@ -60,12 +62,12 @@ public class MonsterBaseController : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         Init();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         switch (State)
         {
@@ -87,7 +89,7 @@ public class MonsterBaseController : MonoBehaviour
         }
     }
 
-    public virtual void Init()
+    protected virtual void Init()
     {
         _stat = gameObject.GetComponent<MonsterStat>();
         // 몬스터 체력바 표시? 등
@@ -96,14 +98,18 @@ public class MonsterBaseController : MonoBehaviour
     }
 
     protected virtual void UpdateTracking() { }
+
     protected virtual void UpdateIdle() { }
+
     protected virtual void UpdateAttack() { }
+
     protected virtual void UpdateDie()
     {
         Debug.Log("Monster Dead");
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    // 접촉 시 플레이어에게 데미지
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
@@ -111,8 +117,8 @@ public class MonsterBaseController : MonoBehaviour
                 DamageToPlayer(collision.gameObject);
         }
     }
-    // 범용, 플레이어에게 데미지
-    public void DamageToPlayer(GameObject player = null, GameObject monster = null, bool haveRange = false)
+    // 플레이어에게 데미지
+    public virtual void DamageToPlayer(GameObject player = null, GameObject monster = null, bool haveRange = false)
     {
         PlayerStats _ps;
         GameObject _player;
@@ -152,6 +158,23 @@ public class MonsterBaseController : MonoBehaviour
         if (_stat.Hp <= 0)
             State = MonsterState.Die;
     }
+    public void ShotToPlayer(GameObject player = null, GameObject monster = null, bool haveRange = false)
+    {
+        PlayerStats _ps;
+        GameObject _player;
+
+        if (player)
+        {
+            _player = player;
+            _ps = player.GetComponent<PlayerStats>();
+        }
+        else
+        {
+            _player = GameObject.FindGameObjectWithTag("Player");
+            _ps = _player.GetComponent<PlayerStats>();
+        }
+
+    }
 
     // 체력이 0이 되어 죽음
     public void DestroyObject()
@@ -159,4 +182,30 @@ public class MonsterBaseController : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // 공격 모션을 마친 직후
+    public void EndAttackAnimation()
+    {
+        if (_lockTarget != null)
+        {
+            float distance = (_lockTarget.transform.position - transform.position).magnitude;
+            if (distance <= _stat.AttackActionRange)
+                State = MonsterState.Attack;
+            else
+                State = MonsterState.Track;
+        }
+        else
+        {
+            State = MonsterState.IdleStop;
+        }
+    }
+    // 투사체 발사
+    public virtual void ShotProjectile()
+    {
+        Debug.Log("발싸");
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        Vector3 spawnPosition = collider != null ? collider.bounds.center : transform.position; // 혹시라도 BoxCollider2D가 없으면 transform의 위치를 사용
+
+        GameObject projectile = Instantiate(ProjectilePrefab, spawnPosition, Quaternion.identity);
+        projectile.GetComponent<MonsterProjectile>().damage = _stat.AttackDamage;
+    }
 }

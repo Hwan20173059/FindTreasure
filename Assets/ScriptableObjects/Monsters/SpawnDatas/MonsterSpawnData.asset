@@ -49,3 +49,19 @@ MonoBehaviour:
       spawnPosition: {x: 92.5, y: 12}
       tempMinX: 4
       tempMaxX: 1
+  - stageName: Test
+    spawnInfos:
+    - monsterType: MonsterA
+      isStopOnIdle: 0
+      isStopOnTrack: 0
+      isBoss: 0
+      spawnPosition: {x: -1, y: -1.5}
+      tempMinX: 0
+      tempMaxX: 3
+    - monsterType: MonsterB
+      isStopOnIdle: 0
+      isStopOnTrack: 0
+      isBoss: 0
+      spawnPosition: {x: -1, y: -1.5}
+      tempMinX: 0
+      tempMaxX: 5

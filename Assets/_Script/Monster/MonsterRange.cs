@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Rendering;
+using static MonsterBaseController;
 
-public class MonsterMelee : MonsterBaseController
+public class MonsterRange : MonsterBaseController
 {
 
     protected override void Init()
@@ -30,7 +27,7 @@ public class MonsterMelee : MonsterBaseController
         // 현재 위치가 MinX보다 작거나 MaxX보다 클 경우 방향 전환
         if (transform.position.x <= _stat.MinX || transform.position.x >= _stat.MaxX)
         {
-            if(!_stat.IsStopOnIdle)
+            if (!_stat.IsStopOnIdle)
                 _currentMoveDirection *= -1;
         }
 
@@ -38,7 +35,7 @@ public class MonsterMelee : MonsterBaseController
         transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX = _currentMoveDirection < 0;
 
         // 몬스터 이동
-        if(!_stat.IsStopOnIdle)
+        if (!_stat.IsStopOnIdle)
             transform.position += Vector3.right * _currentMoveDirection * _stat.MoveSpeed * Time.deltaTime;
 
         // 몬스터가 범위를 벗어나지 않도록 조정
@@ -79,69 +76,8 @@ public class MonsterMelee : MonsterBaseController
             Vector3 nextPosition = transform.position + Vector3.right * _stat.MoveSpeed * CurrentMoveDirection * Time.deltaTime;
             nextPosition.x = Mathf.Clamp(nextPosition.x, _stat.MinX, _stat.MaxX);
 
-            if(!_stat.IsStopOnTrack)
+            if (!_stat.IsStopOnTrack)
                 transform.position = nextPosition;
         }
     }
-
-    //// 몬스터가 플레이어에 부딪혔을 경우, 플레이어에게 데미지
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-    //    {
-    //        if(State != MonsterState.Die)
-    //            DamageToPlayer(collision.gameObject);
-    //    }
-    //}
-    //// 범용?, 플레이어에게 데미지
-    //public void DamageToPlayer(GameObject player = null, GameObject monster = null, bool haveRange = false)
-    //{
-    //    PlayerStats _ps;
-    //    GameObject _player;
-
-    //    if (player)
-    //    {
-    //        _player = player;
-    //        _ps = player.GetComponent<PlayerStats>();
-    //    }
-    //    else
-    //    {
-    //        _player = GameObject.FindGameObjectWithTag("Player");
-    //        _ps = _player.GetComponent<PlayerStats>();
-    //    }
-
-    //    GameObject _monster;
-    //    if (monster) _monster = monster;
-    //    else _monster = gameObject;
-
-    //    if (_ps != null)
-    //    {
-    //        if (!haveRange || ((_player.transform.position - _monster.transform.position).magnitude < _stat.RealAttackRange))
-    //        {
-    //            Vector2 hitDirection = (_player.transform.position - _monster.transform.position).normalized;
-    //            _ps.TakeHit(_stat.AttackDamage, hitDirection); // 데미지, 히트방향
-    //        }
-    //    }
-    //}
-    //// 데미지 받기
-    //public void TakeHit(float damage, Vector2 hitDir)
-    //{
-    //    TakeDamage(damage);
-    //}
-    //private void TakeDamage(float damage)
-    //{
-    //    _stat.Hp -= (int)damage;
-    //    if (_stat.Hp <= 0)
-    //        State = MonsterState.Die;
-    //}
-
-    //// 체력이 0이 되어 죽음
-    //protected override void UpdateDie()
-    //{
-    //    Debug.Log("Monster Dead");
-    //}
-    //public void DestroyObject()
-    //{
-    //    Destroy(gameObject);
-    //}
 }

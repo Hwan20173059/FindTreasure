@@ -33,7 +33,7 @@ public class MonstersManager : MonoBehaviour
     }
 
     // 스테이지 이름을 받아 해당 스테이지에 몬스터를 스폰
-    private void SpawnMonsters(string stageName)
+    public void SpawnMonsters(string stageName)
     {
         var spawnInfo = monsterSpawnData.GetSpawnInfoByStageName(stageName);
         if (spawnInfo != null)

@@ -35,4 +35,6 @@ public struct SpawnInfo
     public bool isStopOnTrack;
     public bool isBoss;
     public Vector2 spawnPosition;
+    public float tempMinX;
+    public float tempMaxX;
 }

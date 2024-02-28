@@ -121447,6 +121447,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterSpawnData: {fileID: 11400000, guid: b4b9c4dd79c7f224a911c326f2f5f25a, type: 2}
+  PlayerCamera: {fileID: 1796397930}
+  currentStage: 0
+  stage:
+  - {fileID: 514772603}
+  - {fileID: 257528938}
+  - {fileID: 1252724754}
+  - {fileID: 701810253}
+  - {fileID: 253711035}
+  - {fileID: 1719695237}
+  - {fileID: 387539484}
+  - {fileID: 1592701927}
+  - {fileID: 28304369}
+  - {fileID: 650835766}
+  - {fileID: 702869603}
+  - {fileID: 1820901558}
 --- !u!4 &1292056900
 Transform:
   m_ObjectHideFlags: 0

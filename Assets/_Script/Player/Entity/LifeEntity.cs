@@ -15,7 +15,7 @@ public class LifeEntity : MonoBehaviour,IDamageable
         curHealth = health;
     }
 
-    public virtual void TakeHit(float damage, Transform hitPoint, Vector2 hitDir)
+    public virtual void TakeHit(float damage, Vector2 hitDir)
     {
         TakeDamage(damage);
     }

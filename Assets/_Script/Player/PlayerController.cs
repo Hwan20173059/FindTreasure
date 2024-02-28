@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float playerSpeed;
     [SerializeField] float playerClimbingSpeed;
     [SerializeField] float playerJumpPower;
+    [SerializeField] float gravityScale;
     public bool onMove;
     bool onJump;
     bool isClimbing;
@@ -84,7 +85,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            _rigidbody.gravityScale = 2f;
+            _rigidbody.gravityScale = gravityScale;
         }
 
         if (onJump)

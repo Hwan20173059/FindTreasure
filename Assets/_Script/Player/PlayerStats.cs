@@ -28,11 +28,11 @@ public class PlayerStats : LifeEntity
         playerAnimation = GetComponent<PlayerAnimation>();
     }
 
-    public override void TakeHit(float damage, Transform hitPoint, Vector2 hitDir)
+    public override void TakeHit(float damage, Vector2 hitDir)
     {
         if (!onInvincibility)
         {  
-            base.TakeHit(damage, hitPoint, hitDir);
+            base.TakeHit(damage, hitDir);
         }
     }
 

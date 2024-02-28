@@ -33,6 +33,7 @@ public class MonstersManager : MonoBehaviour
 
     private void Start()
     {
+        SpawnMonsters("Test");
         currentStage = -1;
         //SpawnMonsters("stage_a"); // 스테이지 관리 스크립트에서 이와 같이 스폰하면 될 듯 -> 스테이지 관리 스크립트... 그런 건 없었다.
         ////SpawnMonsters("stage1-2");
@@ -40,17 +41,24 @@ public class MonstersManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(PlayerCamera.currentStage !=  currentStage)
+        try
         {
-            currentStage = PlayerCamera.currentStage;
-            try
+            if (PlayerCamera.currentStage != currentStage)
             {
-                SpawnMonsters($"Stage{currentStage}");
+                currentStage = PlayerCamera.currentStage;
+                try
+                {
+                    SpawnMonsters($"Stage{currentStage}");
+                }
+                catch
+                {
+                    Debug.Log($"Stage{currentStage}에 대한 스폰에 실패했습니다.");
+                }
             }
-            catch
-            {
-                Debug.Log($"Stage{currentStage}에 대한 스폰에 실패했습니다.");
-            }
+        }
+        catch
+        {
+            Debug.Log("MonsterManager - LateUpdate를 실행 할 수 없습니다.");
         }
     }
 

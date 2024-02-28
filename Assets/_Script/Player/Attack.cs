@@ -11,9 +11,12 @@ public class Attack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         int layerValue = 1 << collision.gameObject.layer;
+
+        Debug.Log(monsterMask.value);
+        Debug.Log(layerValue);
         if ( monsterMask.value == layerValue)
         {
-            MonsterMelee monster = collision.GetComponent<MonsterMelee>();
+            MonsterBaseController monster = collision.GetComponent<MonsterBaseController>();
             Vector2 dir = (collision.transform.position - transform.position).normalized;
             monster.TakeHit(attackDamage, dir);
 

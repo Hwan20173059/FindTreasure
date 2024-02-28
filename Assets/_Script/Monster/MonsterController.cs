@@ -149,7 +149,7 @@ public class MonsterController : MonsterBaseController
             {
                 Transform hitPoint = transform;
                 Vector2 hitDirection = (collision.transform.position - this.transform.position).normalized;
-                _ps.TakeHit(_stat.Attack, hitPoint, hitDirection); // + 히트포인트, 히트방향
+                _ps.TakeHit(_stat.Attack, hitDirection); // + 히트포인트, 히트방향
             }
         }
     }

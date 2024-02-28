@@ -282,6 +282,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 9f4bb109-22af-434e-bd91-3a8b5008bcb6
     m_ActionName: Player/Bomb[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 301876681653556976}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 987ac56e-6b1b-4910-bb83-1f4b35f42080
+    m_ActionName: Player/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -312,6 +328,7 @@ MonoBehaviour:
   platformObject: {fileID: 0}
   _playerOnPlatform: 0
   addJumbPower: 200
+  interactDistance: 0.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 384

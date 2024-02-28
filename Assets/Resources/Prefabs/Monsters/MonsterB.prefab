@@ -70,7 +70,7 @@ MonoBehaviour:
   _attackDamage: 5
   _attackActionRange: 6
   _realAttackRange: 0
-  _attackDelay: 2
+  _attackDelay: 3
   _defense: 0
   _moveSpeed: 1
   _scanRange: 7

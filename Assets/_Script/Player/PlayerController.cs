@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour
     float maxJumpTime = .5f;
     bool onGround;
 
+    [Header("Interact")]
+    [SerializeField] float interactDistance = 0.5f;
+
 
     [Header("Layer")]
     public LayerMask groundLayer;
@@ -54,6 +57,9 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+
+        Init();
+
         _rigidbody = GetComponent<Rigidbody2D>();
         pooling = GetComponent<Pooling>();
         pooling.CreatePool(poolItemPos);
@@ -61,43 +67,50 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        CheckFloor();
-        CheckClimbing();
-
-
-        if (onJump)
+        if (!playerStats.isDead)
         {
-            jumpTime += Time.deltaTime;
-            if (jumpTime >= maxJumpTime)
+            CheckFloor();
+            CheckClimbing();
+
+
+            if (onJump)
             {
-                onJump = false;
+                jumpTime += Time.deltaTime;
+                if (jumpTime >= maxJumpTime)
+                {
+                    onJump = false;
+                }
             }
         }
+        
     }
 
     private void FixedUpdate()
     {
-        if (onMove) { _rigidbody.position += dir * playerSpeed * Time.deltaTime; }
-        if (isClimbing)
+        if(!playerStats.isDead)
         {
-            _rigidbody.gravityScale = 0f;
-            _rigidbody.position += climbingDir * playerClimbingSpeed * Time.deltaTime;
-        }
-        else
-        {
-            _rigidbody.gravityScale = gravityScale;
-        }
+            if (onMove) { _rigidbody.position += dir * playerSpeed * Time.deltaTime; }
+            if (isClimbing)
+            {
+                _rigidbody.gravityScale = 0f;
+                _rigidbody.position += climbingDir * playerClimbingSpeed * Time.deltaTime;
+            }
+            else
+            {
+                _rigidbody.gravityScale = gravityScale;
+            }
 
-        if (onJump)
-        {
-            _rigidbody.AddForce(Vector2.up * addJumbPower, ForceMode2D.Force);
+            if (onJump)
+            {
+                _rigidbody.AddForce(Vector2.up * addJumbPower, ForceMode2D.Force);
+            }
         }
-
+     
     }
 
     private bool IsGrounded()
     {
-        RaycastHit2D hitL = Physics2D.Raycast(transform.position + new Vector3(-0.5f,0), Vector2.down, raycastDistance, groundLayer);
+        RaycastHit2D hitL = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 0), Vector2.down, raycastDistance, groundLayer);
         RaycastHit2D hitR = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0), Vector2.down, raycastDistance, groundLayer);
 
         Debug.DrawRay(transform.position + new Vector3(-0.3f, 0), Vector2.down, Color.red);
@@ -110,7 +123,6 @@ public class PlayerController : MonoBehaviour
         }
         return false;
 
-        //return Physics2D.OverlapCircle(transform.position, groundCheckRadius, groundLayer);
     }
 
     //private void OnDrawGizmos()
@@ -118,6 +130,13 @@ public class PlayerController : MonoBehaviour
     //    Gizmos.color = Color.red;
     //    Gizmos.DrawRay(transform.position, Vector3.down);
     //}
+
+    void Init()
+    {
+        playerJumpPower = 130;
+        addJumbPower = 200;
+        gravityScale = 4;
+    }
 
 
     #region Move
@@ -225,6 +244,11 @@ public class PlayerController : MonoBehaviour
         {
             playercamera.currentStage = collision.gameObject.GetComponent<StageManager>().stage;
         }
+
+        if (collision.CompareTag("GoldenKey"))
+        {
+            // TODO : 키 획득 어떤식으로 할지
+        }
     }
 
     //private void OnTriggerExit2D(Collider2D collision)
@@ -236,6 +260,30 @@ public class PlayerController : MonoBehaviour
     //}
 
     #endregion
+
+
+
+    #region Interact 
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        Debug.Log("E");
+        if (context.phase == InputActionPhase.Performed)
+        {
+            // 주변 콜라이더 집합
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, interactDistance);
+            foreach (Collider2D col in colliders)
+            {
+                if (col.CompareTag("Chest"))
+                {
+                    col.GetComponent<ChestInteract>().SetChestState(ChestState.Open);
+                }
+            }
+        }
+    }
+
+    #endregion
+
 
     #region Collision 
     //private void OnCollisionEnter2D(Collision2D collision)

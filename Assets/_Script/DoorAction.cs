@@ -14,6 +14,7 @@ public class DoorAction : MonoBehaviour
 {
     private DoorState state;
     [SerializeField] private GameObject objectMask;
+    [SerializeField] private AudioClip clip;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class DoorAction : MonoBehaviour
 
     IEnumerator MoveDoorUp()
     {
+        SoundManager.Instance.PlayClip(clip);
         Vector3 destination = transform.position;
         destination.y += 8;
         float moveSpeed = 1f;

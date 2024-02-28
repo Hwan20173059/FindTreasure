@@ -21,6 +21,7 @@ public class ChestInteract : MonoBehaviour
     [SerializeField] private GameObject rewardsObject;
     [SerializeField] private Animator chestAnim;
     [SerializeField] private Animator keyAnim;
+    [SerializeField] private AudioClip clip;
 
     private void Awake()
     {
@@ -55,6 +56,7 @@ public class ChestInteract : MonoBehaviour
 
     IEnumerator WaitAnim()
     {
+        SoundManager.Instance.PlayClip(clip);
         yield return new WaitForSeconds(chestAnim.GetCurrentAnimatorClipInfo(0).Length);
         rewardsObject.SetActive(true);
     }

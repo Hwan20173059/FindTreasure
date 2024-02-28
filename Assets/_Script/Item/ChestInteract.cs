@@ -8,7 +8,8 @@ public enum ChestState
 {
     Lock,
     Close,
-    Open
+    Open,
+    Empty
 }
 
 public class ChestInteract : MonoBehaviour
@@ -18,37 +19,62 @@ public class ChestInteract : MonoBehaviour
     [Header("Layer")]
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private GameObject rewardsObject;
-    [SerializeField] private Animator anim;
+    [SerializeField] private Animator chestAnim;
+    [SerializeField] private Animator keyAnim;
 
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (layerMask.value == (layerMask.value | (1 << collision.gameObject.layer)))
-    //    {
-    //        if (state == ChestState.Close)
-    //        {
-    //            // Open
-    //        }
-    //        else
-    //        {
-    //            // 열쇠 획득 => 플레이어로 옮김
-    //        }
-    //    }
-    //}
+    private void Awake()
+    {
+        state = ChestState.Close;
+    }
 
     public void SetChestState(ChestState _state)
     {
-        state = _state;
-        // 오픈 애니
-        anim.SetBool("IsOpen", true);
+        if (state != _state)
+        {
+            state = _state;
 
-        StartCoroutine(WaitAnim());
+            switch (_state)
+            {
+                case ChestState.Open:
+                    {
+                        // 오픈 애니
+                        chestAnim.SetBool("IsOpen", true);
+                        StartCoroutine(WaitAnim());
+                    }
+                    break;
+                case ChestState.Empty:
+                    {
+                        StopCoroutine(WaitAnim());
+                        keyAnim.enabled = false;
+                        StartCoroutine(MoveKeyObject());
+                    }
+                    break;
+            }
+        }
     }
 
     IEnumerator WaitAnim()
     {
-        yield return new WaitForSeconds(anim.GetCurrentAnimatorClipInfo(0).Length);
-
-        Debug.Log("Animation finished!");
+        yield return new WaitForSeconds(chestAnim.GetCurrentAnimatorClipInfo(0).Length);
         rewardsObject.SetActive(true);
+    }
+
+
+    IEnumerator MoveKeyObject()
+    {
+        // 좀 더 이쁘게 움직일수 있다면 좋을듯.
+        Vector3 destination = new Vector3(13, 7, 0);
+        float moveSpeed = 3f;
+        SpriteRenderer keyObject = rewardsObject.GetComponentInChildren<SpriteRenderer>();
+
+        while (Vector3.Distance(keyObject.transform.position, destination) > 0.5f)
+        {
+            Vector3 direction = (destination - keyObject.transform.position).normalized;
+            keyObject.transform.position += direction * moveSpeed * Time.deltaTime;
+            moveSpeed += 0.3f;
+            yield return null;
+        }
+        keyObject.transform.position = destination;
+        rewardsObject.SetActive(false);
     }
 }

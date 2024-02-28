@@ -17,12 +17,7 @@ public class PlayerAttack : MonoBehaviour
     public PlayerStats playerStats;
     float time;
 
-    int attackCount;
     float attackDelay;
-
-    bool attacked;
-
-
 
     public AudioClip clip;
 
@@ -41,27 +36,25 @@ public class PlayerAttack : MonoBehaviour
             playerController.onAttack = false;
         }
 
-        if(Time.time >= attackDelay)
-        {
-            attackCount = 0;
-        }
 
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-       
+        if (attackDelay <= Time.time)
+        {
             if (context.phase == InputActionPhase.Performed)
             {
-                attackCount++;
-
                 playerController.onAttack = true;
                 time = Time.time + 0.4f;
+
+                attackDelay = Time.time + 0.3f;
 
                 SoundManager.Instance.PlayClip(clip);
                 playerAnimation.animator.SetTrigger("Attack");
             }
-        
+        }
+
        
     
     }

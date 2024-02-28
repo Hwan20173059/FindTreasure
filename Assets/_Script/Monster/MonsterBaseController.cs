@@ -32,6 +32,7 @@ public abstract class MonsterBaseController : MonoBehaviour
             switch (_state)
             {
                 case MonsterState.Die:
+                    anim.CrossFade("DIE", 0.1f);
                     break;
                 case MonsterState.Idle:
                     anim.CrossFade("WAIT", 0.1f);

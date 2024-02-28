@@ -103,7 +103,7 @@ Transform:
   - {fileID: 2252242290026208061}
   - {fileID: 3918672614577551483}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6721873082806423224
 BoxCollider2D:
@@ -344,6 +344,7 @@ MonoBehaviour:
   dropItemPos: {fileID: 8330693447573470754}
   platformObject: {fileID: 0}
   _playerOnPlatform: 0
+  mainSpriteTransform: {fileID: 0}
   addJumbPower: 200
   interactDistance: 0.5
   groundLayer:
@@ -389,6 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
+  clip: {fileID: 8300000, guid: 4a25cd783e0cf18448c6c5fd63df610f, type: 3}
 --- !u!114 &3922153423090296803
 MonoBehaviour:
   m_ObjectHideFlags: 0

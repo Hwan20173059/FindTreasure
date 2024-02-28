@@ -18,7 +18,7 @@ public class PlayerStats : LifeEntity
 
     public int lifeCount;
     public int bombAmount;
-    private int goldenKeyAmount;
+    public int goldenKeyAmount;
 
     [SerializeField] float invincibilityRate;
     [SerializeField] bool onInvincibility;

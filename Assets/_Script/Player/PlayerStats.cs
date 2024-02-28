@@ -16,13 +16,13 @@ public class PlayerStats : LifeEntity
     [Header("Player State")]
     public float attackDamage;
 
-
     public int lifeCount;
     public int bombAmount;
     public int goldenKeyAmount;
 
     [SerializeField] float invincibilityRate;
     [SerializeField] bool onInvincibility;
+   
     private void Awake()
     {
         OnDeathEvent += Death;
@@ -40,7 +40,6 @@ public class PlayerStats : LifeEntity
     {
         if (!onInvincibility)
         {
-
             //test
             playerController._rigidbody.AddForce(hitDir*50f, ForceMode2D.Impulse);
             //test
@@ -72,10 +71,10 @@ public class PlayerStats : LifeEntity
             Debug.Log("Game Over");
         }
         else
-        {
-            //CO 1s
+        {      
+           
             //Resurrection Animation,
-            isDead = false;
+            isDead = true;
             StartCoroutine(InvincibilityCo());
         }
     }
@@ -83,10 +82,17 @@ public class PlayerStats : LifeEntity
 
     IEnumerator InvincibilityCo()
     {
+        yield return new WaitForSeconds(1f);
+        playerAnimation.animator.SetBool("OnDeath", false);
+        transform.position = transform.position + new Vector3(0, 2);
+        //init
+        curHealth = health;
+        isDead = false;
+        //init
         float duration = invincibilityRate;
         onInvincibility = true;
         // Invincibillity effect,
-        while (duration <= 0)
+        while (duration >= 0)
         {
             duration -= Time.deltaTime;
 

@@ -21,7 +21,8 @@ public class ChestInteract : MonoBehaviour
     [SerializeField] private GameObject rewardsObject;
     [SerializeField] private Animator chestAnim;
     [SerializeField] private Animator keyAnim;
-    [SerializeField] private AudioClip clip;
+    [SerializeField] private AudioClip chestClip;
+    [SerializeField] private AudioClip keyClip;
 
     private void Awake()
     {
@@ -56,7 +57,7 @@ public class ChestInteract : MonoBehaviour
 
     IEnumerator WaitAnim()
     {
-        SoundManager.Instance.PlayClip(clip);
+        SoundManager.Instance.PlayClip(chestClip);
         yield return new WaitForSeconds(chestAnim.GetCurrentAnimatorClipInfo(0).Length);
         rewardsObject.SetActive(true);
     }
@@ -64,6 +65,7 @@ public class ChestInteract : MonoBehaviour
 
     IEnumerator MoveKeyObject()
     {
+        SoundManager.Instance.PlayClip(keyClip);
         // 좀 더 이쁘게 움직일수 있다면 좋을듯.
         Vector3 destination = new Vector3(140, 70, 0);
         float moveSpeed = 3f;

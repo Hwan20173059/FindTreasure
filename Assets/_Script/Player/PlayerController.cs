@@ -213,19 +213,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("Ladder"))
-    //    {
-    //        _rigidbody.velocity = Vector2.zero;
-    //        ladders.Add(collision.gameObject);
-    //    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //if (collision.CompareTag("Ladder"))
+        //{
+        //    _rigidbody.velocity = Vector2.zero;
+        //    ladders.Add(collision.gameObject);
+        //}
 
-    //    if (collision.CompareTag("Stage"))
-    //    {
-    //        playercamera.currentStage = collision.gameObject.GetComponent<StageManager>().stage;
-    //    }
-    //}
+        if (collision.CompareTag("Stage"))
+        {
+            playercamera.currentStage = collision.gameObject.GetComponent<StageManager>().stage;
+        }
+    }
 
     //private void OnTriggerExit2D(Collider2D collision)
     //{

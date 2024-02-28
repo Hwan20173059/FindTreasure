@@ -48,4 +48,16 @@ public class Pooling : MonoBehaviour
         }
     }
 
+    public GameObject GetPoolItem(string name)
+    {
+        if (poolDic.ContainsKey(name))
+        {
+            GameObject obj = poolDic[name].Dequeue();
+            poolDic[name].Enqueue(obj);
+            obj.transform.position = transform.position;
+            return obj;
+        }
+        return null;
+    }
+
 }

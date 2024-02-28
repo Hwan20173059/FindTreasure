@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     Vector2 climbingDir;
     [SerializeField] private PlatformEffector2D platformObject;
     [SerializeField] private bool _playerOnPlatform; // 얕은 플랫폼 위에 있는지
-
+    public Transform mainSpriteTransform;
 
     [Header("Jump")]
     [SerializeField] float addJumbPower;
@@ -121,9 +121,10 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit2D hitL = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 0), Vector2.down, raycastDistance, groundLayer);
         RaycastHit2D hitR = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0), Vector2.down, raycastDistance, groundLayer);
-
+       
         Debug.DrawRay(transform.position + new Vector3(-0.3f, 0), Vector2.down, Color.red);
         Debug.DrawRay(transform.position + new Vector3(0.3f, 0), Vector2.down, Color.red);
+   
 
         //Debug.Log((transform.position.y - hit.point.y));
         if ((hitL.collider != null && (transform.position.y - hitL.point.y) > 0f) || (hitR.collider != null && (transform.position.y - hitR.point.y) > 0f))

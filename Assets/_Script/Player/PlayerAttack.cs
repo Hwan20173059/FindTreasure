@@ -17,6 +17,15 @@ public class PlayerAttack : MonoBehaviour
     public PlayerStats playerStats;
     float time;
 
+    int attackCount;
+    float attackDelay;
+
+    bool attacked;
+
+
+
+    public AudioClip clip;
+
 
     private void Awake()
     {
@@ -31,17 +40,29 @@ public class PlayerAttack : MonoBehaviour
         {
             playerController.onAttack = false;
         }
+
+        if(Time.time >= attackDelay)
+        {
+            attackCount = 0;
+        }
+
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Performed)
-        {
-            playerController.onAttack = true;
-            time = Time.time + 0.4f;
+       
+            if (context.phase == InputActionPhase.Performed)
+            {
+                attackCount++;
 
-            playerAnimation.animator.SetTrigger("Attack");
-        }
+                playerController.onAttack = true;
+                time = Time.time + 0.4f;
+
+                SoundManager.Instance.PlayClip(clip);
+                playerAnimation.animator.SetTrigger("Attack");
+            }
+        
+       
     
     }
 

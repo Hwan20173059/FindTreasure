@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 649724618985169649}
   - component: {fileID: 2390800208154479564}
   - component: {fileID: 3236474680134429246}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 8978767450629861476}
   - component: {fileID: 627089580744544329}
   - component: {fileID: 5571189494150340400}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Explosition Col
   m_TagString: Bomb
   m_Icon: {fileID: 0}
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 2020369077727210762}
   - component: {fileID: 1653820034958547171}
   - component: {fileID: 7542556676499021367}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Debris
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5168,7 +5168,7 @@ GameObject:
   - component: {fileID: 6575849838792687142}
   - component: {fileID: 6023745124291124447}
   - component: {fileID: 3868619835552660640}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Explosion Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

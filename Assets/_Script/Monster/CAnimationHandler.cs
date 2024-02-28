@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CAnimationHandler : MonoBehaviour
@@ -29,11 +30,18 @@ public class CAnimationHandler : MonoBehaviour
     public void AtAttack()
     {
         Debug.Log("범위 내 플레이어에 데미지");
+        m_MonsterController.DamageToPlayer(haveRange:true);
+
     }
     public void AtEndAnimation()
     {
-        Debug.Log("애니메이션 종료");
+        //Debug.Log("공격 애니메이션 종료");
         m_MonsterController.AtEndAnimation();
+    }
+    public void AtEndDie()
+    {
+        Debug.Log("몬스터 파괴");
+        m_MonsterController.DestroyObject();
     }
 
     #endregion Methods

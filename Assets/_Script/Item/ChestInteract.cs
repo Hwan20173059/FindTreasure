@@ -63,7 +63,7 @@ public class ChestInteract : MonoBehaviour
     IEnumerator MoveKeyObject()
     {
         // 좀 더 이쁘게 움직일수 있다면 좋을듯.
-        Vector3 destination = new Vector3(13, 7, 0);
+        Vector3 destination = new Vector3(140, 70, 0);
         float moveSpeed = 3f;
         SpriteRenderer keyObject = rewardsObject.GetComponentInChildren<SpriteRenderer>();
 

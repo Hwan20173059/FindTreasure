@@ -13,7 +13,7 @@ public class Attack : MonoBehaviour
         int layerValue = 1 << collision.gameObject.layer;
         if ( monsterMask.value == layerValue)
         {
-            MonsterController monster = collision.GetComponent<MonsterController>();
+            MonsterMelee monster = collision.GetComponent<MonsterMelee>();
             Vector2 dir = (collision.transform.position - transform.position).normalized;
             monster.TakeHit(attackDamage, dir);
 

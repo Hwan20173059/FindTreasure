@@ -9,7 +9,7 @@ public class CAnimationHandler : MonoBehaviour
     #region Members
     private Animator m_Animator;
     [SerializeField]
-    private MonsterController m_MonsterController;
+    private MonsterMelee m_MonsterController;
 
     #endregion Members
 
@@ -18,7 +18,7 @@ public class CAnimationHandler : MonoBehaviour
     void Awake()
     {
         m_Animator = GetComponent<Animator>();
-        m_MonsterController = GetComponentInParent<MonsterController>();
+        m_MonsterController = GetComponentInParent<MonsterMelee>();
     }
 
     //public void EnterNextScene()

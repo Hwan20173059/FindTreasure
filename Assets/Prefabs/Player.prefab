@@ -114,7 +114,7 @@ Transform:
   - {fileID: 2252242290026208061}
   - {fileID: 5302533429190209300}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6721873082806423224
 BoxCollider2D:
@@ -277,6 +277,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 65ad0820-eb35-44df-8805-f9f2e45eea34
     m_ActionName: Player/Down[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 301876681653556976}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 987ac56e-6b1b-4910-bb83-1f4b35f42080
+    m_ActionName: Player/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -308,6 +324,7 @@ MonoBehaviour:
   _playerOnPlatform: 0
   addJumbPower: 0
   jumpTime: 0
+  interactDistance: 0.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 384

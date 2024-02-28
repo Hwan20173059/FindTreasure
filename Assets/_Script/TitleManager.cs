@@ -38,6 +38,6 @@ public class TitleManager : MonoBehaviour
 
     public void SceneChange()
     {
-        GameManager.instance.SceneChange(1);
+        SceneManager.LoadScene("MainScene");
     }
 }

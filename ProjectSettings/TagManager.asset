@@ -11,6 +11,7 @@ TagManager:
   - GoldenKey
   - Monster
   - Thorns
+  - Door
   layers:
   - Default
   - TransparentFX

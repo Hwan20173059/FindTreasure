@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
     bool isClimbing;
     public Transform poolItemPos;
     public Transform dropItemPos;
+    bool isDamage = false;
 
     [Header("Player Move")]
     HashSet<GameObject> ladders = new HashSet<GameObject>();
@@ -147,20 +150,20 @@ public class PlayerController : MonoBehaviour
 
     #region Move
     public void OnMove(InputAction.CallbackContext context)
-    {  
-            if (context.phase == InputActionPhase.Performed)
-            {
-                dir = context.ReadValue<Vector2>();
-                playerAnimation.CallOnMoveEvent(dir.x);
-                playerAnimation.animator.SetBool("IsRun", true);
-                onMove = true;
-            }
-            else
-            {
-                onMove = false;
-                playerAnimation.animator.SetBool("IsRun", false);
-            }
-      
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            dir = context.ReadValue<Vector2>();
+            playerAnimation.CallOnMoveEvent(dir.x);
+            playerAnimation.animator.SetBool("IsRun", true);
+            onMove = true;
+        }
+        else
+        {
+            onMove = false;
+            playerAnimation.animator.SetBool("IsRun", false);
+        }
+
     }
 
     public void OnDown(InputAction.CallbackContext context)
@@ -255,14 +258,44 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("GoldenKey"))
         {
             collision.GetComponentInParent<ChestInteract>().SetChestState(ChestState.Empty);
-            playerStats.GetGoldenKey();
-        }
-
-        if (collision.CompareTag("Thorns"))
-        {
-            Debug.Log("가시 데미지 처리");
+            playerStats.AddGoldenKey();
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Thorns"))
+        {
+            if (isDamage == false)
+            {
+                playerStats.TakeDamage(10);
+                isDamage = true;
+                Invoke("isDamaged", 1);
+            }
+        }
+
+        if (collision.CompareTag("Door"))
+        {
+            // 키 3개 먹었는지 확인
+            if (GameManager.instance.state == PlayerState.Start && playerStats.GetGoldenKey() >= 3) // 열쇠 판단부분
+            {
+                // 키입력 막음
+                GameManager.instance.SetPlayerState(PlayerState.Pause);
+                // 자동 이동
+                StartCoroutine(PlayerMoveToDoor(collision));
+            }
+            else
+            {
+                Debug.LogWarning("열쇠 없음 처리");
+            }
+        }
+    }
+
+    public void isDamaged()
+    {
+        isDamage = false;
+    }
+
 
     //private void OnTriggerExit2D(Collider2D collision)
     //{
@@ -357,5 +390,64 @@ public class PlayerController : MonoBehaviour
 
 
     #endregion
+
+
+    #region EndAnimation
+    IEnumerator PlayerMoveToDoor(Collider2D collision)
+    {
+        Vector3 destination = new Vector3(55, 36, 0);
+        //float moveSpeed = 1f;
+        playerAnimation.animator.SetBool("IsRun", true);
+        while (Vector3.Distance(transform.position, destination) > 0.1f)
+        {
+            Vector3 direction = (destination - transform.position).normalized;
+            transform.position += direction * playerSpeed * Time.deltaTime;
+            yield return null;
+        }
+        transform.position = destination;
+        playerAnimation.animator.SetBool("IsRun", false);
+
+        // 키 꽂는 연출
+        yield return StartCoroutine(InsertGoldenKey());
+        // 문 작동
+        collision.GetComponentInParent<DoorAction>().SetChestState(DoorState.Open);
+        yield return StartCoroutine(PlayerMoveToInside());
+    }
+
+    IEnumerator InsertGoldenKey()
+    {
+        // 키 시작 : 56 44 0 도착 : 54 44 0
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/Interact/InsertGoldenKey");
+        GameObject goldenKey = Instantiate(prefab, new Vector3(56, 44, 0), Quaternion.Euler(0f, 0f, -90f));
+        Vector3 destination = new Vector3(54, 44, 0);
+        float moveSpeed = 2f;
+        while (Vector3.Distance(goldenKey.transform.position, destination) > 0.1f)
+        {
+            Vector3 direction = (destination - goldenKey.transform.position).normalized;
+            goldenKey.transform.position += direction * moveSpeed * Time.deltaTime;
+            yield return null;
+        }
+        goldenKey.transform.position = destination;
+    }
+
+    IEnumerator PlayerMoveToInside()
+    {
+        yield return new WaitForSeconds(3f);
+        Vector3 destination = new Vector3(51, 36, 0);
+        float moveSpeed = 1f;
+        playerAnimation.animator.SetBool("IsRun", true);
+        while (Vector3.Distance(transform.position, destination) > 0.1f)
+        {
+            Vector3 direction = (destination - transform.position).normalized;
+            transform.position += direction * moveSpeed * Time.deltaTime;
+            yield return null;
+        }
+        transform.position = destination;
+        playerAnimation.animator.SetBool("IsRun", false);
+
+        GameManager.instance.SceneChange(2);
+    }
+    #endregion
+
 
 }

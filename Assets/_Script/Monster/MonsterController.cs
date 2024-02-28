@@ -58,7 +58,7 @@ public class MonsterController : MonsterBaseController
     }
     protected override void UpdateMoving()
     {
-        Debug.Log("Monster UpdateMoving");
+        //Debug.Log("Monster UpdateMoving");
 
         // 플레이어가 내 사정거리보다 가까우면 공격, 멀어지면 Idle로 전환
         if (_lockTarget != null)
@@ -96,13 +96,13 @@ public class MonsterController : MonsterBaseController
     }
     protected override void UpdateSkill()
     {
-        Debug.Log("Monster UpdateSkill");
+        //Debug.Log("Monster UpdateSkill");
 
         OnHitEvent();
     }
     void OnHitEvent() // Animation 중 Damage수치를 가진 오브젝트를 만드는 것으로 수정
     {
-        Debug.Log("Monster OnHitEvent");
+        //Debug.Log("Monster OnHitEvent");
         if (_lockTarget != null)
         {
             // Stat 플레이어의 스탯과, 몬스터의 스탯으로부터 데미지 계산 및 플레이어에게 데미지 주기.
@@ -145,20 +145,37 @@ public class MonsterController : MonsterBaseController
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            // 부딪친 Player 오브젝트의 PlayerController 에서 데미지 주는 메서드 사용
-            PlayerStats _ps = collision.gameObject.GetComponent<PlayerStats>();
-            if (_ps != null)
-            {
-                Transform hitPoint = transform;
-                Vector2 hitDirection = (collision.transform.position - this.transform.position).normalized;
-                _ps.TakeHit(_stat.AttackDamage, hitDirection); // + 히트포인트, 히트방향
-            }
+            DamageToPlayer(collision.gameObject);
         }
     }
-
-    public void DamagePlayer()
+    // 범용, 플레이어에게 데미지
+    public void DamageToPlayer(GameObject player = null, GameObject monster = null)
     {
+        PlayerStats _ps;
+        GameObject _player;
 
+        if (player)
+        {
+            _player = player;
+            _ps = player.GetComponent<PlayerStats>();
+        }
+        else
+        {
+            _player = GameObject.FindGameObjectWithTag("Player");
+            _ps = _player.GetComponent<PlayerStats>();
+        }
+
+        GameObject _monster;
+        if (monster) _monster = monster;
+        else _monster = gameObject;
+
+        if (_ps != null)
+        {
+            //Debug.Log(_player);
+            //Debug.Log(_monster);
+            Vector2 hitDirection = (_player.transform.position - _monster.transform.position).normalized;
+            _ps.TakeHit(_stat.AttackDamage, hitDirection); // 데미지, 히트방향
+        }
     }
 
 

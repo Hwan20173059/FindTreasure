@@ -66,12 +66,11 @@ MonoBehaviour:
   _level: 1
   _hp: 5
   _maxHp: 5
-  _attackDamage: 0
+  _attackDamage: 5
   _attackRange: 0.7
-  _attackSpeed: 0
-  _attackObjInitDelay: 0
+  _attackDelay: 2
   _defense: 0
-  _moveSpeed: 2
+  _moveSpeed: 1
   _scanRange: 2
   _minX: 0
   _maxX: 0
@@ -241,3 +240,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e9f561c38152a84ba8d142ad5aed7b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_MonsterController: {fileID: 0}

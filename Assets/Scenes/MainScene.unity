@@ -962,6 +962,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6721873082806423224, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.38863587
+      objectReference: {fileID: 0}
+    - target: {fileID: 6721873082806423224, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.026590675
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

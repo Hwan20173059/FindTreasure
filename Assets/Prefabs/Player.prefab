@@ -103,7 +103,7 @@ Transform:
   - {fileID: 2252242290026208061}
   - {fileID: 3918672614577551483}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6721873082806423224
 BoxCollider2D:
@@ -137,7 +137,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 0.026590675, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -148,7 +148,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 1}
+  m_Size: {x: 0.38863587, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &1319589037323213460
 Rigidbody2D:
@@ -318,9 +318,9 @@ MonoBehaviour:
   playerAnimation: {fileID: 1365103534890963654}
   playerStats: {fileID: 4426857697000941460}
   _rigidbody: {fileID: 0}
-  playerSpeed: 5
+  playerSpeed: 8
   playerClimbingSpeed: 3
-  playerJumpPower: 100
+  playerJumpPower: 120
   gravityScale: 0
   onMove: 0
   poolItemPos: {fileID: 3918672614577551483}

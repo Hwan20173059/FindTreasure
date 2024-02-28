@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
     void Init()
     {
-        playerJumpPower = 100;
+        playerJumpPower = 130;
         addJumbPower = 200;
         gravityScale = 4;
     }

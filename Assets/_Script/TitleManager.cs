@@ -17,10 +17,10 @@ public class TitleManager : MonoBehaviour
         BackGroundAnim();
         Invoke("PlayerAnim", 4.5f);
         Invoke("FadeInAnim", 8f);
-        Invoke("SceneChange",9.5f);
+        Invoke("SceneChange", 9.5f);
 
     }
-   
+
     public void BackGroundAnim()
     {
         titleAnim.SetTrigger("GameStart");
@@ -35,9 +35,9 @@ public class TitleManager : MonoBehaviour
     {
         player.SetActive(true);
     }
-    
+
     public void SceneChange()
     {
-        SceneManager.LoadScene("MainScene");
+        GameManager.instance.SceneChange(1);
     }
 }

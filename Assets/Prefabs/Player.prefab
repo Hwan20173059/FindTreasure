@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5118088472828904247
 Transform:
   m_ObjectHideFlags: 0
@@ -407,7 +407,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5811255141837919404}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -444,11 +444,19 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -0.95105654, y: 0.30901697}
-      - {x: -0.5877852, y: -0.80901706}
-      - {x: 0.58778536, y: -0.80901694}
-      - {x: 0.9510565, y: 0.30901712}
+    - - {x: -0.0768255, y: 0.12089476}
+      - {x: 0.15499198, y: 0.089556605}
+      - {x: 0.475335, y: 0.18732882}
+      - {x: 0.632738, y: 0.35720277}
+      - {x: 0.6340513, y: 0.5864909}
+      - {x: 0.63489056, y: 0.71558034}
+      - {x: 0.46928072, y: 0.88222414}
+      - {x: 0.14890552, y: 0.9787276}
+      - {x: 0.4549929, y: 0.7547396}
+      - {x: 0.43163806, y: 0.48983088}
+      - {x: 0.22159076, y: 0.19384767}
+      - {x: 0.007761717, y: 0.15751731}
+      - {x: -0.2793377, y: 0.23332205}
   m_UseDelaunayMesh: 0
 --- !u!1 &5832270536707314081
 GameObject:
@@ -466,7 +474,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2609293734712402760
 Transform:
   m_ObjectHideFlags: 0

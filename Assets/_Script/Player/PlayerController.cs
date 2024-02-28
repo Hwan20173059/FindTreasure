@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
     float maxJumpTime = .5f;
     bool onGround;
 
+    [Header("Interact")]
+    [SerializeField] float interactDistance = 0.5f;
+
 
     [Header("Layer")]
     public LayerMask groundLayer;
@@ -96,7 +99,7 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        RaycastHit2D hitL = Physics2D.Raycast(transform.position + new Vector3(-0.5f,0), Vector2.down, raycastDistance, groundLayer);
+        RaycastHit2D hitL = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 0), Vector2.down, raycastDistance, groundLayer);
         RaycastHit2D hitR = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0), Vector2.down, raycastDistance, groundLayer);
 
         Debug.DrawRay(transform.position + new Vector3(-0.3f, 0), Vector2.down, Color.red);
@@ -109,7 +112,6 @@ public class PlayerController : MonoBehaviour
         }
         return false;
 
-        //return Physics2D.OverlapCircle(transform.position, groundCheckRadius, groundLayer);
     }
 
     //private void OnDrawGizmos()
@@ -224,6 +226,11 @@ public class PlayerController : MonoBehaviour
         {
             playercamera.currentStage = collision.gameObject.GetComponent<StageManager>().stage;
         }
+
+        if (collision.CompareTag("GoldenKey"))
+        {
+            // TODO : 키 획득 어떤식으로 할지
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -235,6 +242,30 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+
+
+    #region Interact 
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        Debug.Log("E");
+        if (context.phase == InputActionPhase.Performed)
+        {
+            // 주변 콜라이더 집합
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, interactDistance);
+            foreach (Collider2D col in colliders)
+            {
+                if (col.CompareTag("Chest"))
+                {
+                    col.GetComponent<ChestInteract>().SetChestState(ChestState.Open);
+                }
+            }
+        }
+    }
+
+    #endregion
+
 
     #region Collision 
     //private void OnCollisionEnter2D(Collision2D collision)

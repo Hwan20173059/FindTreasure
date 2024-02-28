@@ -144,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffectVolume: 0.413
   musicVolume: 0.453
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: 20a87892c7d1e1840948a360fcd346c1, type: 3}
 --- !u!114 &5678548994428378978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,4 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e348e1e813a4cb793cd9d38112e26c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolList: []
+  poolList:
+  - name: SoundSource
+    prefeb: {fileID: 771441050632097408, guid: 18dc4ca808578b64fa3886aeea0eaee3, type: 3}
+    amount: 10

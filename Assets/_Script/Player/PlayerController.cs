@@ -60,6 +60,14 @@ public class PlayerController : MonoBehaviour
     [Header("Camera")]
     public PlayerCamera playercamera;
 
+
+    [Header("Sound")]
+    public AudioClip jumpSound;
+    public AudioClip runSound;
+    GameObject curSoundSource;
+
+
+
     private void Awake()
     {
 
@@ -158,11 +166,15 @@ public class PlayerController : MonoBehaviour
             playerAnimation.CallOnMoveEvent(dir.x);
             playerAnimation.animator.SetBool("IsRun", true);
             onMove = true;
+            SoundManager.Instance.PlayClip(runSound);
+            curSoundSource = SoundManager.Instance.CurSoundSource();
+
         }
         else
         {
             onMove = false;
             playerAnimation.animator.SetBool("IsRun", false);
+            curSoundSource.GetComponent<SoundSource>().Disable();
         }
 
     }
@@ -205,7 +217,8 @@ public class PlayerController : MonoBehaviour
         {
             if (context.phase == InputActionPhase.Performed)
             {
-                onJump = true;
+                onJump = true;  
+                SoundManager.Instance.PlayClip(jumpSound);
                 _rigidbody.AddForce(Vector2.up * playerJumpPower, ForceMode2D.Impulse);
             }
         }

@@ -15,7 +15,9 @@ public class BombController : MonoBehaviour
 
     [Header("Bomb State")]
     float bombIdel_AnimationTime;
-    
+
+    [Header("Sound")]
+    public AudioClip clip;
 
 
     private void Awake()
@@ -39,9 +41,12 @@ public class BombController : MonoBehaviour
         yield return new WaitForSeconds(bombIdel_AnimationTime);
         explosionEffect.Play();
         debris.Play();
+        SoundManager.Instance.PlayClip(clip);
+        //Explosion
         explosionCollider.enabled = true;
         yield return new WaitForSeconds(0.3f);
         explosionCollider.enabled = false;
+        //Explosion
         yield return new WaitForSeconds(1.3f);
         gameObject.SetActive(false);
 

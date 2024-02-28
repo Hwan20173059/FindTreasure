@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectilePrefab: {fileID: 8380211377817646301, guid: 18d4c68740ee01b4a937bd7ff67e77a7, type: 3}
+  PotionPrefab: {fileID: 6402566761950651428, guid: 2769739ce86a685498025d417b026a50, type: 3}
+  dropPercentage: 70
   _destPos: {x: 0, y: 0, z: 0}
   _state: 2
   _lockTarget: {fileID: 0}

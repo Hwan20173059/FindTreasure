@@ -104,7 +104,6 @@ public class MonsterBaseController : MonoBehaviour
             // 공격 중에도 플레이어의 위치에 따라 몬스터의 XFlip 조정
             _destPos = _lockTarget.transform.position;
             Vector3 dir = _destPos - transform.position;
-            //Debug.Log(dir.x);
             CurrentMoveDirection = dir.x > 0 ? 1f : -1f;
             transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX = dir.x > 0 ? false : true;
 
@@ -160,12 +159,30 @@ public class MonsterBaseController : MonoBehaviour
     public void TakeHit(float damage, Vector2 hitDir)
     {
         TakeDamage(damage);
+        // 넉백 로직
+        StartCoroutine(KnockbackCoroutine(hitDir));
     }
     private void TakeDamage(float damage)
     {
         _stat.Hp -= (int)damage;
         if (_stat.Hp <= 0)
             State = MonsterState.Die;
+    }
+    private IEnumerator KnockbackCoroutine(Vector2 hitDir)
+    {
+        // x 방향으로만 넉백을 적용하기 위해 hitDir의 y성분을 0으로
+        Vector3 knockbackDir = new Vector3(hitDir.x > 0 ? 1 : -1, 0, 0);
+
+        // 첫 번째 넉백
+        transform.position += knockbackDir * 0.2f;
+        yield return new WaitForSeconds(0.1f); // 넉백 사이에 잠시 대기
+
+        // 두 번째 넉백
+        transform.position += knockbackDir * 0.2f;
+        yield return new WaitForSeconds(0.1f); // 넉백 사이에 잠시 대기
+
+        // 세 번째 넉백
+        transform.position += knockbackDir * 0.3f;
     }
     public void ShotToPlayer(GameObject player = null, GameObject monster = null, bool haveRange = false)
     {

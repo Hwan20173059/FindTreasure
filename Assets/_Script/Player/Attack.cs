@@ -12,8 +12,6 @@ public class Attack : MonoBehaviour
     {
         int layerValue = 1 << collision.gameObject.layer;
 
-        Debug.Log(monsterMask.value);
-        Debug.Log(layerValue);
         if ( monsterMask.value == layerValue)
         {
             MonsterBaseController monster = collision.GetComponent<MonsterBaseController>();

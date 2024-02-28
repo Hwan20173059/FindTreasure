@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -95,10 +95,6 @@ public class GameManager : MonoBehaviour
     {
         return textDataDictionary[key];
     }
-
-
-
-
 
     public void SceneChange(int sceneIndex)
     {

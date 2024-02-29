@@ -12,6 +12,7 @@ TagManager:
   - Monster
   - Thorns
   - Door
+  - Coin
   layers:
   - Default
   - TransparentFX

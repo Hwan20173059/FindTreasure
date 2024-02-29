@@ -126,8 +126,8 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        RaycastHit2D hitL = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 0), Vector2.down, raycastDistance, groundLayer);
-        RaycastHit2D hitR = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0), Vector2.down, raycastDistance, groundLayer);
+        RaycastHit2D hitL = Physics2D.Raycast(transform.position + new Vector3(-0.25f, 0), Vector2.down, raycastDistance, groundLayer);
+        RaycastHit2D hitR = Physics2D.Raycast(transform.position + new Vector3(0.25f, 0), Vector2.down, raycastDistance, groundLayer);
 
         Debug.DrawRay(transform.position + new Vector3(-0.3f, 0), Vector2.down, Color.red);
         Debug.DrawRay(transform.position + new Vector3(0.3f, 0), Vector2.down, Color.red);
@@ -402,6 +402,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 destination = new Vector3(55, 36, 0);
         //float moveSpeed = 1f;
+        playerAnimation.CallOnMoveEvent(-1);
         playerAnimation.animator.SetBool("IsRun", true);
         while (Vector3.Distance(transform.position, destination) > 0.1f)
         {

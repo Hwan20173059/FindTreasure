@@ -31,265 +31,265 @@ MonoBehaviour:
       tempMaxX: 2
   - stageName: Stage5
     spawnInfos:
-    - monsterType: MonsterB
+    - monsterType: MonsterA
       isStopOnIdle: 1
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 93, y: 24.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterC
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 82, y: 24.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterB
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterC
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 71, y: 24.1}
-      tempMinX: 1
+      tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterA
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 60, y: 24.1}
-      tempMinX: 0
-      tempMaxX: 0
+      tempMinX: 2
+      tempMaxX: 2
   - stageName: Stage6
     spawnInfos:
-    - monsterType: MonsterA
+    - monsterType: MonsterC
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 35.5, y: 24.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 3
+      tempMaxX: 3
+    - monsterType: MonsterB
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 26.5, y: 32.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterC
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 26.5, y: 24.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 3
+      tempMaxX: 3
+    - monsterType: MonsterB
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 38.5, y: 36.1}
-      tempMinX: 0
-      tempMaxX: 0
+      tempMinX: 2
+      tempMaxX: 2
     - monsterType: MonsterA
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 32.5, y: 42.1}
-      tempMinX: 0
-      tempMaxX: 0
+      tempMinX: 2
+      tempMaxX: 2
     - monsterType: MonsterA
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 32.5, y: 46.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterB
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 26.5, y: 56.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterB
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 38.5, y: 60.1}
-      tempMinX: 0
-      tempMaxX: 0
+      tempMinX: 2
+      tempMaxX: 2
   - stageName: Stage7
     spawnInfos:
-    - monsterType: MonsterA
+    - monsterType: MonsterC
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 5, y: 27.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 3
+      tempMaxX: 3
+    - monsterType: MonsterA_Large
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 0, y: 27.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterC
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -8, y: 27.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 3
+      tempMaxX: 3
+    - monsterType: MonsterA_Large
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 7, y: 22.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterB
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -8, y: 22.1}
       tempMinX: 0
       tempMaxX: 0
-    - monsterType: MonsterA
+    - monsterType: MonsterA_Large
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -8, y: 15.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterC
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 8.5, y: 15.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 3
+      tempMaxX: 3
+    - monsterType: MonsterC
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 14.5, y: 15.1}
-      tempMinX: 0
-      tempMaxX: 0
+      tempMinX: 3
+      tempMaxX: 3
   - stageName: Stage8
     spawnInfos:
-    - monsterType: MonsterA
+    - monsterType: MonsterD
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 1.5, y: 50.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterB
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -8.5, y: 54.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterD
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 6.5, y: 56.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterB
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 16, y: 60.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterD
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -3, y: 62.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterD
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -7.5, y: 62.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterD
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -1, y: 36.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterD
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 4.5, y: 36.1}
-      tempMinX: 0
-      tempMaxX: 0
+      tempMinX: 2
+      tempMaxX: 2
   - stageName: Stage9
     spawnInfos:
-    - monsterType: MonsterA
+    - monsterType: MonsterD
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 54.5, y: 60.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterA_Large
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 60, y: 60.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterD
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 65.5, y: 60.1}
-      tempMinX: 0
-      tempMaxX: 0
+      tempMinX: 2
+      tempMaxX: 2
   - stageName: Stage10
     spawnInfos:
-    - monsterType: MonsterA
+    - monsterType: MonsterC
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 85, y: 56.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterC
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 90.5, y: 52.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterC
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 95.5, y: 48.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterA_Large
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 93.5, y: 36.1}
-      tempMinX: 0
-      tempMaxX: 0
-    - monsterType: MonsterA
+      tempMinX: 2
+      tempMaxX: 2
+    - monsterType: MonsterA_Large
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 85, y: 36.1}
-      tempMinX: 0
-      tempMaxX: 0
+      tempMinX: 2
+      tempMaxX: 2

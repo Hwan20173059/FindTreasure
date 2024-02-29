@@ -66,8 +66,8 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 35.5, y: 24.1}
-      tempMinX: 3
-      tempMaxX: 3
+      tempMinX: 5
+      tempMaxX: 5
     - monsterType: MonsterB
       isStopOnIdle: 0
       isStopOnTrack: 0
@@ -80,8 +80,8 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 26.5, y: 24.1}
-      tempMinX: 3
-      tempMaxX: 3
+      tempMinX: 5
+      tempMaxX: 5
     - monsterType: MonsterB
       isStopOnIdle: 0
       isStopOnTrack: 0
@@ -124,8 +124,8 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 5, y: 27.1}
-      tempMinX: 3
-      tempMaxX: 3
+      tempMinX: 5
+      tempMaxX: 5
     - monsterType: MonsterA_Large
       isStopOnIdle: 0
       isStopOnTrack: 0
@@ -138,8 +138,8 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -8, y: 27.1}
-      tempMinX: 3
-      tempMaxX: 3
+      tempMinX: 5
+      tempMaxX: 5
     - monsterType: MonsterA_Large
       isStopOnIdle: 0
       isStopOnTrack: 0

@@ -50,11 +50,11 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 0}
   dropItems:
   - DropItemsPrefab: {fileID: 2064884255217465386, guid: 33075b44ac6531943875b30b6d328bf7, type: 3}
-    dropPercentage: 100
+    dropPercentage: 20
   - DropItemsPrefab: {fileID: 6402566761950651428, guid: 2769739ce86a685498025d417b026a50, type: 3}
-    dropPercentage: 80
+    dropPercentage: 20
   - DropItemsPrefab: {fileID: 6402566761950651428, guid: 2769739ce86a685498025d417b026a50, type: 3}
-    dropPercentage: 60
+    dropPercentage: 20
   dieSound: {fileID: 8300000, guid: eb435b7de676b0943b3d0bd14235473f, type: 3}
   hitSound: {fileID: 8300000, guid: 35ff150819beaa1409efa9adb0b7598f, type: 3}
   _destPos: {x: 0, y: 0, z: 0}
@@ -74,14 +74,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _level: 3
-  _hp: 50
-  _maxHp: 50
+  _hp: 40
+  _maxHp: 40
   _attackDamage: 20
   _attackActionRange: 2.5
   _realAttackRange: 3
   _attackDelay: 5
   _defense: 0
-  _moveSpeed: 0.6
+  _moveSpeed: 1
   _scanRange: 4
   _minX: -7
   _maxX: 7

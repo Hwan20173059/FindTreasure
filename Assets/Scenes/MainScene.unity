@@ -2223,17 +2223,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4426857697000941460, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
-      propertyPath: health
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4426857697000941460, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
-      propertyPath: hitSound
+      propertyPath: healSound
       value: 
-      objectReference: {fileID: 8300000, guid: 5c64557d7e70965478ee376ed0365f45, type: 3}
-    - target: {fileID: 4426857697000941460, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
-      propertyPath: curHealth
-      value: 100
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: efb7ac8a32387444fae94701b2882e83, type: 3}
     - target: {fileID: 4674462189064075841, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
       propertyPath: m_Name
       value: Player

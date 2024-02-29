@@ -36,6 +36,7 @@ public class PlayerStats : LifeEntity
 
     [Header("Hit")]
     public AudioClip hitSound;
+    public AudioClip healSound;
 
     private void Awake()
     {
@@ -191,6 +192,7 @@ public class PlayerStats : LifeEntity
 
     public override void Heal(float healPoint)
     {
+        SoundManager.Instance.PlayClip(healSound);
         base.Heal(healPoint);
     }
 }

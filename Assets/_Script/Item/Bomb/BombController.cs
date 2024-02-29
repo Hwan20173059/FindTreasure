@@ -13,16 +13,23 @@ public class BombController : MonoBehaviour
     public CircleCollider2D circleCollider;
     public CircleCollider2D explosionCollider;
     Rigidbody2D rb;
+
     [Header("Effect")]
     [SerializeField] ParticleSystem explosionEffect;
     [SerializeField] ParticleSystem debris;
+
+    
+    public ParticleSystem[] beforeExplosionEffects;
+
 
     [Header("Bomb State")]
     float bombIdel_AnimationTime;
 
 
     [Header("Sound")]
-    public AudioClip clip;
+    public AudioClip explosionSoundClip;
+    GameObject curFuseSoundObj;
+    public AudioClip fuseSoundClip;
 
     public LayerMask groundLayerMask;
     private void Awake()
@@ -51,20 +58,31 @@ public class BombController : MonoBehaviour
 
     private void OnEnable()
     {
-       
-            StartCoroutine(BombCo());
-        
+        StartCoroutine(BombCo());
     }
 
 
 
+    void OnEffect(ParticleSystem[] particleSystems)
+    {
+        foreach(ParticleSystem par in particleSystems)
+        {
+            par.Play();
+        }
+    }
+
+
     IEnumerator BombCo()
     {
-        circleCollider.enabled = true;
-        yield return new WaitForSeconds(bombIdel_AnimationTime);
+        yield return new WaitForSeconds(0.1f);
+        BeforeExplosion();
+
+        yield return new WaitForSeconds(bombIdel_AnimationTime); //3
+        curFuseSoundObj.GetComponent<SoundSource>().Disable();
+
         explosionEffect.Play();
         debris.Play();
-        SoundManager.Instance.PlayClip(clip);
+        SoundManager.Instance.PlayClip(explosionSoundClip);
         //Explosion
         explosionCollider.enabled = true;
         yield return new WaitForSeconds(0.3f);
@@ -74,6 +92,14 @@ public class BombController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
 
+    }
+
+    void BeforeExplosion()
+    {
+        circleCollider.enabled = true;
+        OnEffect(beforeExplosionEffects);
+        SoundManager.Instance.PlayClip(fuseSoundClip);
+        curFuseSoundObj = SoundManager.Instance.CurSoundSource();
     }
 
 }

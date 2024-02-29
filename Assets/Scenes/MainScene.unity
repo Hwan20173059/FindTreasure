@@ -122510,57 +122510,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 546015187925249089, guid: 5a8dc10865cfdc248a7baa1df9902c4d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -115
-      objectReference: {fileID: 0}
-    - target: {fileID: 2742250443368854320, guid: 5a8dc10865cfdc248a7baa1df9902c4d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2742250443368854320, guid: 5a8dc10865cfdc248a7baa1df9902c4d, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2742250443368854320, guid: 5a8dc10865cfdc248a7baa1df9902c4d, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2742250443368854320, guid: 5a8dc10865cfdc248a7baa1df9902c4d, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2742250443368854320, guid: 5a8dc10865cfdc248a7baa1df9902c4d, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2742250443368854320, guid: 5a8dc10865cfdc248a7baa1df9902c4d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6431561751872484555, guid: 5a8dc10865cfdc248a7baa1df9902c4d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6431561751872484555, guid: 5a8dc10865cfdc248a7baa1df9902c4d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 5779472306975197420, guid: 5a8dc10865cfdc248a7baa1df9902c4d, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1796397930}
     - target: {fileID: 6622646211128755452, guid: 5a8dc10865cfdc248a7baa1df9902c4d, type: 3}
       propertyPath: m_Name
       value: UICanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7571059892036998815, guid: 5a8dc10865cfdc248a7baa1df9902c4d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -115
-      objectReference: {fileID: 0}
-    - target: {fileID: 8315547008708682784, guid: 5a8dc10865cfdc248a7baa1df9902c4d, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8315547008708682784, guid: 5a8dc10865cfdc248a7baa1df9902c4d, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8411765586365217489, guid: 5a8dc10865cfdc248a7baa1df9902c4d, type: 3}
       propertyPath: m_Pivot.x

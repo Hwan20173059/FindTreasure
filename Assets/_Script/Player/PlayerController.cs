@@ -356,15 +356,6 @@ public class PlayerController : MonoBehaviour
 
 
     #region Collision 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Monster"))
-    //    {
-    //        Vector2 dir = (collision.gameObject.transform.position-transform.position).normalized;
-    //        playerStats.TakeHit(1, hitPoint, dir);
-    //        _rigidbody.AddForce(dir, ForceMode2D.Impulse);
-    //    }
-    //}
 
 
     private void SetPlayerOnPlatform(Collision2D other, bool value)

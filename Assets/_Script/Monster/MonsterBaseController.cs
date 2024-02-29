@@ -102,14 +102,17 @@ public class MonsterBaseController : MonoBehaviour
 
     protected virtual void UpdateAttack()
     {
+        // 플레이어의 넉백 등으로 밀렸을 때, X범위 밖으로 나가지 않도록 위치 업데이트
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, _stat.MinX, _stat.MaxX), transform.position.y, transform.position.z);
+
+        // 공격 중에도 플레이어의 위치에 따라 몬스터의 XFlip 조정
+        _destPos = _lockTarget.transform.position;
+        Vector3 dir = _destPos - transform.position;
+        CurrentMoveDirection = dir.x > 0 ? 1f : -1f;
+        transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX = dir.x > 0 ? false : true;
+
         if (Time.time - _lastAttackTime > _stat.AttackDelay)
         {
-            // 공격 중에도 플레이어의 위치에 따라 몬스터의 XFlip 조정
-            _destPos = _lockTarget.transform.position;
-            Vector3 dir = _destPos - transform.position;
-            CurrentMoveDirection = dir.x > 0 ? 1f : -1f;
-            transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX = dir.x > 0 ? false : true;
-
             _lastAttackTime = Time.time;
         }
     }
@@ -186,11 +189,11 @@ public class MonsterBaseController : MonoBehaviour
 
         // 첫 번째 넉백
         transform.position += knockbackDir * 0.2f;
-        yield return new WaitForSeconds(0.1f); // 넉백 사이에 잠시 대기
+        yield return new WaitForSeconds(0.06f); // 넉백 사이에 잠시 대기
 
         // 두 번째 넉백
         transform.position += knockbackDir * 0.2f;
-        yield return new WaitForSeconds(0.1f); // 넉백 사이에 잠시 대기
+        yield return new WaitForSeconds(0.06f); // 넉백 사이에 잠시 대기
 
         // 세 번째 넉백
         transform.position += knockbackDir * 0.3f;
@@ -251,6 +254,9 @@ public class MonsterBaseController : MonoBehaviour
     protected virtual void UpdateTracking()
     {
         //Debug.Log("Monster UpdateTracking");
+
+        // 플레이어의 넉백 등으로 밀렸을 때, X범위 밖으로 나가지 않도록 위치 업데이트
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, _stat.MinX, _stat.MaxX), transform.position.y, transform.position.z);
 
         // 플레이어가 내 사정거리보다 가까우면 공격, 멀어지면 Idle로 전환
         if (_lockTarget != null)

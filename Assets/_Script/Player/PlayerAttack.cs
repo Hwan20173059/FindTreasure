@@ -17,6 +17,9 @@ public class PlayerAttack : MonoBehaviour
     public PlayerStats playerStats;
     float time;
 
+    float initPlayerSpeed;
+
+
     float attackDelay;
 
     public AudioClip clip;
@@ -25,6 +28,7 @@ public class PlayerAttack : MonoBehaviour
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
+        initPlayerSpeed = playerController.playerSpeed;
         playerAnimation = playerController.playerAnimation;
         playerStats = playerController.playerStats;
     }
@@ -34,6 +38,7 @@ public class PlayerAttack : MonoBehaviour
         if(Time.time >= time)
         {
             playerController.onAttack = false;
+            playerController.playerSpeed = initPlayerSpeed;
         }
 
 
@@ -47,7 +52,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 playerController.onAttack = true;
                 time = Time.time + 0.4f;
-
+                playerController.playerSpeed = 3;
                 attackDelay = Time.time + 0.3f;
 
                 SoundManager.Instance.PlayClip(clip);

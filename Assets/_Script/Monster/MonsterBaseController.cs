@@ -212,7 +212,7 @@ public class MonsterBaseController : MonoBehaviour
 
     protected virtual void UpdateDie()
     {
-        Debug.Log("Monster Dead");
+        //Debug.Log("Monster Dead");
         
     }
 

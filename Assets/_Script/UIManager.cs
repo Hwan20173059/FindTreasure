@@ -15,9 +15,9 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        lifeCount.text = "x " + playerStats.lifeCount.ToString();
-        bombCount.text = "X " + playerStats.bombAmount.ToString();
-        keyCount.text = playerStats.goldenKeyAmount.ToString() + " / 3";
+        lifeCount.text = $"<i>x {playerStats.lifeCount}</i>";
+        bombCount.text = $"x {playerStats.bombAmount}";
+        keyCount.text = $"{playerStats.goldenKeyAmount} / 3";
 
         hpBar.value = playerStats.curHealth / playerStats.health;
     }

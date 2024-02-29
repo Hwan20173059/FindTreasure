@@ -48,8 +48,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectilePrefab: {fileID: 0}
-  PotionPrefab: {fileID: 2064884255217465386, guid: 33075b44ac6531943875b30b6d328bf7, type: 3}
-  dropPercentage: 100
+  dropItems:
+  - DropItemsPrefab: {fileID: 2064884255217465386, guid: 33075b44ac6531943875b30b6d328bf7, type: 3}
+    dropPercentage: 100
+  - DropItemsPrefab: {fileID: 6402566761950651428, guid: 2769739ce86a685498025d417b026a50, type: 3}
+    dropPercentage: 80
+  - DropItemsPrefab: {fileID: 6402566761950651428, guid: 2769739ce86a685498025d417b026a50, type: 3}
+    dropPercentage: 60
   _destPos: {x: 0, y: 0, z: 0}
   _state: 2
   _lockTarget: {fileID: 0}

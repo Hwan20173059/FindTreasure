@@ -30,7 +30,10 @@ public class PlayerStats : LifeEntity
 
     [SerializeField] float invincibilityRate;
     [SerializeField] bool onInvincibility;
-   
+
+    [Header("Effect")]
+    public ParticleSystem resurrectionEffect;
+
     private void Awake()
     {
         OnDeathEvent += Death;
@@ -57,15 +60,18 @@ public class PlayerStats : LifeEntity
 
     public override void TakeHit(float damage, Vector2 hitDir)
     {
-        if (!onInvincibility && !beDamaged)
+        if (!onInvincibility)
         {
-            beDamagedTime = Time.time + 1f;
-            beDamaged = true;
-            //test
-            playerController._rigidbody.AddForce(hitDir * 50f, ForceMode2D.Impulse);
-            //test
+            if (!beDamaged)
+            {
+                beDamagedTime = Time.time + 1f;
+                beDamaged = true;
+                //test
+                playerController._rigidbody.AddForce(hitDir * 50f, ForceMode2D.Impulse);
+                //test
 
-            base.TakeHit(damage, hitDir);
+                base.TakeHit(damage, hitDir);
+            }
         }
     }
 
@@ -118,21 +124,28 @@ public class PlayerStats : LifeEntity
 
     IEnumerator ResurrectionCo()
     {
+        
+        StartCoroutine(InvincibilityCo()); //5
         yield return new WaitForSeconds(1f);
+        resurrectionEffect.Play();
         playerAnimation.animator.SetBool("OnDeath", false);
 
         //Resurrection
-        StartCoroutine(FlashCo(Color.yellow, 2f));
+       
         //init
         curHealth = health;
-        isDead = false;
+        
         //init
         playerAnimation.animator.SetTrigger("OnResurrection");
 
         yield return new WaitForSeconds(2f);
 
-        StartCoroutine(InvincibilityCo());
- 
+        Color color = Color.black;
+        StartCoroutine(FlashCo(color, 4f));
+
+        isDead = false;
+
+
     }
 
     IEnumerator FlashCo(Color color, float duration)
@@ -143,12 +156,13 @@ public class PlayerStats : LifeEntity
         while(time < duration)
         {
             time += Time.deltaTime;
-            Color col = Color.Lerp(orgCol, color, Mathf.PingPong(time, .5f));
+            Color col = Color.Lerp(orgCol, color, Mathf.PingPong(time, .2f));
 
-            spriteRenderer.color = col;
+            spriteRenderer.material.color = col;
             yield return null;
             
         }
+        spriteRenderer.material.color = orgCol;
     }
 
     public bool UseBomb() // Add Ui delegate

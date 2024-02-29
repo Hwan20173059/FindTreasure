@@ -34,6 +34,9 @@ public class PlayerStats : LifeEntity
     [Header("Effect")]
     public ParticleSystem resurrectionEffect;
 
+    [Header("Hit")]
+    public AudioClip hitSound;
+
     private void Awake()
     {
         OnDeathEvent += Death;
@@ -70,6 +73,7 @@ public class PlayerStats : LifeEntity
                 playerController._rigidbody.AddForce(hitDir * 50f, ForceMode2D.Impulse);
                 //test
 
+                SoundManager.Instance.PlayClip(hitSound);
                 base.TakeHit(damage, hitDir);
             }
         }

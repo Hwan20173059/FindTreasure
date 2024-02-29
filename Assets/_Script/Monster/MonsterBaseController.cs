@@ -129,6 +129,7 @@ public class MonsterBaseController : MonoBehaviour
                 DamageToPlayer(collision.gameObject);
         }
     }
+
     // 플레이어에게 데미지
     public virtual void DamageToPlayer(GameObject player = null, GameObject monster = null, bool haveRange = false)
     {
@@ -159,19 +160,25 @@ public class MonsterBaseController : MonoBehaviour
             }
         }
     }
+
     // 데미지 받기
     public void TakeHit(float damage, Vector2 hitDir)
     {
-        TakeDamage(damage);
-        // 넉백 로직
-        StartCoroutine(KnockbackCoroutine(hitDir));
+        if(State != MonsterState.Die)
+        {
+            TakeDamage(damage);
+            // 넉백 로직
+            StartCoroutine(KnockbackCoroutine(hitDir));
+        }
     }
+
     private void TakeDamage(float damage)
     {
         _stat.Hp -= (int)damage;
         if (_stat.Hp <= 0)
             State = MonsterState.Die;
     }
+
     private IEnumerator KnockbackCoroutine(Vector2 hitDir)
     {
         // x 방향으로만 넉백을 적용하기 위해 hitDir의 y성분을 0으로
@@ -188,6 +195,7 @@ public class MonsterBaseController : MonoBehaviour
         // 세 번째 넉백
         transform.position += knockbackDir * 0.3f;
     }
+
     public void ShotToPlayer(GameObject player = null, GameObject monster = null, bool haveRange = false)
     {
         PlayerStats _ps;
@@ -228,6 +236,7 @@ public class MonsterBaseController : MonoBehaviour
             State = MonsterState.IdleStop;
         }
     }
+
     // 투사체 발사
     public virtual void ShotProjectile()
     {
@@ -238,6 +247,7 @@ public class MonsterBaseController : MonoBehaviour
         GameObject projectile = Instantiate(ProjectilePrefab, spawnPosition, Quaternion.identity);
         projectile.GetComponent<MonsterProjectile>().damage = _stat.AttackDamage;
     }
+
     protected virtual void UpdateTracking()
     {
         //Debug.Log("Monster UpdateTracking");
@@ -280,6 +290,7 @@ public class MonsterBaseController : MonoBehaviour
                 transform.position = nextPosition;
         }
     }
+
     protected virtual void UpdateIdle()
     {
         //Debug.Log("Monster UpdateIdle");
@@ -312,6 +323,7 @@ public class MonsterBaseController : MonoBehaviour
         float clampedX = Mathf.Clamp(transform.position.x, _stat.MinX, _stat.MaxX);
         transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
     }
+
     private void DropPotion()
     {
         float dropChance = Random.Range(0, 100);

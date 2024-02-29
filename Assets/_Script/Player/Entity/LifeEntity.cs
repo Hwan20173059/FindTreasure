@@ -25,6 +25,12 @@ public class LifeEntity : MonoBehaviour,IDamageable
         if (curHealth <= 0 && !isDead)
             Die();
     }
+    public virtual void Heal(float healPoint)
+    {
+        curHealth += healPoint;
+        if (curHealth > health)
+            curHealth = health;
+    }
 
     public virtual void Die()
     {

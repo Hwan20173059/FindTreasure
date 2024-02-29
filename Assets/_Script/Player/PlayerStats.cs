@@ -122,4 +122,9 @@ public class PlayerStats : LifeEntity
     {
         return goldenKeyAmount;
     }
+
+    public override void Heal(float healPoint)
+    {
+        base.Heal(healPoint);
+    }
 }

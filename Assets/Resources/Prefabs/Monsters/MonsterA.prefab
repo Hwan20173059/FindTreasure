@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12d915550d014c646ba21af5594d048e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ProjectilePrefab: {fileID: 0}
+  PotionPrefab: {fileID: 6402566761950651428, guid: 2769739ce86a685498025d417b026a50, type: 3}
+  dropPercentage: 70
   _destPos: {x: 0, y: 0, z: 0}
   _state: 2
   _lockTarget: {fileID: 0}

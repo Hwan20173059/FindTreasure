@@ -6,6 +6,8 @@ using UnityEngine;
 public class MonsterBaseController : MonoBehaviour
 {
     public GameObject ProjectilePrefab; // 에디터에서 설정
+    public GameObject PotionPrefab; // 에디터에서 설정
+    public float dropPercentage = 70f;
 
     public enum MonsterState
     {
@@ -45,6 +47,7 @@ public class MonsterBaseController : MonoBehaviour
             {
                 case MonsterState.Die:
                     anim.CrossFade("DIE", 0.1f);
+                    DropPotion();
                     break;
                 case MonsterState.IdleStop:
                     anim.CrossFade("WAIT", 0.1f);
@@ -114,6 +117,7 @@ public class MonsterBaseController : MonoBehaviour
     protected virtual void UpdateDie()
     {
         Debug.Log("Monster Dead");
+        
     }
 
     // 접촉 시 플레이어에게 데미지
@@ -307,5 +311,20 @@ public class MonsterBaseController : MonoBehaviour
         // 몬스터가 범위를 벗어나지 않도록 조정
         float clampedX = Mathf.Clamp(transform.position.x, _stat.MinX, _stat.MaxX);
         transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
+    }
+    private void DropPotion()
+    {
+        float dropChance = Random.Range(0, 100);
+        if (dropChance <= dropPercentage)
+        {
+            try
+            {
+                Instantiate(PotionPrefab, transform.position, Quaternion.identity);
+            }
+            catch
+            {
+                Debug.Log("MonsterController에서 포션 프리팹 지정 안함");
+            }
+        }
     }
 }

@@ -234,7 +234,8 @@ MonoBehaviour:
   rewardsObject: {fileID: 495621595294582366}
   chestAnim: {fileID: 7150881710212493796}
   keyAnim: {fileID: 6657829582508972127}
-  clip: {fileID: 8300000, guid: d663f127334725a47a952d28c8c7f119, type: 3}
+  chestClip: {fileID: 8300000, guid: d663f127334725a47a952d28c8c7f119, type: 3}
+  keyClip: {fileID: 8300000, guid: bc7eacbc09d97984abcaa6c31fabb750, type: 3}
 --- !u!1 &2659009648769737945
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,7 +551,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 335a60e0a0e88a34095efce9fb69630b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

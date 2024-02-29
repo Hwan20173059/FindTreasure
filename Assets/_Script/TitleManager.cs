@@ -11,14 +11,30 @@ public class TitleManager : MonoBehaviour
     public GameObject player;
     public GameObject backGround;
 
+    public GameObject coinSound;
+    public GameObject titleSound;
+
     public void GameStart()
     {
+        PlayCoinsound();
+        Invoke("PlayTitleSound", 1f);
+
         backGround.SetActive(false);
         BackGroundAnim();
         Invoke("PlayerAnim", 4.5f);
         Invoke("FadeInAnim", 8f);
         Invoke("SceneChange", 9.5f);
 
+    }
+
+    public void PlayCoinsound()
+    {
+        coinSound.SetActive(true);
+    }
+
+    public void PlayTitleSound()
+    {
+        titleSound.SetActive(true);
     }
 
     public void BackGroundAnim()

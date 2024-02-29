@@ -13,9 +13,15 @@ public struct dropItemsStruct
 
 public class MonsterBaseController : MonoBehaviour
 {
+    [Header("Projectile")]
     public GameObject ProjectilePrefab; // 에디터에서 설정
 
+    [Header("Drop Item List")]
     public dropItemsStruct[] dropItems; // 에디터에서 설정
+
+    [Header("Sound")]
+    public AudioClip dieSound;
+    public AudioClip hitSound;
 
     public enum MonsterState
     {
@@ -26,6 +32,7 @@ public class MonsterBaseController : MonoBehaviour
         Attack,
     }
 
+    [Header("Debug")]
     [SerializeField]
     protected Vector3 _destPos;
 
@@ -291,6 +298,7 @@ public class MonsterBaseController : MonoBehaviour
     {
         if(State != MonsterState.Die)
         {
+            // 데미지 적용 및 스테이트 변경, 사운드 적용
             TakeDamage(damage);
             // 넉백 로직
             StartCoroutine(KnockbackCoroutine(hitDir));
@@ -304,7 +312,17 @@ public class MonsterBaseController : MonoBehaviour
     {
         _stat.Hp -= (int)damage;
         if (_stat.Hp <= 0)
+        {
             State = MonsterState.Die;
+            // 피격사운드 : DIE
+            SoundManager.Instance.PlayClip(dieSound);
+        }
+        else
+        {
+            // 피격사운드 : HIT
+            SoundManager.Instance.PlayClip(hitSound);
+
+        }
     }
     // 넉백 로직
     private IEnumerator KnockbackCoroutine(Vector2 hitDir)

@@ -10,6 +10,10 @@ using UnityEngine;
 
 public class PlayerStats : LifeEntity
 {
+
+    [Header("Componenets")]
+    SpriteRenderer spriteRenderer;
+
     PlayerAnimation playerAnimation;
     PlayerController playerController;
 
@@ -19,6 +23,10 @@ public class PlayerStats : LifeEntity
     public int lifeCount;
     public int bombAmount;
     public int goldenKeyAmount;
+
+    float beDamagedTime;
+    [SerializeField] bool beDamaged;
+
 
     [SerializeField] float invincibilityRate;
     [SerializeField] bool onInvincibility;
@@ -32,14 +40,27 @@ public class PlayerStats : LifeEntity
     {
         base.Start();
         playerController = GetComponent<PlayerController>();
+        spriteRenderer = playerController.mainSpriteTransform.GetComponent<SpriteRenderer>();
         playerAnimation = playerController.playerAnimation;
 
     }
 
+    private void Update()
+    {
+        if(Time.time > beDamagedTime)
+        {
+            beDamaged = false;
+        }
+    }
+
+
+
     public override void TakeHit(float damage, Vector2 hitDir)
     {
-        if (!onInvincibility)
+        if (!onInvincibility && !beDamaged)
         {
+            beDamagedTime = Time.time + 1f;
+            beDamaged = true;
             //test
             playerController._rigidbody.AddForce(hitDir * 50f, ForceMode2D.Impulse);
             //test
@@ -75,22 +96,16 @@ public class PlayerStats : LifeEntity
            
             //Resurrection Animation,
             isDead = true;
-            StartCoroutine(InvincibilityCo());
+            StartCoroutine(ResurrectionCo());
         }
     }
 
 
     IEnumerator InvincibilityCo()
     {
-        yield return new WaitForSeconds(1f);
-        playerAnimation.animator.SetBool("OnDeath", false);
-        transform.position = transform.position + new Vector3(0, 2);
-        //init
-        curHealth = health;
-        isDead = false;
-        //init
         float duration = invincibilityRate;
         onInvincibility = true;
+
         // Invincibillity effect,
         while (duration >= 0)
         {
@@ -101,7 +116,40 @@ public class PlayerStats : LifeEntity
         onInvincibility = false;
     }
 
+    IEnumerator ResurrectionCo()
+    {
+        yield return new WaitForSeconds(1f);
+        playerAnimation.animator.SetBool("OnDeath", false);
 
+        //Resurrection
+        StartCoroutine(FlashCo(Color.yellow, 2f));
+        //init
+        curHealth = health;
+        isDead = false;
+        //init
+        playerAnimation.animator.SetTrigger("OnResurrection");
+
+        yield return new WaitForSeconds(2f);
+
+        StartCoroutine(InvincibilityCo());
+ 
+    }
+
+    IEnumerator FlashCo(Color color, float duration)
+    {
+        Color orgCol = Color.white;
+
+        float time = 0;
+        while(time < duration)
+        {
+            time += Time.deltaTime;
+            Color col = Color.Lerp(orgCol, color, Mathf.PingPong(time, .5f));
+
+            spriteRenderer.color = col;
+            yield return null;
+            
+        }
+    }
 
     public bool UseBomb() // Add Ui delegate
     {

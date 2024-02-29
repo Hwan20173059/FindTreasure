@@ -31,10 +31,9 @@ public class ChestInteract : MonoBehaviour
 
     public void SetChestState(ChestState _state)
     {
-        if (state != _state)
+        if (state < _state)
         {
             state = _state;
-
             switch (_state)
             {
                 case ChestState.Open:

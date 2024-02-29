@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem runEffect;
 
     [Header("Camera")]
-    PlayerCamera playercamera;
+    public PlayerCamera playercamera;
 
 
     [Header("Sound")]
@@ -171,13 +171,13 @@ public class PlayerController : MonoBehaviour
             curSoundSource = SoundManager.Instance.CurSoundSource();
 
         }
-        else
+        if(context.phase == InputActionPhase.Canceled)
         {
             onMove = false;
             runEffect.Stop();
             playerAnimation.animator.SetBool("IsRun", false);
 
-            if (curSoundSource.activeSelf)
+            if (curSoundSource.activeSelf && curSoundSource != null)
             {
                 curSoundSource.GetComponent<SoundSource>().Disable();
             }

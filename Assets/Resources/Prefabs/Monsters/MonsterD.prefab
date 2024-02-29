@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 4826732134101487419}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6931147548043416899
 MonoBehaviour:
@@ -70,8 +70,8 @@ MonoBehaviour:
   _hp: 50
   _maxHp: 50
   _attackDamage: 20
-  _attackActionRange: 1.8
-  _realAttackRange: 2
+  _attackActionRange: 2.5
+  _realAttackRange: 3
   _attackDelay: 5
   _defense: 0
   _moveSpeed: 0.6

@@ -15,14 +15,14 @@ MonoBehaviour:
   stageSpawnInfos:
   - stageName: Stage4
     spawnInfos:
-    - monsterType: MonsterA
+    - monsterType: MonsterC
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 113.5, y: 12.1}
       tempMinX: 2
       tempMaxX: 2
-    - monsterType: MonsterA
+    - monsterType: MonsterD
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0

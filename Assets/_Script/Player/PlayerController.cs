@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     Pooling pooling;
 
     [Header("Player State")]
-    [SerializeField] float playerSpeed;
+    public float playerSpeed;
     [SerializeField] float playerClimbingSpeed;
     [SerializeField] float playerJumpPower;
     [SerializeField] float gravityScale;
@@ -56,9 +56,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("Effect")]
     public Transform hitPoint;
+    public ParticleSystem runEffect;
 
     [Header("Camera")]
-    public PlayerCamera playercamera;
+    PlayerCamera playercamera;
 
 
     [Header("Sound")]
@@ -102,8 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!playerStats.isDead)
         {
-            if (!onAttack)
-            {
+           
                 if (onMove) { _rigidbody.position += dir * playerSpeed * Time.deltaTime; }
                 if (isClimbing)
                 {
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
                 {
                     _rigidbody.AddForce(Vector2.up * addJumbPower, ForceMode2D.Force);
                 }
-            }
+            
 
         }
 
@@ -165,6 +165,7 @@ public class PlayerController : MonoBehaviour
             dir = context.ReadValue<Vector2>();
             playerAnimation.CallOnMoveEvent(dir.x);
             playerAnimation.animator.SetBool("IsRun", true);
+            runEffect.Play();
             onMove = true;
             SoundManager.Instance.PlayClip(runSound);
             curSoundSource = SoundManager.Instance.CurSoundSource();
@@ -173,8 +174,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             onMove = false;
+            runEffect.Stop();
             playerAnimation.animator.SetBool("IsRun", false);
-            curSoundSource.GetComponent<SoundSource>().Disable();
+
+            if (curSoundSource.activeSelf)
+            {
+                curSoundSource.GetComponent<SoundSource>().Disable();
+            }
+
+           
         }
 
     }

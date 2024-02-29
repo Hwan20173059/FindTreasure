@@ -14,7 +14,7 @@ public enum ChestState
 
 public class ChestInteract : MonoBehaviour
 {
-    private ChestState state;
+    public ChestState state { get; private set; }
 
     [Header("Layer")]
     [SerializeField] private LayerMask layerMask;
@@ -28,6 +28,7 @@ public class ChestInteract : MonoBehaviour
     {
         state = ChestState.Close;
     }
+
 
     public void SetChestState(ChestState _state)
     {

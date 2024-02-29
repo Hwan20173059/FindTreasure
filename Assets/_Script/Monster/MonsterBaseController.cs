@@ -382,7 +382,28 @@ public class MonsterBaseController : MonoBehaviour
             float dropChance = Random.Range(0, 100);
             if (dropChance <= dropItem.dropPercentage)
             {
-                Instantiate(dropItem.DropItemsPrefab, transform.position, Quaternion.identity);
+                // 위치를 랜덤하게 조정
+                Vector3 randomPosition = new Vector3(
+                    Random.Range(-0.7f, 0.7f), // X 방향으로 -0.1f ~ 0.1f 사이
+                    Random.Range(0.0f, 2f),  // Y 방향으로 0.0f ~ 0.2f 사이
+                    0                          // Z 축은 변경하지 않음
+                );
+                // 아이템을 랜덤한 위치에 생성
+                GameObject droppedItem = Instantiate(dropItem.DropItemsPrefab, transform.position + randomPosition, Quaternion.identity);
+
+                // Rigidbody2D 컴포넌트가 있는지 확인하고, 없으면 추가(진짜 '만약'을 위한 구문)
+                Rigidbody2D rb = droppedItem.GetComponent<Rigidbody2D>();
+                if (rb == null)
+                {
+                    rb = droppedItem.AddComponent<Rigidbody2D>();
+                }
+
+                // 아이템이 kinematic이 아니도록 설정하여 물리적으로 움직일 수 있게
+                rb.isKinematic = false;
+
+                // 랜덤한 방향으로 약간의 속도 부여
+                Vector2 randomVelocity = new Vector2(Random.Range(-1f, 1f), Random.Range(1f, 2f));
+                rb.velocity = randomVelocity * 3f; // 속도 조정은 이 값을 변경
             }
         }
     }

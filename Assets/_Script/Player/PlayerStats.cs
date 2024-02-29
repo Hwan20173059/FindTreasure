@@ -24,6 +24,10 @@ public class PlayerStats : LifeEntity
     public int bombAmount;
     public int goldenKeyAmount;
 
+    float beDamagedTime;
+    [SerializeField] bool beDamaged;
+
+
     [SerializeField] float invincibilityRate;
     [SerializeField] bool onInvincibility;
    
@@ -41,10 +45,22 @@ public class PlayerStats : LifeEntity
 
     }
 
+    private void Update()
+    {
+        if(Time.time > beDamagedTime)
+        {
+            beDamaged = false;
+        }
+    }
+
+
+
     public override void TakeHit(float damage, Vector2 hitDir)
     {
-        if (!onInvincibility)
+        if (!onInvincibility && !beDamaged)
         {
+            beDamagedTime = Time.time + 1f;
+            beDamaged = true;
             //test
             playerController._rigidbody.AddForce(hitDir * 50f, ForceMode2D.Impulse);
             //test

@@ -102,23 +102,23 @@ public class PlayerController : MonoBehaviour
     {
         if (!playerStats.isDead)
         {
-           
-                if (onMove) { _rigidbody.position += dir * playerSpeed * Time.deltaTime; }
-                if (isClimbing)
-                {
-                    _rigidbody.gravityScale = 0f;
-                    _rigidbody.position += climbingDir * playerClimbingSpeed * Time.deltaTime;
-                }
-                else
-                {
-                    _rigidbody.gravityScale = gravityScale;
-                }
 
-                if (onJump)
-                {
-                    _rigidbody.AddForce(Vector2.up * addJumbPower, ForceMode2D.Force);
-                }
-            
+            if (onMove) { _rigidbody.position += dir * playerSpeed * Time.deltaTime; }
+            if (isClimbing)
+            {
+                _rigidbody.gravityScale = 0f;
+                _rigidbody.position += climbingDir * playerClimbingSpeed * Time.deltaTime;
+            }
+            else
+            {
+                _rigidbody.gravityScale = gravityScale;
+            }
+
+            if (onJump)
+            {
+                _rigidbody.AddForce(Vector2.up * addJumbPower, ForceMode2D.Force);
+            }
+
 
         }
 
@@ -128,10 +128,10 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit2D hitL = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 0), Vector2.down, raycastDistance, groundLayer);
         RaycastHit2D hitR = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0), Vector2.down, raycastDistance, groundLayer);
-       
+
         Debug.DrawRay(transform.position + new Vector3(-0.3f, 0), Vector2.down, Color.red);
         Debug.DrawRay(transform.position + new Vector3(0.3f, 0), Vector2.down, Color.red);
-   
+
 
         //Debug.Log((transform.position.y - hit.point.y));
         if ((hitL.collider != null && (transform.position.y - hitL.point.y) > 0f) || (hitR.collider != null && (transform.position.y - hitR.point.y) > 0f))
@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
             curSoundSource = SoundManager.Instance.CurSoundSource();
 
         }
-        if(context.phase == InputActionPhase.Canceled)
+        if (context.phase == InputActionPhase.Canceled)
         {
             onMove = false;
             runEffect.Stop();
@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour
                 curSoundSource.GetComponent<SoundSource>().Disable();
             }
 
-           
+
         }
 
     }
@@ -224,7 +224,7 @@ public class PlayerController : MonoBehaviour
         {
             if (context.phase == InputActionPhase.Performed)
             {
-                onJump = true;  
+                onJump = true;
                 SoundManager.Instance.PlayClip(jumpSound);
                 _rigidbody.AddForce(Vector2.up * playerJumpPower, ForceMode2D.Impulse);
             }
@@ -278,8 +278,12 @@ public class PlayerController : MonoBehaviour
 
         if (collision.CompareTag("GoldenKey"))
         {
-            collision.GetComponentInParent<ChestInteract>().SetChestState(ChestState.Empty);
-            playerStats.AddGoldenKey();
+            ChestInteract chest = collision.GetComponentInParent<ChestInteract>();
+            if (chest.state != ChestState.Empty)
+            {
+                collision.GetComponentInParent<ChestInteract>().SetChestState(ChestState.Empty);
+                playerStats.AddGoldenKey();
+            }
         }
     }
 
@@ -302,10 +306,6 @@ public class PlayerController : MonoBehaviour
                 GameManager.instance.SetPlayerState(PlayerState.Pause);
                 // 자동 이동
                 StartCoroutine(PlayerMoveToDoor(collision));
-            }
-            else
-            {
-                Debug.LogWarning("열쇠 없음 처리");
             }
         }
     }

@@ -14,7 +14,7 @@ public enum ChestState
 
 public class ChestInteract : MonoBehaviour
 {
-    private ChestState state;
+    public ChestState state { get; private set; }
 
     [Header("Layer")]
     [SerializeField] private LayerMask layerMask;
@@ -29,12 +29,12 @@ public class ChestInteract : MonoBehaviour
         state = ChestState.Close;
     }
 
+
     public void SetChestState(ChestState _state)
     {
-        if (state != _state)
+        if (state < _state)
         {
             state = _state;
-
             switch (_state)
             {
                 case ChestState.Open:
@@ -65,9 +65,12 @@ public class ChestInteract : MonoBehaviour
 
     IEnumerator MoveKeyObject()
     {
+        // !HACK : 카메라 좌표 가져오는것 개선 필요
+        Vector3 cameraPosition = Camera.main.transform.position;
+
         SoundManager.Instance.PlayClip(keyClip);
         // 좀 더 이쁘게 움직일수 있다면 좋을듯.
-        Vector3 destination = new Vector3(140, 70, 0);
+        Vector3 destination = cameraPosition + new Vector3(-5.2f, 5, 0);
         float moveSpeed = 3f;
         SpriteRenderer keyObject = rewardsObject.GetComponentInChildren<SpriteRenderer>();
 

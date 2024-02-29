@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
+
 public class BombController : MonoBehaviour
 {
+
     [Header("Components")]
     Animator animator;
     public CircleCollider2D circleCollider;
@@ -16,6 +19,7 @@ public class BombController : MonoBehaviour
 
     [Header("Bomb State")]
     float bombIdel_AnimationTime;
+
 
     [Header("Sound")]
     public AudioClip clip;
@@ -47,7 +51,9 @@ public class BombController : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(BombCo());
+       
+            StartCoroutine(BombCo());
+        
     }
 
 

@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public PlayerStats playerStats;
 
     public Text lifeCount;
+    public Text coinCount;
     public Text bombCount;
     public Text keyCount;
 
@@ -16,8 +17,10 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         lifeCount.text = $"<i>x {playerStats.lifeCount}</i>";
+        coinCount.text = $"x {playerStats.coin}";
         bombCount.text = $"x {playerStats.bombAmount}";
         keyCount.text = $"{playerStats.goldenKeyAmount} / 3";
+
 
         hpBar.value = playerStats.curHealth / playerStats.health;
     }

@@ -24,6 +24,8 @@ public class PlayerStats : LifeEntity
     public int bombAmount;
     public int goldenKeyAmount;
 
+    public int coin = 0;
+
     float beDamagedTime;
     [SerializeField] bool beDamaged;
 
@@ -37,6 +39,7 @@ public class PlayerStats : LifeEntity
     [Header("Hit")]
     public AudioClip hitSound;
     public AudioClip healSound;
+    public AudioClip coinSound;
 
     private void Awake()
     {

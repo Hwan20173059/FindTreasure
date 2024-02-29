@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     bool isClimbing;
     public Transform poolItemPos;
     public Transform dropItemPos;
-    bool isDamage = false;
 
     [Header("Player Move")]
     HashSet<GameObject> ladders = new HashSet<GameObject>();
@@ -291,12 +290,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Thorns"))
         {
-            if (isDamage == false)
-            {
-                playerStats.TakeDamage(10);
-                isDamage = true;
-                Invoke("isDamaged", 1);
-            }
+            playerStats.TakeHit(10, dir);
         }
 
         if (collision.CompareTag("Door"))
@@ -314,11 +308,6 @@ public class PlayerController : MonoBehaviour
                 Debug.LogWarning("열쇠 없음 처리");
             }
         }
-    }
-
-    public void isDamaged()
-    {
-        isDamage = false;
     }
 
 

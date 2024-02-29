@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[System.Serializable]
+public struct dropItemsStruct
+{
+    public GameObject DropItemsPrefab;
+    public float dropPercentage;
+}
+
 public class MonsterBaseController : MonoBehaviour
 {
     public GameObject ProjectilePrefab; // 에디터에서 설정
-    public GameObject PotionPrefab; // 에디터에서 설정
-    public float dropPercentage = 70f;
+
+
+    public dropItemsStruct[] dropItems; // 에디터에서 설정
 
     public enum MonsterState
     {
@@ -332,16 +340,12 @@ public class MonsterBaseController : MonoBehaviour
 
     private void DropPotion()
     {
-        float dropChance = Random.Range(0, 100);
-        if (dropChance <= dropPercentage)
+        foreach(dropItemsStruct dropItem in dropItems)
         {
-            try
+            float dropChance = Random.Range(0, 100);
+            if (dropChance <= dropItem.dropPercentage)
             {
-                Instantiate(PotionPrefab, transform.position, Quaternion.identity);
-            }
-            catch
-            {
-                Debug.Log("MonsterController에서 포션 프리팹 지정 안함");
+                Instantiate(dropItem.DropItemsPrefab, transform.position, Quaternion.identity);
             }
         }
     }

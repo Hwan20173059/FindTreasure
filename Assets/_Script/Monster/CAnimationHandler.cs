@@ -29,13 +29,13 @@ public class CAnimationHandler : MonoBehaviour
 
     public void AtAttackMelee()
     {
-        Debug.Log("범위 내 플레이어에 데미지");
+        //Debug.Log("범위 내 플레이어에 데미지");
         m_MonsterController.DamageToPlayer(haveRange: true);
 
     }
     public void AtAttackRange()
     {
-        Debug.Log("플레이어에 투사체 발사");
+        //Debug.Log("플레이어에 투사체 발사");
         m_MonsterController.ShotProjectile();
 
     }
@@ -46,7 +46,7 @@ public class CAnimationHandler : MonoBehaviour
     }
     public void AtEndDie()
     {
-        Debug.Log("몬스터 파괴");
+        //Debug.Log("몬스터 파괴");
         m_MonsterController.DestroyObject();
     }
 

@@ -5199,7 +5199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dfad6b945296ca4fb6a2e44486febad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 50
   curHealth: 0
   isDead: 0
   attackDamage: 0
@@ -10390,7 +10390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4269813835146044208
 Transform:
   m_ObjectHideFlags: 0

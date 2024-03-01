@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour
     [Header("Interact")]
     [SerializeField] float interactDistance = 0.5f;
 
-
     [Header("Layer")]
     public LayerMask groundLayer;
     [SerializeField] private LayerMask passthrough;
@@ -59,7 +58,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Camera")]
     public PlayerCamera playercamera;
-
 
     [Header("Sound")]
     public AudioClip jumpSound;
@@ -76,6 +74,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         pooling = GetComponent<Pooling>();
         pooling.CreatePool(poolItemPos);
+        playercamera = Camera.main.GetComponent<PlayerCamera>();
     }
 
     private void Update()

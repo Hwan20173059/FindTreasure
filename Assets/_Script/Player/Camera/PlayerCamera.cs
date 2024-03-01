@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    public Transform player;
+    Transform player;
     public float cameraSpeed;
 
     public int currentStage;
@@ -19,6 +19,7 @@ public class PlayerCamera : MonoBehaviour
     {
         height = Camera.main.orthographicSize;
         width = height * Screen.width / Screen.height;
+        player = GameManager.instance.player.transform;
     }
 
     private void LateUpdate()

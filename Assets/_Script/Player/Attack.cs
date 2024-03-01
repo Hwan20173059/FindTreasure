@@ -6,7 +6,6 @@ public class Attack : MonoBehaviour
 {
     public LayerMask monsterMask;
     float attackDamage = 5f;
-    float knockbackPower = 5f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

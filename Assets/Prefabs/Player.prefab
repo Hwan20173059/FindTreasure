@@ -4931,7 +4931,7 @@ Transform:
   - {fileID: 2252242290026208061}
   - {fileID: 3918672614577551483}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6721873082806423224
 BoxCollider2D:
@@ -5206,11 +5206,14 @@ MonoBehaviour:
   lifeCount: 5
   bombAmount: 10
   goldenKeyAmount: 0
+  coin: 0
   beDamaged: 0
   invincibilityRate: 7
   onInvincibility: 0
   resurrectionEffect: {fileID: 7473358060135773271}
   hitSound: {fileID: 8300000, guid: 5c64557d7e70965478ee376ed0365f45, type: 3}
+  healSound: {fileID: 8300000, guid: efb7ac8a32387444fae94701b2882e83, type: 3}
+  coinSound: {fileID: 8300000, guid: 5620992a762e00b4299bd18af534099a, type: 3}
 --- !u!114 &4627755680071924025
 MonoBehaviour:
   m_ObjectHideFlags: 0

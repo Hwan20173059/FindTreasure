@@ -8,12 +8,14 @@ using UnityEngine;
 //LifeCount
 //bombAmount
 
+
+
+
 public class PlayerStats : LifeEntity
 {
 
     [Header("Componenets")]
     SpriteRenderer spriteRenderer;
-
     PlayerAnimation playerAnimation;
     PlayerController playerController;
 
@@ -26,9 +28,7 @@ public class PlayerStats : LifeEntity
 
     public int coin = 0;
 
-    float beDamagedTime;
-    [SerializeField] bool beDamaged;
-
+  
 
     [SerializeField] float invincibilityRate;
     [SerializeField] bool onInvincibility;
@@ -40,6 +40,11 @@ public class PlayerStats : LifeEntity
     public AudioClip hitSound;
     public AudioClip healSound;
     public AudioClip coinSound;
+    float beDamagedTime;
+    bool beDamaged;
+
+    [Header("UpgradeState")]
+    public Dictionary<int, UpgradeStats_Base> upgradeStateDictionary = new Dictionary<int, UpgradeStats_Base>();
 
     private void Awake()
     {
@@ -198,4 +203,8 @@ public class PlayerStats : LifeEntity
         SoundManager.Instance.PlayClip(healSound);
         base.Heal(healPoint);
     }
+
+
+
+
 }

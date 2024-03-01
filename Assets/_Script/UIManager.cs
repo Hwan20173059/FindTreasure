@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public PlayerStats playerStats;
+    PlayerStats playerStats;
 
     public Text lifeCount;
     public Text coinCount;
@@ -13,6 +13,10 @@ public class UIManager : MonoBehaviour
     public Text keyCount;
 
     public Slider hpBar;
+    private void Awake()
+    {
+        playerStats = GameManager.instance.player.GetComponent<PlayerController>().playerStats;
+    }
 
     private void Update()
     {

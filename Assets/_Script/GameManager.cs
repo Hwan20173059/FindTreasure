@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public PlayerState state;
-
+    public GameObject player;
 
     private void Awake()
     {
@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
         SetPlayerState(PlayerState.Start);
         // 데이터가 많아지면 매니저를 따로 빼기.
         ReadTextData();
+        player = Instantiate(player, Vector3.zero, Quaternion.identity);
     }
 
     public void SetPlayerState(PlayerState _state)

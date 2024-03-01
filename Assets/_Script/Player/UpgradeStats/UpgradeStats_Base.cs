@@ -20,28 +20,38 @@ public enum UpgradeIncreseType
 
 public class UpgradeStats_Base : MonoBehaviour
 {
-
+    [Header("Components")]
     PlayerStats playerStats;
+    Button button;
+    Image image;
+
     public Condition condition;
     public int id;
     public string upgradeStateName;
-    [SerializeField] UpgradeStateType upgradeStateType;
-    [SerializeField] UpgradeIncreseType upgradeIncreseType;
     [SerializeField] float upgradeAmount;
-
     [SerializeField] int maxCount;
     int curCount;
-    bool isMaxCount;
-    bool onActive;
+    
     [SerializeField] int cost;
 
-    [Header("Interaction")]
-    Button button;
+    [Header("State")]
+    bool onActive;
+    bool isMaxCount;
+    [SerializeField] UpgradeStateType upgradeStateType;
+    [SerializeField] UpgradeIncreseType upgradeIncreseType;
+
+    public GameObject upgradeCountContain;
+    public GameObject upgardeBar;
+    GameObject[] upgradeBars;
+
 
     private void Awake()
     {
         button = GetComponent<Button>();
+        image = GetComponent<Image>();
         button.onClick.AddListener(OnClickEvent);
+        upgradeBars = new GameObject[maxCount];
+        CreateUpgradeBar();
     }
 
     private void Start()
@@ -49,15 +59,32 @@ public class UpgradeStats_Base : MonoBehaviour
         playerStats = GameManager.instance.player.GetComponent<PlayerController>().playerStats;
     }
 
-    void UpgradeState() // Check coin amount in playerState.
+
+    void CreateUpgradeBar()
     {
-        if (!isMaxCount)
+        for (int i = 0; i < maxCount; i++)
+        {
+           GameObject bar = Instantiate(upgardeBar, upgradeCountContain.transform);
+            bar.SetActive(false);
+            upgradeBars[i] = bar;
+        }
+    }
+
+    void UpgradeState() 
+    {
+        if (!isMaxCount && playerStats.coin >= cost)
         {
             curCount++;
+            upgradeBars[curCount - 1].SetActive(true);
+            playerStats.coin -= cost;
+            cost = cost + cost / 2;
+
             if (curCount == maxCount)
             {
                 isMaxCount = true;
+                return;
             }
+
         }
        
     }
@@ -70,6 +97,7 @@ public class UpgradeStats_Base : MonoBehaviour
             if (!onActive)
             {
                 playerStats.upgradeStateDictionary.Add(id, this);
+                image.color = Color.white;
                 onActive = true;
             }
             Debug.Log(playerStats.upgradeStateDictionary[id].upgradeStateName);

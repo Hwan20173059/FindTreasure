@@ -250,3 +250,4 @@ MonoBehaviour:
   upgradeIncreseType: 1
   upgradeCountContain: {fileID: 3615421157547413555}
   upgardeBar: {fileID: 4223786805665762652, guid: e073944ef234b4ef1a71a6e341f3a0ea, type: 3}
+  lineList: []

@@ -5,11 +5,11 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     public LayerMask monsterMask;
-    float attackDamage = 5f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         int layerValue = 1 << collision.gameObject.layer;
+        float attackDamage = GameManager.instance.player.GetComponent<PlayerController>().playerStats.attackDamage;
 
         if ( monsterMask.value == layerValue)
         {

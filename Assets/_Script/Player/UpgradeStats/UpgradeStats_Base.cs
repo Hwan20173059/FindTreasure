@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.EventSystems;
 
 
 public enum UpgradeStateType
 {
     AttackDamage,
     AttackSpeed,
+    MoveSpeed,
     Heath,
 }
 
@@ -18,7 +19,7 @@ public enum UpgradeIncreseType
     FixedValue
 }
 
-public class UpgradeStats_Base : MonoBehaviour
+public class UpgradeStats_Base : MousePointerEntity
 {
     [Header("Components")]
     PlayerStats playerStats;
@@ -28,21 +29,25 @@ public class UpgradeStats_Base : MonoBehaviour
     public Condition condition;
     public int id;
     public string upgradeStateName;
-    [SerializeField] float upgradeAmount;
-    [SerializeField] int maxCount;
-    int curCount;
+    public float upgradeAmount;
+    public int maxCount;
+    public int curCount;
     
     [SerializeField] int cost;
 
     [Header("State")]
     bool onActive;
     bool isMaxCount;
-    [SerializeField] UpgradeStateType upgradeStateType;
-    [SerializeField] UpgradeIncreseType upgradeIncreseType;
+    public UpgradeStateType upgradeStateType;
+    public UpgradeIncreseType upgradeIncreseType;
 
     public GameObject upgradeCountContain;
     public GameObject upgardeBar;
     GameObject[] upgradeBars;
+
+    [Header("UI")]
+    public List<UpgradeUi_Line> lineList = new List<UpgradeUi_Line>();
+    GameObject message;
 
 
     private void Awake()
@@ -65,8 +70,7 @@ public class UpgradeStats_Base : MonoBehaviour
         for (int i = 0; i < maxCount; i++)
         {
            GameObject bar = Instantiate(upgardeBar, upgradeCountContain.transform);
-            bar.SetActive(false);
-            upgradeBars[i] = bar;
+           upgradeBars[i] = bar;
         }
     }
 
@@ -75,9 +79,10 @@ public class UpgradeStats_Base : MonoBehaviour
         if (!isMaxCount && playerStats.coin >= cost)
         {
             curCount++;
-            upgradeBars[curCount - 1].SetActive(true);
+            upgradeBars[curCount - 1].GetComponent<Image>().color = Color.red;
             playerStats.coin -= cost;
             cost = cost + cost / 2;
+            playerStats.UpgradePlayerState(this);
 
             if (curCount == maxCount)
             {
@@ -89,6 +94,21 @@ public class UpgradeStats_Base : MonoBehaviour
        
     }
 
+    IEnumerator ActiveAndUpgrade()
+    {
+        playerStats.upgradeStateDictionary.Add(id, this);
+        image.color = Color.white;
+        onActive = true;
+
+        foreach (UpgradeUi_Line line in lineList)
+        {
+            line.Active();
+            yield return new WaitForSeconds(.5f);
+        }
+        yield return new WaitForSeconds(.1f);
+        UpgradeState();
+    }
+
 
     public void OnClickEvent()
     {
@@ -96,12 +116,14 @@ public class UpgradeStats_Base : MonoBehaviour
         {
             if (!onActive)
             {
-                playerStats.upgradeStateDictionary.Add(id, this);
-                image.color = Color.white;
-                onActive = true;
+                StartCoroutine(ActiveAndUpgrade());
             }
-            Debug.Log(playerStats.upgradeStateDictionary[id].upgradeStateName);
-            UpgradeState();
+            else
+            {
+                UpgradeState();
+            }
+
+            message.GetComponent<MessageUi>().WriteMessage(this);
         }
         else
         {
@@ -122,10 +144,10 @@ public class UpgradeStats_Base : MonoBehaviour
         int curSatisFaction = 0;
         for (int i = 0; i < condition.conditionID.Length; i++)
         {
-            if (playerStats.upgradeStateDictionary.ContainsKey(condition.conditionID[i]))
+            if (playerStats.upgradeStateDictionary.ContainsKey(condition.conditionID[i].id))
             {
-                UpgradeStats_Base curBase = playerStats.upgradeStateDictionary[condition.conditionID[i]];
-                if(curBase.curCount == condition.conditionCount[i])
+                UpgradeStats_Base curBase = playerStats.upgradeStateDictionary[condition.conditionID[i].id];
+                if(curBase.curCount >= condition.conditionCount[i])
                 {
                     curSatisFaction++;
                 }
@@ -143,11 +165,36 @@ public class UpgradeStats_Base : MonoBehaviour
     }
 
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            Debug.Log("DownGrade");
+        }
+    }
+
+    public override void OnPointerEnter(PointerEventData data)
+    {
+        Debug.Log("Enter");
+        Vector3 position;
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(transform as RectTransform, data.position, Camera.main, out position);
+
+        message = UIManager.Instance.pooling.GetPoolItem("Message");
+        message.GetComponent<MessageUi>().WriteMessage(this, position);
+        message.SetActive(true);
+    }
+
+    public override void OnPointerExit(PointerEventData data)
+    {
+        Debug.Log("Exit");
+        message.gameObject.SetActive(false);
+    }
+
 }
 
 [System.Serializable]
 public struct Condition // 
 {
-    public int[] conditionID;
+    public UpgradeStats_Base[] conditionID;
     public int[] conditionCount;
 }

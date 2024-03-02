@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
+
+    public Pooling pooling;
     PlayerStats playerStats;
 
     public Text lifeCount;
@@ -13,9 +16,21 @@ public class UIManager : MonoBehaviour
     public Text keyCount;
 
     public Slider hpBar;
+
     private void Awake()
     {
+        if(Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+
         playerStats = GameManager.instance.player.GetComponent<PlayerController>().playerStats;
+        pooling = GetComponent<Pooling>();
+        pooling.CreatePool(transform.Find("PoolingBox"));
     }
 
     private void Update()

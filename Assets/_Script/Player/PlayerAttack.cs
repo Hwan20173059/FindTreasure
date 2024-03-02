@@ -14,7 +14,7 @@ public class PlayerAttack : MonoBehaviour
 {
     PlayerController playerController;
     PlayerAnimation playerAnimation;
-    public PlayerStats playerStats;
+    PlayerStats playerStats;
     float time;
 
     float initPlayerSpeed;
@@ -28,7 +28,8 @@ public class PlayerAttack : MonoBehaviour
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
-        initPlayerSpeed = playerController.playerSpeed;
+        playerStats = playerController.playerStats;
+        initPlayerSpeed = playerStats.playerSpeed;
         playerAnimation = playerController.playerAnimation;
         playerStats = playerController.playerStats;
     }
@@ -38,7 +39,7 @@ public class PlayerAttack : MonoBehaviour
         if(Time.time >= time)
         {
             playerController.onAttack = false;
-            playerController.playerSpeed = initPlayerSpeed;
+            playerStats.playerSpeed = initPlayerSpeed;
         }
 
 
@@ -52,7 +53,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 playerController.onAttack = true;
                 time = Time.time + 0.4f;
-                playerController.playerSpeed = 3;
+                playerStats.playerSpeed = 3;
                 attackDelay = Time.time + 0.3f;
 
                 SoundManager.Instance.PlayClip(clip);

@@ -19,9 +19,7 @@ public class PlayerController : MonoBehaviour
     Pooling pooling;
 
     [Header("Player State")]
-    public float playerSpeed;
-    [SerializeField] float playerClimbingSpeed;
-    [SerializeField] float playerJumpPower;
+    
     [SerializeField] float gravityScale;
     public bool onMove;
     public bool onAttack;
@@ -102,11 +100,11 @@ public class PlayerController : MonoBehaviour
         if (!playerStats.isDead)
         {
 
-            if (onMove) { _rigidbody.position += dir * playerSpeed * Time.deltaTime; }
+            if (onMove) { _rigidbody.position += dir * playerStats.playerSpeed * Time.deltaTime; }
             if (isClimbing)
             {
                 _rigidbody.gravityScale = 0f;
-                _rigidbody.position += climbingDir * playerClimbingSpeed * Time.deltaTime;
+                _rigidbody.position += climbingDir * playerStats.playerClimbingSpeed * Time.deltaTime;
             }
             else
             {
@@ -149,7 +147,6 @@ public class PlayerController : MonoBehaviour
 
     void Init()
     {
-        playerJumpPower = 130;
         addJumbPower = 200;
         gravityScale = 4;
     }
@@ -225,7 +222,7 @@ public class PlayerController : MonoBehaviour
             {
                 onJump = true;
                 SoundManager.Instance.PlayClip(jumpSound);
-                _rigidbody.AddForce(Vector2.up * playerJumpPower, ForceMode2D.Impulse);
+                _rigidbody.AddForce(Vector2.up * playerStats.playerJumpPower, ForceMode2D.Impulse);
             }
         }
 
@@ -406,7 +403,7 @@ public class PlayerController : MonoBehaviour
         while (Vector3.Distance(transform.position, destination) > 0.1f)
         {
             Vector3 direction = (destination - transform.position).normalized;
-            transform.position += direction * playerSpeed * Time.deltaTime;
+            transform.position += direction * playerStats.playerSpeed * Time.deltaTime;
             yield return null;
         }
         transform.position = destination;

@@ -105,7 +105,7 @@ public class UpgradeStats_Base : MousePointerEntity
             line.Active();
             yield return new WaitForSeconds(.5f);
         }
-
+        yield return new WaitForSeconds(.1f);
         UpgradeState();
     }
 

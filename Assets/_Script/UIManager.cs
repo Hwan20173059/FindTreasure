@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    
 
-
+    public Pooling pooling;
     PlayerStats playerStats;
 
     public Text lifeCount;
@@ -30,6 +29,8 @@ public class UIManager : MonoBehaviour
         }
 
         playerStats = GameManager.instance.player.GetComponent<PlayerController>().playerStats;
+        pooling = GetComponent<Pooling>();
+        pooling.CreatePool(transform.Find("PoolingBox"));
     }
 
     private void Update()

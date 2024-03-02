@@ -19,7 +19,7 @@ public enum UpgradeIncreseType
     FixedValue
 }
 
-public class UpgradeStats_Base : MonoBehaviour, IPointerClickHandler
+public class UpgradeStats_Base : MousePointerEntity
 {
     [Header("Components")]
     PlayerStats playerStats;
@@ -30,8 +30,8 @@ public class UpgradeStats_Base : MonoBehaviour, IPointerClickHandler
     public int id;
     public string upgradeStateName;
     public float upgradeAmount;
-    [SerializeField] int maxCount;
-    [SerializeField] int curCount;
+    public int maxCount;
+    public int curCount;
     
     [SerializeField] int cost;
 
@@ -47,6 +47,8 @@ public class UpgradeStats_Base : MonoBehaviour, IPointerClickHandler
 
     [Header("UI")]
     public List<UpgradeUi_Line> lineList = new List<UpgradeUi_Line>();
+    GameObject message;
+
 
     private void Awake()
     {
@@ -120,6 +122,8 @@ public class UpgradeStats_Base : MonoBehaviour, IPointerClickHandler
             {
                 UpgradeState();
             }
+
+            message.GetComponent<MessageUi>().WriteMessage(this);
         }
         else
         {
@@ -140,10 +144,10 @@ public class UpgradeStats_Base : MonoBehaviour, IPointerClickHandler
         int curSatisFaction = 0;
         for (int i = 0; i < condition.conditionID.Length; i++)
         {
-            if (playerStats.upgradeStateDictionary.ContainsKey(condition.conditionID[i]))
+            if (playerStats.upgradeStateDictionary.ContainsKey(condition.conditionID[i].id))
             {
-                UpgradeStats_Base curBase = playerStats.upgradeStateDictionary[condition.conditionID[i]];
-                if(curBase.curCount == condition.conditionCount[i])
+                UpgradeStats_Base curBase = playerStats.upgradeStateDictionary[condition.conditionID[i].id];
+                if(curBase.curCount >= condition.conditionCount[i])
                 {
                     curSatisFaction++;
                 }
@@ -169,11 +173,28 @@ public class UpgradeStats_Base : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public override void OnPointerEnter(PointerEventData data)
+    {
+        Debug.Log("Enter");
+        Vector3 position;
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(transform as RectTransform, data.position, Camera.main, out position);
+
+        message = UIManager.Instance.pooling.GetPoolItem("Message");
+        message.GetComponent<MessageUi>().WriteMessage(this, position);
+        message.SetActive(true);
+    }
+
+    public override void OnPointerExit(PointerEventData data)
+    {
+        Debug.Log("Exit");
+        message.gameObject.SetActive(false);
+    }
+
 }
 
 [System.Serializable]
 public struct Condition // 
 {
-    public int[] conditionID;
+    public UpgradeStats_Base[] conditionID;
     public int[] conditionCount;
 }

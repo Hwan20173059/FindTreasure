@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 
 //CurHealth
@@ -21,14 +21,16 @@ public class PlayerStats : LifeEntity
 
     [Header("Player State")]
     public float attackDamage;
+    public float attackSpeed;
+    public float playerSpeed;
+    public float playerClimbingSpeed;
+    public float playerJumpPower;
 
     public int lifeCount;
     public int bombAmount;
     public int goldenKeyAmount;
 
     public int coin = 0;
-
-  
 
     [SerializeField] float invincibilityRate;
     [SerializeField] bool onInvincibility;
@@ -49,6 +51,8 @@ public class PlayerStats : LifeEntity
     private void Awake()
     {
         OnDeathEvent += Death;
+
+        Init();
     }
 
     protected override void Start()
@@ -68,6 +72,13 @@ public class PlayerStats : LifeEntity
         }
     }
 
+    void Init()
+    {
+        attackDamage = 5;
+        playerSpeed = 5;
+        attackSpeed = 1;
+        playerJumpPower = 130;
+    }
 
 
     public override void TakeHit(float damage, Vector2 hitDir)
@@ -204,7 +215,70 @@ public class PlayerStats : LifeEntity
         base.Heal(healPoint);
     }
 
+    #region Upgrade and Downgrade in Player Status
 
 
+    public void UpgradePlayerState(UpgradeStats_Base upgradeStats_Base)
+    {
+        switch (upgradeStats_Base.upgradeStateType)
+        {
+            case UpgradeStateType.AttackDamage:
+                attackDamage = UpgradeplayerState_Parts(attackDamage, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+                break;
+            case UpgradeStateType.AttackSpeed:
+                 attackSpeed = UpgradeplayerState_Parts(attackSpeed, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+                break;
+            case UpgradeStateType.MoveSpeed:
+                playerSpeed = UpgradeplayerState_Parts(playerSpeed, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+                break;
+            case UpgradeStateType.Heath:
+                health = UpgradeplayerState_Parts(health, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+                break;
 
+        }
+    }
+    float UpgradeplayerState_Parts(float value,float increase,UpgradeIncreseType type)
+    {
+        if( type == UpgradeIncreseType.Percent)
+        {
+            return value + Mathf.Floor(value * (increase / 100f));
+        }
+        else
+        {
+            return value + increase;
+        }
+    }
+
+
+    public void DownGradePlayerState(UpgradeStats_Base upgradeStats_Base)
+    {
+        switch (upgradeStats_Base.upgradeStateType)
+        {
+            case UpgradeStateType.AttackDamage:
+                attackDamage = DowngradeplayerState_Parts(attackDamage, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+                break;
+            case UpgradeStateType.AttackSpeed:
+                attackSpeed = DowngradeplayerState_Parts(attackSpeed, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+                break;
+            case UpgradeStateType.MoveSpeed:
+                playerSpeed = DowngradeplayerState_Parts(playerSpeed, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+                break;
+            case UpgradeStateType.Heath:
+                health = DowngradeplayerState_Parts(health, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+                break;
+
+        }
+    }
+    float DowngradeplayerState_Parts(float value, float increase, UpgradeIncreseType type)
+    {
+        if (type == UpgradeIncreseType.Percent)
+        {
+            return value - Mathf.Floor(value * (increase / 100f));
+        }
+        else
+        {
+            return value - increase;
+        }
+    }
+    #endregion
 }

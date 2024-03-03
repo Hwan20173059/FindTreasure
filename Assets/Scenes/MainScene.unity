@@ -266,6 +266,7 @@ MonoBehaviour:
   bombCount: {fileID: 1177399690}
   keyCount: {fileID: 1177399689}
   hpBar: {fileID: 1177399692}
+  upgradeUiCanvas: {fileID: 0}
 --- !u!114 &164079702
 MonoBehaviour:
   m_ObjectHideFlags: 0

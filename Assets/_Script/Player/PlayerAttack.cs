@@ -36,7 +36,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if(Time.time >= time)
+        if(Time.time >= time && playerController.onAttack)
         {
             playerController.onAttack = false;
             playerStats.playerSpeed = initPlayerSpeed;
@@ -53,10 +53,12 @@ public class PlayerAttack : MonoBehaviour
             {
                 playerController.onAttack = true;
                 time = Time.time + 0.4f;
+                initPlayerSpeed = playerStats.playerSpeed;
                 playerStats.playerSpeed = 3;
                 attackDelay = Time.time + 0.3f;
 
                 SoundManager.Instance.PlayClip(clip);
+                playerAnimation.animator.SetFloat("AttackSpeed", playerStats.attackSpeed);
                 playerAnimation.animator.SetTrigger("Attack");
             }
         }

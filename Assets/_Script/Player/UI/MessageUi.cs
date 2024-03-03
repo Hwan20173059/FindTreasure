@@ -53,7 +53,7 @@ public class MessageUi : MonoBehaviour
 
 
 
-        text.text = $"{title}\n\n{info}\n\n - Condition -\n{condition}";
+        text.text = $"{title}\n\n{info}\n - Condition -\n{condition}";
         transform.position = position;
     }
 

@@ -35,6 +35,8 @@ public class UpgradeStats_Base : MousePointerEntity
     public int curCount;
     [SerializeField] int cost;
 
+    public Stack<float> playerStateStack = new Stack<float>();
+
     [Header("State")]
     bool onActive;
     bool isMaxCount;
@@ -87,7 +89,7 @@ public class UpgradeStats_Base : MousePointerEntity
 
             foreach(UpgradeStatus upgradeStatus in upgradeStatusList)
             {
-                playerStats.UpgradePlayerState(upgradeStatus);
+                playerStats.UpgradePlayerState(upgradeStatus,this);
             }
 
             if (curCount == maxCount)
@@ -111,10 +113,9 @@ public class UpgradeStats_Base : MousePointerEntity
             foreach (UpgradeUi_Line line in lineList)
             {
                 line.Active();
-                yield return new WaitForSeconds(.5f);
             }
+            yield return new WaitForSeconds(0.2f);
             image.color = Color.white;
-            yield return new WaitForSeconds(.1f);
         }
        
         UpgradeState();
@@ -204,7 +205,7 @@ public class UpgradeStats_Base : MousePointerEntity
 
                     foreach (UpgradeStatus upgradeStatus in upgradeStatusList)
                     {
-                        playerStats.DownGradePlayerState(upgradeStatus);
+                        playerStats.DownGradePlayerState(upgradeStatus,this);
                     }
 
                 }
@@ -248,7 +249,7 @@ public class UpgradeStats_Base : MousePointerEntity
 }
 
 [System.Serializable]
-public struct Condition // 
+public struct Condition
 {
     public UpgradeStats_Base[] conditionID;
     public int[] conditionCount;

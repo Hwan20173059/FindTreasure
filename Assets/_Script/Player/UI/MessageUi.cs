@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UIElements;
+
 public class MessageUi : MonoBehaviour
 {
     public TextMeshProUGUI text;
     public void WriteMessage(UpgradeStats_Base upgradeStats_Base,Vector3 position)
     {
-        string increase = "";
-
-        if (upgradeStats_Base.upgradeIncreseType == UpgradeIncreseType.Percent)
-            increase = $"{(upgradeStats_Base.upgradeAmount / 100)} %";
-        else increase = upgradeStats_Base.upgradeAmount.ToString();
-
+       
         string title = $"{upgradeStats_Base.upgradeStateName}";
 
         if(upgradeStats_Base.curCount >= upgradeStats_Base.maxCount)
@@ -24,36 +21,45 @@ public class MessageUi : MonoBehaviour
             title = title.Replace(" [Max]", "");
         }
 
-        
-        string info = $"{title}\n The amount of increase : [ {increase} ]\n" +
-            $"\n- Condition -\n";
+
+
+        string info = "";
+
+        foreach (UpgradeStatus upgradeStatus in upgradeStats_Base.upgradeStatusList)
+        {
+            string increase = "";
+
+            if (upgradeStatus.increseType == UpgradeIncreseType.Percent)
+                increase = $"{upgradeStatus.amount / 100} %";
+            else increase = upgradeStatus.amount.ToString();
+
+            info += $"{upgradeStatus.statusType} + {increase}\n";
+
+        }
+
+        string condition = "";
 
         if (upgradeStats_Base.condition.conditionID.Length > 0)
         {
             for (int i = 0; i < upgradeStats_Base.condition.conditionID.Length; i++)
             {
-                info += $"{upgradeStats_Base.condition.conditionID[i].upgradeStateName}[ {upgradeStats_Base.condition.conditionCount[i]} ]\n";
+                condition += $"{upgradeStats_Base.condition.conditionID[i].upgradeStateName}[ {upgradeStats_Base.condition.conditionCount[i]} ]\n";
             }
         }
         else
         {
-            info += "No Condition";
+            condition += "No Condition";
         }
 
-       
 
-        text.text = info;
+
+        text.text = $"{title}\n\n{info}\n\n - Condition -\n{condition}";
         transform.position = position;
     }
 
+
     public  void WriteMessage(UpgradeStats_Base upgradeStats_Base)
     {
-        string increase = "";
-
-        if (upgradeStats_Base.upgradeIncreseType == UpgradeIncreseType.Percent)
-            increase = $"{(upgradeStats_Base.upgradeAmount / 100)} %";
-        else increase = upgradeStats_Base.upgradeAmount.ToString();
-
         string title = $"{upgradeStats_Base.upgradeStateName}";
 
         if (upgradeStats_Base.curCount >= upgradeStats_Base.maxCount)
@@ -66,23 +72,38 @@ public class MessageUi : MonoBehaviour
         }
 
 
-        string info = $"{title}\n The amount of increase : [ {increase} ]\n" +
-            $"\n- Condition -\n";
+
+        string info = "";
+
+        foreach (UpgradeStatus upgradeStatus in upgradeStats_Base.upgradeStatusList)
+        {
+            string increase = "";
+
+            if (upgradeStatus.increseType == UpgradeIncreseType.Percent)
+                increase = $"{upgradeStatus.amount / 100} %";
+            else increase = upgradeStatus.amount.ToString();
+
+            info += $"{upgradeStatus.statusType} + {increase}\n";
+
+        }
+
+        string condition = "";
 
         if (upgradeStats_Base.condition.conditionID.Length > 0)
         {
             for (int i = 0; i < upgradeStats_Base.condition.conditionID.Length; i++)
             {
-                info += $"{upgradeStats_Base.condition.conditionID[i].upgradeStateName}[ {upgradeStats_Base.condition.conditionCount[i]} ]\n";
+                condition += $"{upgradeStats_Base.condition.conditionID[i].upgradeStateName}[ {upgradeStats_Base.condition.conditionCount[i]} ]\n";
             }
         }
         else
         {
-            info += "No Condition";
+            condition += "No Condition";
         }
 
 
-        text.text = info;
+
+        text.text = $"{title}\n\n{info}\n\n - Condition -\n{condition}";
     }
 
 

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class UpgradeUi_Line : MonoBehaviour
 {
     Animator animator;
-    public List<Image> lineList = new List<Image>();
 
     private void Awake()
     {
@@ -20,10 +19,7 @@ public class UpgradeUi_Line : MonoBehaviour
 
     public void Reset()
     {
-        foreach(Image image in lineList)
-        {
-            image.fillAmount = 1;
-        }
+        animator.SetTrigger("Reverse");
     }
 
 }

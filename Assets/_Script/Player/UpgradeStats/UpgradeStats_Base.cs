@@ -82,7 +82,7 @@ public class UpgradeStats_Base : MousePointerEntity
         if (!isMaxCount && playerStats.coin >= cost)
         {
             curCount++;
-            upgradeBars[curCount - 1].GetComponent<Image>().color = Color.red;
+            upgradeBars[curCount - 1].GetComponent<Image>().color = Color.green;
             playerStats.coin -= cost;
             cost = cost + cost / 2;
 

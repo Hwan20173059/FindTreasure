@@ -43,7 +43,15 @@ public class MessageUi : MonoBehaviour
         {
             for (int i = 0; i < upgradeStats_Base.condition.conditionID.Length; i++)
             {
-                condition += $"{upgradeStats_Base.condition.conditionID[i].upgradeStateName}[ {upgradeStats_Base.condition.conditionCount[i]} ]\n";
+                UpgradeStats_Base curBase = upgradeStats_Base.condition.conditionID[i];
+                int conditionAmount = upgradeStats_Base.condition.conditionCount[i];
+
+                condition += $"{curBase.upgradeStateName}[ {conditionAmount} ]";
+
+                if (curBase.curCount >= conditionAmount)
+                    condition += " Complete\n";
+                else condition += "\n";
+                
             }
         }
         else

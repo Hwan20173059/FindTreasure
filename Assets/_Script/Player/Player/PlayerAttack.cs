@@ -17,7 +17,7 @@ public class PlayerAttack : MonoBehaviour
     PlayerStats playerStats;
     float time;
 
-    float initPlayerSpeed;
+    public float initPlayerMoveSpeed;
 
 
     float attackDelay;
@@ -29,9 +29,9 @@ public class PlayerAttack : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
         playerStats = playerController.playerStats;
-        initPlayerSpeed = playerStats.playerSpeed;
         playerAnimation = playerController.playerAnimation;
         playerStats = playerController.playerStats;
+        playerStats.OnChangePlayerMoveSpeed += SetPlayerMoveSpeed;
     }
 
     private void Update()
@@ -39,10 +39,14 @@ public class PlayerAttack : MonoBehaviour
         if(Time.time >= time && playerController.onAttack)
         {
             playerController.onAttack = false;
-            playerStats.playerSpeed = initPlayerSpeed;
+            playerStats.playerSpeed = initPlayerMoveSpeed;
         }
 
 
+    }
+    public void SetPlayerMoveSpeed(float speed)
+    {
+        initPlayerMoveSpeed = speed;
     }
 
     public void OnAttack(InputAction.CallbackContext context)
@@ -53,7 +57,8 @@ public class PlayerAttack : MonoBehaviour
             {
                 playerController.onAttack = true;
                 time = Time.time + 0.4f;
-                initPlayerSpeed = playerStats.playerSpeed;
+
+
                 playerStats.playerSpeed = 3;
                 attackDelay = Time.time + 0.3f;
 

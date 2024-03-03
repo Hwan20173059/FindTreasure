@@ -49,6 +49,9 @@ public class PlayerStats : LifeEntity
     [Header("UpgradeState")]
     public Dictionary<int, UpgradeStats_Base> upgradeStateDictionary = new Dictionary<int, UpgradeStats_Base>();
 
+    
+    public event Action<float> OnChangePlayerMoveSpeed;
+
     private void Awake()
     {
         OnDeathEvent += Death;
@@ -62,6 +65,7 @@ public class PlayerStats : LifeEntity
         playerController = GetComponent<PlayerController>();
         spriteRenderer = playerController.mainSpriteTransform.GetComponent<SpriteRenderer>();
         playerAnimation = playerController.playerAnimation;
+        CallOnChangePlayerMoveSpeed(playerSpeed);
 
     }
 
@@ -216,6 +220,11 @@ public class PlayerStats : LifeEntity
         base.Heal(healPoint);
     }
 
+    public void CallOnChangePlayerMoveSpeed(float speed)
+    {
+        OnChangePlayerMoveSpeed?.Invoke(speed);
+    }
+
     #region Upgrade and Downgrade in Player Status
 
 
@@ -231,6 +240,7 @@ public class PlayerStats : LifeEntity
                 break;
             case UpgradeStatusType.MoveSpeed:
                 playerSpeed = UpgradeplayerState_Parts(playerSpeed, upgradeStatus, upgradeStats_Base);
+                CallOnChangePlayerMoveSpeed(playerSpeed);
                 break;
             case UpgradeStatusType.Heath:
                 health = UpgradeplayerState_Parts(health, upgradeStatus, upgradeStats_Base);
@@ -266,6 +276,7 @@ public class PlayerStats : LifeEntity
                 break;
             case UpgradeStatusType.MoveSpeed:
                 playerSpeed = DowngradeplayerState_Parts(playerSpeed, upgradeStatus, upgradeStats_Base);
+                CallOnChangePlayerMoveSpeed(playerSpeed);
                 break;
             case UpgradeStatusType.Heath:
                 health = DowngradeplayerState_Parts(health, upgradeStatus, upgradeStats_Base);

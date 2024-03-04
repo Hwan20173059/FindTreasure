@@ -454,7 +454,10 @@ public class PlayerController : MonoBehaviour
     #region Open Ui
     public void OpenUpgradeUi()
     {
-        UIManager.Instance.upgradeUiCanvas.SetActive(true);
+        if (UIManager.Instance.upgradeUiCanvas.activeSelf)
+            UIManager.Instance.upgradeUiCanvas.SetActive(false);
+        else UIManager.Instance.upgradeUiCanvas.SetActive(true);
+
     }
     #endregion
 

@@ -20,15 +20,17 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 113.5, y: 12.1}
-      tempMinX: 2
-      tempMaxX: 2
+      autoAdjustPosition: 1
+      tempMinX: 0
+      tempMaxX: 0
     - monsterType: MonsterA
       isStopOnIdle: 0
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 127.5, y: 18.1}
-      tempMinX: 2
-      tempMaxX: 2
+      autoAdjustPosition: 1
+      tempMinX: 0
+      tempMaxX: 0
   - stageName: Stage5
     spawnInfos:
     - monsterType: MonsterA
@@ -36,6 +38,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 93, y: 24.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterC
@@ -43,6 +46,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 82, y: 24.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterC
@@ -50,6 +54,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 71, y: 24.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterA
@@ -57,6 +62,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 60, y: 24.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
   - stageName: Stage6
@@ -66,6 +72,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 35.5, y: 24.1}
+      autoAdjustPosition: 0
       tempMinX: 5
       tempMaxX: 5
     - monsterType: MonsterB
@@ -73,6 +80,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 26.5, y: 32.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterC
@@ -80,6 +88,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 26.5, y: 24.1}
+      autoAdjustPosition: 0
       tempMinX: 5
       tempMaxX: 5
     - monsterType: MonsterB
@@ -87,6 +96,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 38.5, y: 36.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterA
@@ -94,6 +104,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 32.5, y: 42.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterA
@@ -101,6 +112,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 32.5, y: 46.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterB
@@ -108,6 +120,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 26.5, y: 56.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterB
@@ -115,6 +128,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 38.5, y: 60.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
   - stageName: Stage7
@@ -124,6 +138,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 5, y: 27.1}
+      autoAdjustPosition: 0
       tempMinX: 5
       tempMaxX: 5
     - monsterType: MonsterA_Large
@@ -131,6 +146,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 0, y: 27.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterC
@@ -138,6 +154,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -8, y: 27.1}
+      autoAdjustPosition: 0
       tempMinX: 5
       tempMaxX: 5
     - monsterType: MonsterA_Large
@@ -145,6 +162,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 7, y: 22.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterB
@@ -152,6 +170,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -8, y: 22.1}
+      autoAdjustPosition: 0
       tempMinX: 0
       tempMaxX: 0
     - monsterType: MonsterA_Large
@@ -159,6 +178,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -8, y: 15.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterC
@@ -166,6 +186,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 8.5, y: 15.1}
+      autoAdjustPosition: 0
       tempMinX: 3
       tempMaxX: 3
     - monsterType: MonsterC
@@ -173,6 +194,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 14.5, y: 15.1}
+      autoAdjustPosition: 0
       tempMinX: 3
       tempMaxX: 3
   - stageName: Stage8
@@ -182,6 +204,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 1.5, y: 50.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterB
@@ -189,6 +212,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -8.5, y: 54.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterD
@@ -196,6 +220,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 6.5, y: 56.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterB
@@ -203,6 +228,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 16, y: 60.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterD
@@ -210,6 +236,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -3, y: 62.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterD
@@ -217,6 +244,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -7.5, y: 62.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterD
@@ -224,6 +252,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: -1, y: 36.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterD
@@ -231,6 +260,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 4.5, y: 36.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
   - stageName: Stage9
@@ -240,6 +270,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 54.5, y: 60.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterA_Large
@@ -247,6 +278,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 60, y: 60.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterD
@@ -254,6 +286,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 65.5, y: 60.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
   - stageName: Stage10
@@ -263,6 +296,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 85, y: 56.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterC
@@ -270,6 +304,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 90.5, y: 52.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterC
@@ -277,6 +312,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 95.5, y: 48.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterA_Large
@@ -284,6 +320,7 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 93.5, y: 36.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2
     - monsterType: MonsterA_Large
@@ -291,5 +328,6 @@ MonoBehaviour:
       isStopOnTrack: 0
       isBoss: 0
       spawnPosition: {x: 85, y: 36.1}
+      autoAdjustPosition: 0
       tempMinX: 2
       tempMaxX: 2

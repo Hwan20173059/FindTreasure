@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
 
     public Slider hpBar;
 
+    public GameObject upgradeUiCanvas;
+
     private void Awake()
     {
         if(Instance != null)
@@ -31,6 +33,8 @@ public class UIManager : MonoBehaviour
         playerStats = GameManager.instance.player.GetComponent<PlayerController>().playerStats;
         pooling = GetComponent<Pooling>();
         pooling.CreatePool(transform.Find("PoolingBox"));
+        upgradeUiCanvas = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UpgradeUICanvas"),transform);
+        upgradeUiCanvas.SetActive(false);
     }
 
     private void Update()

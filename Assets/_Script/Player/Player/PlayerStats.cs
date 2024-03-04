@@ -19,7 +19,8 @@ public class PlayerStats : LifeEntity
     PlayerAnimation playerAnimation;
     PlayerController playerController;
 
-    [Header("Player State")]
+    [Header("Player Status")]
+
     public float attackDamage;
     public float attackSpeed;
     public float playerSpeed;
@@ -48,6 +49,9 @@ public class PlayerStats : LifeEntity
     [Header("UpgradeState")]
     public Dictionary<int, UpgradeStats_Base> upgradeStateDictionary = new Dictionary<int, UpgradeStats_Base>();
 
+    
+    public event Action<float> OnChangePlayerMoveSpeed;
+
     private void Awake()
     {
         OnDeathEvent += Death;
@@ -61,6 +65,7 @@ public class PlayerStats : LifeEntity
         playerController = GetComponent<PlayerController>();
         spriteRenderer = playerController.mainSpriteTransform.GetComponent<SpriteRenderer>();
         playerAnimation = playerController.playerAnimation;
+        CallOnChangePlayerMoveSpeed(playerSpeed);
 
     }
 
@@ -76,7 +81,7 @@ public class PlayerStats : LifeEntity
     {
         attackDamage = 5;
         playerSpeed = 5;
-        attackSpeed = 1;
+        attackSpeed = .5f;
         playerJumpPower = 130;
     }
 
@@ -215,69 +220,79 @@ public class PlayerStats : LifeEntity
         base.Heal(healPoint);
     }
 
+    public void CallOnChangePlayerMoveSpeed(float speed)
+    {
+        OnChangePlayerMoveSpeed?.Invoke(speed);
+    }
+
     #region Upgrade and Downgrade in Player Status
 
 
-    public void UpgradePlayerState(UpgradeStats_Base upgradeStats_Base)
+    public void UpgradePlayerState(UpgradeStatus upgradeStatus,UpgradeStats_Base upgradeStats_Base)
     {
-        switch (upgradeStats_Base.upgradeStateType)
+        switch (upgradeStatus.statusType)
         {
-            case UpgradeStateType.AttackDamage:
-                attackDamage = UpgradeplayerState_Parts(attackDamage, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+            case UpgradeStatusType.AttackDamage:
+                attackDamage = UpgradeplayerState_Parts(attackDamage, upgradeStatus,upgradeStats_Base);
                 break;
-            case UpgradeStateType.AttackSpeed:
-                 attackSpeed = UpgradeplayerState_Parts(attackSpeed, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+            case UpgradeStatusType.AttackSpeed:
+                 attackSpeed = UpgradeplayerState_Parts(attackSpeed, upgradeStatus, upgradeStats_Base);
                 break;
-            case UpgradeStateType.MoveSpeed:
-                playerSpeed = UpgradeplayerState_Parts(playerSpeed, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+            case UpgradeStatusType.MoveSpeed:
+                playerSpeed = UpgradeplayerState_Parts(playerSpeed, upgradeStatus, upgradeStats_Base);
+                CallOnChangePlayerMoveSpeed(playerSpeed);
                 break;
-            case UpgradeStateType.Heath:
-                health = UpgradeplayerState_Parts(health, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+            case UpgradeStatusType.Heath:
+                health = UpgradeplayerState_Parts(health, upgradeStatus, upgradeStats_Base);
                 break;
 
         }
     }
-    float UpgradeplayerState_Parts(float value,float increase,UpgradeIncreseType type)
+
+    float UpgradeplayerState_Parts(float value, UpgradeStatus upgradeStatus,UpgradeStats_Base upgradeStats_Base)
     {
-        if( type == UpgradeIncreseType.Percent)
+        if( upgradeStatus.increseType == UpgradeIncreseType.Percent)
         {
-            return value + Mathf.Floor(value * (increase / 100f));
+            upgradeStats_Base.playerStateStack.Push(value);
+            value = value + (value * (upgradeStatus.amount / 100f));
+            return value;
         }
         else
         {
-            return value + increase;
+            return value + upgradeStatus.amount;
         }
     }
 
 
-    public void DownGradePlayerState(UpgradeStats_Base upgradeStats_Base)
+    public void DownGradePlayerState(UpgradeStatus upgradeStatus, UpgradeStats_Base upgradeStats_Base)
     {
-        switch (upgradeStats_Base.upgradeStateType)
+        switch (upgradeStatus.statusType)
         {
-            case UpgradeStateType.AttackDamage:
-                attackDamage = DowngradeplayerState_Parts(attackDamage, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+            case UpgradeStatusType.AttackDamage:
+                attackDamage = DowngradeplayerState_Parts(attackDamage, upgradeStatus, upgradeStats_Base);
                 break;
-            case UpgradeStateType.AttackSpeed:
-                attackSpeed = DowngradeplayerState_Parts(attackSpeed, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+            case UpgradeStatusType.AttackSpeed:
+                attackSpeed = DowngradeplayerState_Parts(attackSpeed, upgradeStatus, upgradeStats_Base);
                 break;
-            case UpgradeStateType.MoveSpeed:
-                playerSpeed = DowngradeplayerState_Parts(playerSpeed, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+            case UpgradeStatusType.MoveSpeed:
+                playerSpeed = DowngradeplayerState_Parts(playerSpeed, upgradeStatus, upgradeStats_Base);
+                CallOnChangePlayerMoveSpeed(playerSpeed);
                 break;
-            case UpgradeStateType.Heath:
-                health = DowngradeplayerState_Parts(health, upgradeStats_Base.upgradeAmount, upgradeStats_Base.upgradeIncreseType);
+            case UpgradeStatusType.Heath:
+                health = DowngradeplayerState_Parts(health, upgradeStatus, upgradeStats_Base);
                 break;
 
         }
     }
-    float DowngradeplayerState_Parts(float value, float increase, UpgradeIncreseType type)
+    float DowngradeplayerState_Parts(float value, UpgradeStatus upgradeStatus,UpgradeStats_Base upgradeStats_Base)
     {
-        if (type == UpgradeIncreseType.Percent)
+        if (upgradeStatus.increseType == UpgradeIncreseType.Percent)
         {
-            return value - Mathf.Floor(value * (increase / 100f));
+            return upgradeStats_Base.playerStateStack.Pop();
         }
         else
         {
-            return value - increase;
+            return value - upgradeStatus.amount;
         }
     }
     #endregion

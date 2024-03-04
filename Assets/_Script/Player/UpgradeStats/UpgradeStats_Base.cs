@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Linq;
 
-
-public enum UpgradeStateType
+public enum UpgradeStatusType
 {
     AttackDamage,
     AttackSpeed,
@@ -23,32 +23,34 @@ public class UpgradeStats_Base : MousePointerEntity
 {
     [Header("Components")]
     PlayerStats playerStats;
-    Button button;
-    Image image;
 
+    [Header("Data")]
     public Condition condition;
+    public List<UpgradeStatus> upgradeStatusList = new List<UpgradeStatus>();
+    public List<UpgradeStats_Base> postUpgradeStatus = new List<UpgradeStats_Base>();
+
     public int id;
     public string upgradeStateName;
-    public float upgradeAmount;
     public int maxCount;
     public int curCount;
-    
     [SerializeField] int cost;
+
+    public Stack<float> playerStateStack = new Stack<float>();
 
     [Header("State")]
     bool onActive;
     bool isMaxCount;
-    public UpgradeStateType upgradeStateType;
-    public UpgradeIncreseType upgradeIncreseType;
 
+    
+    [Header("UI")]
+    Button button;
+    Image image;
+    Color orgColr;
+    public List<UpgradeUi_Line> lineList = new List<UpgradeUi_Line>();
+    GameObject message;
     public GameObject upgradeCountContain;
     public GameObject upgardeBar;
     GameObject[] upgradeBars;
-
-    [Header("UI")]
-    public List<UpgradeUi_Line> lineList = new List<UpgradeUi_Line>();
-    GameObject message;
-
 
     private void Awake()
     {
@@ -57,6 +59,7 @@ public class UpgradeStats_Base : MousePointerEntity
         button.onClick.AddListener(OnClickEvent);
         upgradeBars = new GameObject[maxCount];
         CreateUpgradeBar();
+        orgColr = image.color;
     }
 
     private void Start()
@@ -79,10 +82,15 @@ public class UpgradeStats_Base : MousePointerEntity
         if (!isMaxCount && playerStats.coin >= cost)
         {
             curCount++;
-            upgradeBars[curCount - 1].GetComponent<Image>().color = Color.red;
+            upgradeBars[curCount - 1].GetComponent<Image>().color = Color.green;
             playerStats.coin -= cost;
             cost = cost + cost / 2;
-            playerStats.UpgradePlayerState(this);
+
+
+            foreach(UpgradeStatus upgradeStatus in upgradeStatusList)
+            {
+                playerStats.UpgradePlayerState(upgradeStatus,this);
+            }
 
             if (curCount == maxCount)
             {
@@ -97,15 +105,19 @@ public class UpgradeStats_Base : MousePointerEntity
     IEnumerator ActiveAndUpgrade()
     {
         playerStats.upgradeStateDictionary.Add(id, this);
-        image.color = Color.white;
+        
         onActive = true;
 
-        foreach (UpgradeUi_Line line in lineList)
+        if(lineList != null)
         {
-            line.Active();
-            yield return new WaitForSeconds(.5f);
+            foreach (UpgradeUi_Line line in lineList)
+            {
+                line.Active();
+            }
+            yield return new WaitForSeconds(0.2f);
+            image.color = Color.white;
         }
-        yield return new WaitForSeconds(.1f);
+       
         UpgradeState();
     }
 
@@ -164,18 +176,62 @@ public class UpgradeStats_Base : MousePointerEntity
         }
     }
 
+    bool CheckPostStatusActive()
+    {
+        foreach(UpgradeStats_Base upgradeStats_Base in postUpgradeStatus)
+        {
+            if (upgradeStats_Base.onActive)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
-    public void OnPointerClick(PointerEventData eventData)
+    #region Mouse interaction
+
+
+    public override void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
+            if (CheckPostStatusActive())
+            {
+                isMaxCount = false;
+                if (curCount - 1 >= 0)
+                {
+                    upgradeBars[curCount - 1].GetComponent<Image>().color = Color.white;
+                    curCount--;
+
+                    foreach (UpgradeStatus upgradeStatus in upgradeStatusList)
+                    {
+                        playerStats.DownGradePlayerState(upgradeStatus,this);
+                    }
+
+                }
+
+                if (curCount == 0)
+                {
+                    onActive = false;
+                    playerStats.upgradeStateDictionary.Remove(id);
+                    image.color = orgColr;
+                    if (lineList.Count > 0)
+                    {
+                        foreach (UpgradeUi_Line line in lineList)
+                        {
+                            line.Reset();
+                        }
+                    }
+
+                }
+            }
+
             Debug.Log("DownGrade");
         }
     }
 
     public override void OnPointerEnter(PointerEventData data)
     {
-        Debug.Log("Enter");
         Vector3 position;
         RectTransformUtility.ScreenPointToWorldPointInRectangle(transform as RectTransform, data.position, Camera.main, out position);
 
@@ -186,15 +242,23 @@ public class UpgradeStats_Base : MousePointerEntity
 
     public override void OnPointerExit(PointerEventData data)
     {
-        Debug.Log("Exit");
         message.gameObject.SetActive(false);
     }
 
+    #endregion
 }
 
 [System.Serializable]
-public struct Condition // 
+public struct Condition
 {
     public UpgradeStats_Base[] conditionID;
     public int[] conditionCount;
+}
+
+[System.Serializable]
+public struct UpgradeStatus
+{
+    public UpgradeStatusType statusType;
+    public UpgradeIncreseType increseType;
+    public float amount;
 }

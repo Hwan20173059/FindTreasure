@@ -33,10 +33,11 @@ public class UpgradeStats_Base : MousePointerEntity
     public string upgradeStateName;
     public int maxCount;
     public int curCount;
-    [SerializeField] int cost;
+    public int cost;
 
-    public Stack<float> playerStateStack = new Stack<float>();
-
+    public Stack<float> playerStatusStack = new Stack<float>();
+    public Stack<int> costStack = new Stack<int>();
+    
     [Header("State")]
     bool onActive;
     bool isMaxCount;
@@ -84,8 +85,9 @@ public class UpgradeStats_Base : MousePointerEntity
             curCount++;
             upgradeBars[curCount - 1].GetComponent<Image>().color = Color.green;
             playerStats.coin -= cost;
+            costStack.Push(cost);
             cost = cost + cost / 2;
-
+            
 
             foreach(UpgradeStatus upgradeStatus in upgradeStatusList)
             {
@@ -153,6 +155,11 @@ public class UpgradeStats_Base : MousePointerEntity
             return true;
         }
 
+        if(playerStats.coin < cost)
+        {
+            return false;
+        }
+
         int satisfactionCount = condition.conditionID.Length;
         int curSatisFaction = 0;
         for (int i = 0; i < condition.conditionID.Length; i++)
@@ -199,8 +206,8 @@ public class UpgradeStats_Base : MousePointerEntity
             if (CheckPostStatusActive() && !onExecute && curCount > 0)
             {
                 isMaxCount = false;
-                
-                    upgradeBars[curCount - 1].GetComponent<Image>().color = Color.white;
+                cost = costStack.Pop();
+                upgradeBars[curCount - 1].GetComponent<Image>().color = Color.white;
                     curCount--;
 
                     foreach (UpgradeStatus upgradeStatus in upgradeStatusList)
@@ -225,6 +232,7 @@ public class UpgradeStats_Base : MousePointerEntity
 
                 }
             }
+            message.GetComponent<MessageUi>().WriteMessage(this);
 
         }
     }

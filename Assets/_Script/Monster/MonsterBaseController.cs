@@ -218,7 +218,7 @@ public class MonsterBaseController : MonoBehaviour
 
     #endregion
 
-    #region 플레이어에 공격
+    #region 접촉 및, 플레이어에 데미지를 주는 메서드
 
     // 접촉 시 플레이어에게 데미지
     protected virtual void OnTriggerEnter2D(Collider2D collision)
@@ -234,14 +234,14 @@ public class MonsterBaseController : MonoBehaviour
     public virtual void DamageToPlayer(GameObject player = null, GameObject monster = null, bool haveRange = false)
     {
         PlayerStats _ps;
-        GameObject _player;
+        GameObject _player; // GameObject 쓰면 코드적으로 좋지 않다는 내용을 들었던 것 같은데, 범용성이 너무 커서 그랬던건지 기억은 안남.
 
         if (player)
         {
             _player = player;
             _ps = player.GetComponent<PlayerStats>();
         }
-        else
+        else // 플레이어 매개변수가 전달되지 않은 경우, Tag로 Find.
         {
             _player = GameObject.FindGameObjectWithTag("Player");
             _ps = _player.GetComponent<PlayerStats>();
@@ -249,7 +249,7 @@ public class MonsterBaseController : MonoBehaviour
 
         GameObject _monster;
         if (monster) _monster = monster;
-        else _monster = gameObject;
+        else _monster = gameObject; // 몬스터 매개변수가 전달되지 않은 경우, gameObject 본인을 사용.
 
         if (_ps != null)
         {
@@ -261,18 +261,7 @@ public class MonsterBaseController : MonoBehaviour
         }
     }
 
-    // 투사체 발사
-    public virtual void ShotProjectile()
-    {
-        //Debug.Log("발싸");
-        BoxCollider2D collider = GetComponent<BoxCollider2D>();
-        Vector3 spawnPosition = collider != null ? collider.bounds.center : transform.position; // 혹시라도 BoxCollider2D가 없으면 transform의 위치를 사용
-
-        GameObject projectile = Instantiate(ProjectilePrefab, spawnPosition, Quaternion.identity);
-        projectile.GetComponent<MonsterProjectile>().damage = _stat.AttackDamage;
-    }
-
-    // 공격 모션을 마친 직후
+    // 공격 모션을 마친 직후 몬스터 스테이트 변화
     public void EndAttackAnimation()
     {
         if (_lockTarget != null)
@@ -307,6 +296,7 @@ public class MonsterBaseController : MonoBehaviour
 
         }
     }
+    
     // 데미지 적용 및 스테이트 변경
     private void TakeDamage(float damage)
     {
@@ -324,6 +314,7 @@ public class MonsterBaseController : MonoBehaviour
 
         }
     }
+   
     // 넉백 로직
     private IEnumerator KnockbackCoroutine(Vector2 hitDir)
     {
@@ -341,6 +332,7 @@ public class MonsterBaseController : MonoBehaviour
         // 세 번째 넉백
         transform.position += knockbackDir * 0.3f;
     }
+    
     // 색상 변경 로직
     private IEnumerator ChangeColorCoroutine()
     {

@@ -80,7 +80,7 @@ public class PlayerStats : LifeEntity
     void Init()
     {
         attackDamage = 5;
-        playerSpeed = 5;
+        playerSpeed = 8;
         attackSpeed = .5f;
         playerJumpPower = 130;
     }

@@ -15,7 +15,7 @@ public enum PlayerState
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private string textDataFilePath = "Assets/Resources/DataTable/TextData.json";
+    private string textDataFilePath = "DataTable/TextData";
     public Dictionary<int, string> textDataDictionary { get; private set; }
 
     public InputActionAsset inputAction;
@@ -83,7 +83,10 @@ public class GameManager : MonoBehaviour
     private void ReadTextData()
     {
         textDataDictionary = new Dictionary<int, string>();
-        string jsonText = File.ReadAllText(textDataFilePath);
+        //string jsonText = File.ReadAllText(textDataFilePath);
+        TextAsset jsonTextFile = Resources.Load<TextAsset>(textDataFilePath);
+        string jsonText = jsonTextFile.text;
+
 
         TextData[] textDataArray = JsonUtility.FromJson<RootObject>(jsonText).kokr;
         //Debug.Log(textDataArray.Length);

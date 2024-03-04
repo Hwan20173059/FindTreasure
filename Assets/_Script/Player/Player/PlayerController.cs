@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     Pooling pooling;
 
     [Header("Player State")]
-    
+
     [SerializeField] float gravityScale;
     public bool onMove;
     public bool onAttack;
@@ -138,12 +138,6 @@ public class PlayerController : MonoBehaviour
         return false;
 
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawRay(transform.position, Vector3.down);
-    //}
 
     void Init()
     {
@@ -277,7 +271,7 @@ public class PlayerController : MonoBehaviour
             ChestInteract chest = collision.GetComponentInParent<ChestInteract>();
             if (chest.state != ChestState.Empty)
             {
-                collision.GetComponentInParent<ChestInteract>().SetChestState(ChestState.Empty);
+                chest.SetChestState(ChestState.Empty);
                 playerStats.AddGoldenKey();
             }
         }
@@ -316,7 +310,6 @@ public class PlayerController : MonoBehaviour
     //}
 
     #endregion
-
 
 
     #region Interact 
@@ -454,7 +447,10 @@ public class PlayerController : MonoBehaviour
     #region Open Ui
     public void OpenUpgradeUi()
     {
-        UIManager.Instance.upgradeUiCanvas.SetActive(true);
+        if (UIManager.Instance.upgradeUiCanvas.activeSelf)
+            UIManager.Instance.upgradeUiCanvas.SetActive(false);
+        else UIManager.Instance.upgradeUiCanvas.SetActive(true);
+
     }
     #endregion
 

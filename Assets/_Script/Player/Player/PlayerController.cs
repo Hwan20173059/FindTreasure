@@ -139,12 +139,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawRay(transform.position, Vector3.down);
-    //}
-
     void Init()
     {
         addJumbPower = 200;
@@ -316,7 +310,6 @@ public class PlayerController : MonoBehaviour
     //}
 
     #endregion
-
 
 
     #region Interact 

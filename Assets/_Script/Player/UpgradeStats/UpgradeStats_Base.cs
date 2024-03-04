@@ -77,7 +77,7 @@ public class UpgradeStats_Base : MousePointerEntity
         }
     }
 
-    void UpgradeState() 
+    void UpgradeStatus() 
     {
         if (!isMaxCount && playerStats.coin >= cost)
         {
@@ -118,7 +118,7 @@ public class UpgradeStats_Base : MousePointerEntity
             yield return new WaitForSeconds(0.3f);
             image.color = Color.white;
         }
-        UpgradeState();
+        UpgradeStatus();
         onExecute = false;
     }
 
@@ -133,7 +133,7 @@ public class UpgradeStats_Base : MousePointerEntity
             }
             else
             {
-                UpgradeState();
+                UpgradeStatus();
             }
 
             message.GetComponent<MessageUi>().WriteMessage(this);
@@ -225,9 +225,7 @@ public class UpgradeStats_Base : MousePointerEntity
 
                 }
             }
-            
 
-            Debug.Log("DownGrade");
         }
     }
 

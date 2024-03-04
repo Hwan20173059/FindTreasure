@@ -18,6 +18,7 @@ public class PlayerAnimation : MonoBehaviour
         OnMoveEvent += Set_MoveAnimationParameter;
         OnDeathEvent += Death;
     }
+
     public void CallOnMoveEvent(float dirX)
     {
         OnMoveEvent?.Invoke(dirX);

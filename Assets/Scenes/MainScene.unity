@@ -1800,7 +1800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputAction: {fileID: -944628639613478452, guid: 0e112573387c7e04fb1b8910365f25e0, type: 3}
   state: 0
-  player: {fileID: 4674462189064075841, guid: 278d55bebbc975341a2c06c053f1d44b, type: 3}
+  player: {fileID: 0}
 --- !u!4 &721042869
 Transform:
   m_ObjectHideFlags: 0

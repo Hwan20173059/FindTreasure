@@ -40,8 +40,8 @@ public class UpgradeStats_Base : MousePointerEntity
     [Header("State")]
     bool onActive;
     bool isMaxCount;
+    bool onExecute;
 
-    
     [Header("UI")]
     Button button;
     Image image;
@@ -77,7 +77,7 @@ public class UpgradeStats_Base : MousePointerEntity
         }
     }
 
-    void UpgradeState() 
+    void UpgradeStatus() 
     {
         if (!isMaxCount && playerStats.coin >= cost)
         {
@@ -104,6 +104,7 @@ public class UpgradeStats_Base : MousePointerEntity
 
     IEnumerator ActiveAndUpgrade()
     {
+        onExecute = true;
         playerStats.upgradeStateDictionary.Add(id, this);
         
         onActive = true;
@@ -114,17 +115,17 @@ public class UpgradeStats_Base : MousePointerEntity
             {
                 line.Active();
             }
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.3f);
             image.color = Color.white;
         }
-       
-        UpgradeState();
+        UpgradeStatus();
+        onExecute = false;
     }
 
 
     public void OnClickEvent()
     {
-        if (CheckCondition())
+        if (CheckCondition() && !onExecute)
         {
             if (!onActive)
             {
@@ -132,7 +133,7 @@ public class UpgradeStats_Base : MousePointerEntity
             }
             else
             {
-                UpgradeState();
+                UpgradeStatus();
             }
 
             message.GetComponent<MessageUi>().WriteMessage(this);
@@ -195,11 +196,10 @@ public class UpgradeStats_Base : MousePointerEntity
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (CheckPostStatusActive())
+            if (CheckPostStatusActive() && !onExecute && curCount > 0)
             {
                 isMaxCount = false;
-                if (curCount - 1 >= 0)
-                {
+                
                     upgradeBars[curCount - 1].GetComponent<Image>().color = Color.white;
                     curCount--;
 
@@ -208,8 +208,7 @@ public class UpgradeStats_Base : MousePointerEntity
                         playerStats.DownGradePlayerState(upgradeStatus,this);
                     }
 
-                }
-
+                
                 if (curCount == 0)
                 {
                     onActive = false;
@@ -217,6 +216,7 @@ public class UpgradeStats_Base : MousePointerEntity
                     image.color = orgColr;
                     if (lineList.Count > 0)
                     {
+                        StartCoroutine(OnExecuteCo());
                         foreach (UpgradeUi_Line line in lineList)
                         {
                             line.Reset();
@@ -226,8 +226,14 @@ public class UpgradeStats_Base : MousePointerEntity
                 }
             }
 
-            Debug.Log("DownGrade");
         }
+    }
+
+    IEnumerator OnExecuteCo()
+    {
+        onExecute = true;
+        yield return new WaitForSeconds(0.2f);
+        onExecute = false;
     }
 
     public override void OnPointerEnter(PointerEventData data)

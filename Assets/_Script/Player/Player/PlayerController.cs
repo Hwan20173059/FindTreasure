@@ -139,12 +139,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawRay(transform.position, Vector3.down);
-    //}
-
     void Init()
     {
         addJumbPower = 200;
@@ -318,7 +312,6 @@ public class PlayerController : MonoBehaviour
     #endregion
 
 
-
     #region Interact 
 
     public void OnInteract(InputAction.CallbackContext context)
@@ -454,7 +447,10 @@ public class PlayerController : MonoBehaviour
     #region Open Ui
     public void OpenUpgradeUi()
     {
-        UIManager.Instance.upgradeUiCanvas.SetActive(true);
+        if (UIManager.Instance.upgradeUiCanvas.activeSelf)
+            UIManager.Instance.upgradeUiCanvas.SetActive(false);
+        else UIManager.Instance.upgradeUiCanvas.SetActive(true);
+
     }
     #endregion
 

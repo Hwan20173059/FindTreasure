@@ -16,6 +16,7 @@ public class ChestInteract : MonoBehaviour
 {
     public ChestState state { get; private set; }
 
+    #region inspector
     [Header("Layer")]
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private GameObject rewardsObject;
@@ -23,6 +24,7 @@ public class ChestInteract : MonoBehaviour
     [SerializeField] private Animator keyAnim;
     [SerializeField] private AudioClip chestClip;
     [SerializeField] private AudioClip keyClip;
+    #endregion
 
     private void Awake()
     {

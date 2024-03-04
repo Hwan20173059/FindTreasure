@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.MaterialProperty;
-
 enum BorderType
 {
     Alert,

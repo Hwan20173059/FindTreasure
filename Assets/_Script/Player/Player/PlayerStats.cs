@@ -80,7 +80,7 @@ public class PlayerStats : LifeEntity
     void Init()
     {
         attackDamage = 5;
-        playerSpeed = 5;
+        playerSpeed = 8;
         attackSpeed = .5f;
         playerJumpPower = 130;
     }
@@ -253,14 +253,13 @@ public class PlayerStats : LifeEntity
     {
         if( upgradeStatus.increseType == UpgradeIncreseType.Percent)
         {
-            upgradeStats_Base.playerStateStack.Push(value);
+            upgradeStats_Base.playerStatusStack.Push(value);
             value = value + (value * (upgradeStatus.amount / 100f));
             return value;
         }
-        else
-        {
-            return value + upgradeStatus.amount;
-        }
+        
+        return value + upgradeStatus.amount;
+        
     }
 
 
@@ -269,26 +268,26 @@ public class PlayerStats : LifeEntity
         switch (upgradeStatus.statusType)
         {
             case UpgradeStatusType.AttackDamage:
-                attackDamage = DowngradeplayerState_Parts(attackDamage, upgradeStatus, upgradeStats_Base);
+                attackDamage = DownGradeplayerState_Parts(attackDamage, upgradeStatus, upgradeStats_Base);
                 break;
             case UpgradeStatusType.AttackSpeed:
-                attackSpeed = DowngradeplayerState_Parts(attackSpeed, upgradeStatus, upgradeStats_Base);
+                attackSpeed = DownGradeplayerState_Parts(attackSpeed, upgradeStatus, upgradeStats_Base);
                 break;
             case UpgradeStatusType.MoveSpeed:
-                playerSpeed = DowngradeplayerState_Parts(playerSpeed, upgradeStatus, upgradeStats_Base);
+                playerSpeed = DownGradeplayerState_Parts(playerSpeed, upgradeStatus, upgradeStats_Base);
                 CallOnChangePlayerMoveSpeed(playerSpeed);
                 break;
             case UpgradeStatusType.Heath:
-                health = DowngradeplayerState_Parts(health, upgradeStatus, upgradeStats_Base);
+                health = DownGradeplayerState_Parts(health, upgradeStatus, upgradeStats_Base);
                 break;
 
         }
     }
-    float DowngradeplayerState_Parts(float value, UpgradeStatus upgradeStatus,UpgradeStats_Base upgradeStats_Base)
+    float DownGradeplayerState_Parts(float value, UpgradeStatus upgradeStatus,UpgradeStats_Base upgradeStats_Base)
     {
         if (upgradeStatus.increseType == UpgradeIncreseType.Percent)
         {
-            return upgradeStats_Base.playerStateStack.Pop();
+            return upgradeStats_Base.playerStatusStack.Pop();
         }
         else
         {

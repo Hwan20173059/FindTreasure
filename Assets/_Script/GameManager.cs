@@ -45,7 +45,8 @@ public class GameManager : MonoBehaviour
         SetPlayerState(PlayerState.Start);
         // 데이터가 많아지면 매니저를 따로 빼기.
         ReadTextData();
-        player = Instantiate(Resources.Load<GameObject>("Prefabs/Player/Player"), Vector3.zero, Quaternion.identity);
+
+        player = GameObject.Find("Player");
     }
 
     public void SetPlayerState(PlayerState _state)

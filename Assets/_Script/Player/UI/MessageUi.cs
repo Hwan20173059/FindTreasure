@@ -59,9 +59,11 @@ public class MessageUi : MonoBehaviour
             condition += "No Condition";
         }
 
+        string cost = $"{upgradeStats_Base.cost}";
 
 
-        text.text = $"{title}\n\n{info}\n - Condition -\n{condition}";
+
+        text.text = $"{title}\n\n{info}\n - Condition -\n{condition}\n Cost : [{cost} coin]";
         transform.position = position;
     }
 
@@ -109,9 +111,9 @@ public class MessageUi : MonoBehaviour
             condition += "No Condition";
         }
 
+        string cost = $"{upgradeStats_Base.cost}";
 
-
-        text.text = $"{title}\n\n{info}\n\n - Condition -\n{condition}";
+        text.text = $"{title}\n\n{info}\n\n - Condition -\n{condition}\nCost : [{cost} coin]";
     }
 
 

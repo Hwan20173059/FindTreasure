@@ -125,6 +125,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 448387299777429953}
     m_Modifications:
+    - target: {fileID: 1827791120712161157, guid: 161e28c9195994f1db32312a7638c795, type: 3}
+      propertyPath: cost
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3119103419396580366, guid: 161e28c9195994f1db32312a7638c795, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -212,6 +216,30 @@ PrefabInstance:
     - target: {fileID: 5326045168292177326, guid: 161e28c9195994f1db32312a7638c795, type: 3}
       propertyPath: m_Name
       value: UpgradeUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5516365354938097087, guid: 161e28c9195994f1db32312a7638c795, type: 3}
+      propertyPath: cost
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5939074288500102753, guid: 161e28c9195994f1db32312a7638c795, type: 3}
+      propertyPath: cost
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941270216251124905, guid: 161e28c9195994f1db32312a7638c795, type: 3}
+      propertyPath: cost
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020320950249066071, guid: 161e28c9195994f1db32312a7638c795, type: 3}
+      propertyPath: cost
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8446595734975380548, guid: 161e28c9195994f1db32312a7638c795, type: 3}
+      propertyPath: cost
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8906075488731819962, guid: 161e28c9195994f1db32312a7638c795, type: 3}
+      propertyPath: cost
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

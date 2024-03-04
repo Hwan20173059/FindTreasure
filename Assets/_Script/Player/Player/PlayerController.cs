@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     Pooling pooling;
 
     [Header("Player State")]
-    
+
     [SerializeField] float gravityScale;
     public bool onMove;
     public bool onAttack;
@@ -277,7 +277,7 @@ public class PlayerController : MonoBehaviour
             ChestInteract chest = collision.GetComponentInParent<ChestInteract>();
             if (chest.state != ChestState.Empty)
             {
-                collision.GetComponentInParent<ChestInteract>().SetChestState(ChestState.Empty);
+                chest.SetChestState(ChestState.Empty);
                 playerStats.AddGoldenKey();
             }
         }
